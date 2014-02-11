@@ -1,17 +1,32 @@
 $(document).ready(function(){
 	
-
-	Game = {
-		// Initialize and start our game
-		start : function() {
-			Crafty.init(500,350, $('#game-container').get()[0]);
-			Crafty.background('green');
+	var WorldRouter = Backbone.Router.extend({
+		/**
+		 * Routes your movement around the game world: seeing different parts of the country, your stats, etc.
+		 */
+		routes: {
+			"main": 			"routeMain",
+			"region/:region": 	"routeRegion"
+		},
+		
+		/*
+		 * 
+		 * Handling routing.
+		 * 
+		 */
+		
+		/*
+		 * Loads main view (the whole country).
+		 */
+		routeMain: function(){
+			console.log('go');
 		}
-	}
+		
+	});
+	var worldRouter = new WorldRouter();
+	Backbone.history.start({ 
+		//pushState: 	true,
+	});
+	worldRouter.navigate("main", { trigger: true });
 	
-	Game.start();
-
-	
-      //Crafty.init();
-      Crafty.e('2D, DOM, Color').attr({x: 0, y: 0, w: 100, h: 100}).color('#F00');	
-});
+}); 
