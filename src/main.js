@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	
+	//World properties (window)
+	window.region = Regions.Nation; //by default
+	//see models for window.cities
+	
 	var WorldRouter = Backbone.Router.extend({
 		/**
 		 * Routes your movement around the game world: seeing different parts of the country, your stats, etc.
@@ -19,7 +23,7 @@ $(document).ready(function(){
 		 * Loads main view (the whole country).
 		 */
 		routeMain: function(){
-			console.log('go');
+			region = Regions.Nation;
 		}
 		
 	});
@@ -27,6 +31,12 @@ $(document).ready(function(){
 	Backbone.history.start({ 
 		//pushState: 	true,
 	});
-	worldRouter.navigate("main", { trigger: true });
+
 	
+	
+	//making objects
+	window.appView = new AppView();
+
+
+	worldRouter.navigate("main", { trigger: true });
 }); 

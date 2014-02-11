@@ -5,11 +5,12 @@ $(function(){
 	
 	//Regions
 	var Region = Backbone.Model.extend({}); //String name
-	var Regions = new Backbone.Collection([
-			{ name: "Northeast" },
-			{ name: "South" },
-			{ name: "Midwest" },
-			{ name: "West" },
+	window.Regions = new Backbone.Collection([
+			{ name: "Nation",		slug: "usa" }, //entire country
+			{ name: "Northeast",	slug: "northeast" },
+			{ name: "South",		slug: "south" },
+			{ name: "Midwest",		slug: "midwest" },
+			{ name: "West",			slug: "west" },
 		], {
 			model: Region
 		});

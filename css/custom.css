@@ -2,10 +2,24 @@ body {
   padding-top: 60px;
 }
 
-#game-container{
-	background: no-repeat center center;
-	  -webkit-background-size: contain;
-	  -moz-background-size: contain;
-	  -o-background-size: contain;
-	  background-size: contain;
+#cities{
+	position: absolute;
+	height: 0;
+	width: 0;
+	top: 0;
+	left: 0;
+}
+
+.city{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	background: blue;
+}
+
+.city .city-name{
+	position: relative;
+	left: 30px;
+	width: 200px;
 }

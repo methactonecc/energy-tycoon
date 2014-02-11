@@ -49,8 +49,37 @@
     </div>
 
     <div class="container">
-    	<div id="sidebar">asdf</div>
+    	<div id="game-main" class="row">
+    		<div id="map-container" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+    			<div id="map"></div>
+    			<div id="cities"></div>
+    		</div>
+    	</div>
     </div><!-- /.container -->
+    
+    <div id="templates" class="hidden">
+    	<script id="template-map" type="text/template">
+    		<img src="res/maps/<%= regionSlug %>.png" class="img-responsive">
+    	</script>
+    	<script id="template-city" type="text/template">
+    		<% 
+    			var width = $('#map').width();
+    			var height = $('#map').height();
+    			cities.each(function(city){
+    				var coords;
+    				if(region === Regions.Nation) coords = city.get('nationalCoords');
+    				else coords = city.get('regionalCoords');
+    				var x = coords[0] * width; //TODO adjust for city's width
+    				var y = coords[1] * height;
+    				%>
+    				<div class="city" style="left:<%=x%>px;top:<%=y%>px">
+    					<span class="city-name"><% print(city.get('name')); %></span>
+    				</div>
+    				<%
+    			})
+    		%>
+    	</script>    	
+    </div>
 
 
     <!-- Bootstrap core JavaScript
@@ -67,9 +96,11 @@
     <script src="lib/backbone.localStorage.js"></script>
     <script src="lib/handlebars-v1.3.0.js"></script>
     
-    <script src="src/main.js"></script>
+    <script src="src/utils.js"></script>    
     <script src="src/models.js"></script>
+    <script src="src/view.js"></script>
     <script src="src/enums.js"></script>
-    <script src="src/BLANK.js"></script>
+    <script src="src/main.js"></script>
+    
   </body>
 </html>
