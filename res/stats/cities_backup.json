@@ -1,0 +1,26 @@
+[
+	{
+		"name": "New York",
+		"regionName": "Northeast",
+		"nationalCoords": [0.91, 0.30],
+		"regionalCoords": [0.58, 0.64]
+	},
+	{
+		"name": "Philadelphia",
+		"regionName": "Northeast",
+		"nationalCoords": [0.89, 0.35],
+		"regionalCoords": [0.52, 0.74]
+	},
+	{
+		"name": "Boston",
+		"regionName": "Northeast",
+		"nationalCoords": [0.95, 0.23],
+		"regionalCoords": [0.69, 0.47]
+	},
+	{
+		"name": "Washington DC",
+		"regionName": "Northeast",
+		"nationalCoords": [0.86, 0.41],
+		"regionalCoords": [0.45, 0.85]
+	}
+]
