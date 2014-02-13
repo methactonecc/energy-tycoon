@@ -10,7 +10,8 @@ $(function(){
 		 */
 		routes: {
 			"main": 			"routeMain",
-			"region/:region": 	"routeRegion"
+			"region/:region": 	"routeRegion",
+			"city/:city": 		"routeCity",
 		},
 		
 		/*
@@ -23,19 +24,26 @@ $(function(){
 		 * Loads main view (the whole country).
 		 */
 		routeMain: function(){
-			career.set('region', Regions.Nation);
+			map.set('region', Regions.Nation);
 			//appView.render();
 		},
 		
 		routeRegion: function(regionSlug){
 			var region = Regions.findWhere({slug: regionSlug});
-			career.set('region',region);
-		}
+			map.set('region',region);
+		},
+		
+		routeCity: function(cityName){
+			var city = cities.findWhere({name: cityName});
+			map.set('city',city);
+		},		
 		
 	});
 	
 	//init view
-	window.appView = new AppView({ model: career });	
+	window.appView = new AppView({ model: map });	
+	window.careerView = new CareerView({ model: career });
+	careerView.render();
 	//appView.render();
 	
 	window.worldRouter = new WorldRouter();

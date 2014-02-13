@@ -4,14 +4,45 @@
 $(function(){
 	var Career = Backbone.Model.extend({
 		/**
-		 * Information about you, the player, and the current game state.
+		 * Information about you, the player.
 		 * 
 		 * Fields:
 		 * 	int money
-		 * 	Region region 	the active region.
+		 * 	int year	the current round (known as a year.) Starts at 1.
+		 * 	String name
 		 */	
 		 
+		 defaults: {
+			 money:	100000,
+			 year:	1,
+			 name:	"Neel"
+		 },
 		 
+		 /* Functions */
+		
+		/**
+		 * Changes the amount of money you have (whether positive or negative.)
+		 */
+		changeMoney: function(amount){
+			this.set('money',this.get('money') + amount);
+		},
+		
+		/**
+		 * Increments the year.
+		 */
+		nextYear: function(){
+			this.set('year',this.get('year')+1);
+		}
+	});
+	
+	var Map = Backbone.Model.extend({
+		/*
+		 * Houses information about the map's current state.
+		 * 
+		 * Fields:
+		 * 	Region region	(active region)
+		 * 	City city		(active city)
+		 */
 	});
 	
 	var City = Backbone.Model.extend({
@@ -53,6 +84,7 @@ $(function(){
 	
 	
 	//instantiating models
+	window.map = new Map();
 	window.career = new Career();
 	
 	window.cities = new Cities();
