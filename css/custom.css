@@ -10,16 +10,30 @@ body {
 	left: 0;
 }
 
+#map img{
+	margin: auto;
+}
+
 .city{
 	position: absolute;
-	width: 20px;
-	height: 20px;
-	border-radius: 10px;
-	background: blue;
+	font-size: 110%;
+	width: 10em;
+	background: rgba(255,255,255,0.7);
+	border-radius: .5em;
+	cursor: pointer;
+	/*border-radius: 10px;
+	background: blue;*/
 }
 
 .city .city-name{
-	position: relative;
-	left: 30px;
-	width: 200px;
+}
+
+
+/** UTILITIES **/
+	
+.panel.panel-no-top{
+	/* This is handy when you have your tab content in a panel with the actual tabs above. */
+	border-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }

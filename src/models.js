@@ -4,10 +4,11 @@
 $(function(){
 	var Career = Backbone.Model.extend({
 		/**
-		 * Information about you, the player. Only create one of these.
+		 * Information about you, the player, and the current game state.
 		 * 
 		 * Fields:
 		 * 	int money
+		 * 	Region region 	the active region.
 		 */	
 		 
 		 
@@ -19,10 +20,25 @@ $(function(){
 		 * Fields:
 		 *  String name
 		 * 	bool owned (by player)
+		 *  bool headquarters
 		 *	Region region (see Regions enum)
 		 * 	int[] nationalCoords		coordinates of city on the national map in form [x,y] where x and y are in percents from top left (in decimal form)
 		 * int[] regionalCoords			coordinates for the region they're in. Same format as national.
+		 * 
+		 * In constructor, pass:
+		 * 	String name
+		 * 	String regionName ("Northeast", "West", etc.)
+		 * 	int[] nationalCoords
+		 * 	int[] regionalCoords
 		 */
+		
+		constructor: function(){
+			Backbone.Model.prototype.constructor.apply(this, arguments);
+			
+			if(this.get('regionName')){
+				this.set('region', Regions[this.get('regionName')]);
+			}
+		}
 	});
 	
 	var Cities = Backbone.Collection.extend({
@@ -30,12 +46,35 @@ $(function(){
 		 * List of cities.
 		 */
 		
-		model: City
+		model: City,
+		
+		url: 'res/stats/cities.json'
 	});
-	window.cities = new Cities([
-		new City({ name: "New York", 		nationalCoords: [.91,.30], regionalCoords: [.38,.64]}),	
-		new City({ name: "Philadelphia", 	nationalCoords: [.89,.35], regionalCoords: [.32,.74]}),
-		new City({ name: "Boston", 			nationalCoords: [.95,.23], regionalCoords: [.49,.47]}),
-		new City({ name: "Washington, DC", 	nationalCoords: [.86,.41], regionalCoords: [.25,.85]})
-	]);		
+	
+	
+	//instantiating models
+	window.career = new Career();
+	
+	window.cities = new Cities();
+	cities.fetch({
+		success: function(model, response, options){
+			cities.reset(response);
+			
+			cities.url = null; //prevent accidentally saving to server later
+			
+			//TEMP
+			cities.each(function(c){
+				if(c.get('name') !== "Los Angeles"){
+					c.set('owned',true);
+				}
+			});
+			cities.findWhere({"name": "New York"}).set('headquarters',true);
+			
+			
+			
+			appView.render(); 
+		},
+		error: function(model, response, options){
+		}
+	});
 });

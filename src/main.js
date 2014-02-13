@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 	
 	//World properties (window)
 	window.region = Regions.Nation; //by default
@@ -23,20 +23,24 @@ $(document).ready(function(){
 		 * Loads main view (the whole country).
 		 */
 		routeMain: function(){
-			region = Regions.Nation;
+			career.set('region', Regions.Nation);
+			//appView.render();
+		},
+		
+		routeRegion: function(regionSlug){
+			var region = Regions.findWhere({slug: regionSlug});
+			career.set('region',region);
 		}
 		
 	});
-	var worldRouter = new WorldRouter();
+	
+	//init view
+	window.appView = new AppView({ model: career });	
+	//appView.render();
+	
+	window.worldRouter = new WorldRouter();
 	Backbone.history.start({ 
 		//pushState: 	true,
 	});
-
-	
-	
-	//making objects
-	window.appView = new AppView();
-
-
 	worldRouter.navigate("main", { trigger: true });
 }); 
