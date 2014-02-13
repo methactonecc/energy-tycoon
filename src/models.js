@@ -64,7 +64,7 @@ $(function(){
 			
 			//TEMP
 			cities.each(function(c){
-				if(c.get('name') !== "Los Angeles"){
+				if(c.get('region') === Regions.Northeast){
 					c.set('owned',true);
 				}
 			});

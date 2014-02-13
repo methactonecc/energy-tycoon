@@ -98,24 +98,43 @@
 				</ul>
 
 				<!-- Tab panes -->
-				<div class="tab-content">
-					<div class="panel panel-default panel-no-top">
-						<div class="panel-body">
+				<div class="panel panel-default panel-no-top">
+					<div class="panel-body">
+						<div class="tab-content">
 							<div class="tab-pane active" id="tab-places">
-								<span class="glyphicon glyphicon-home"></span> Headquarters: Chicago
-								<button class="btn btn-default pull-right">Move</button>
+								<span class="glyphicon glyphicon-home"></span> Headquarters: New York
+								<button class="btn btn-default pull-right">
+									Move
+								</button>
 							</div>
 							<div class="tab-pane" id="tab-research">
-								
+								<ul class="list-group">
+									<li class="list-group-item list-group-item-success">
+										<img src="res/plants/fuelcell/32.png"> Fuel Cell
+										<span class="pull-right hidden-sm hidden-xs">
+											<span class="glyphicon glyphicon-ok"></span>
+											<span class="text-muted">Researched</span>
+										</span>
+									</li>
+									<li class="list-group-item">
+										<img src="res/plants/hydroelectric/32.png"> Hydroelectric
+										<span class="pull-right">
+											<button class="btn btn-default">
+												<span class="glyphicon glyphicon-search"></span>
+												Research
+											</button>
+										</span>
+									</li>									
+								</ul>
 							</div>
 							<div class="tab-pane" id="tab-construction">
-								
-							</div>							
+
+							</div>
+
 						</div>
 					</div>
-
 				</div>
-    			
+			
     			<!--
     			<div class="list-group" id="city-list">
     				<a href="#" class="list-group-item clearfix">
@@ -159,7 +178,7 @@
     
     <div id="templates" class="hidden">
     	<script id="template-map" type="text/template">
-    		<img src="res/maps/<%= regionSlug %>.png" class="img-responsive">
+    		<img src="res/maps/resized/<%= regionSlug %>.png" class="img-responsive">
     	</script>
     	<script id="template-city" type="text/template">
     		<%

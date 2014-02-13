@@ -3,31 +3,99 @@
 		"name": "New York",
 		"regionName": "Northeast",
 		"nationalCoords": [0.91, 0.30],
-		"regionalCoords": [0.58, 0.64]
+		"regionalCoords": [0.55, 0.63]
 	},
 	{
 		"name": "Philadelphia",
 		"regionName": "Northeast",
 		"nationalCoords": [0.89, 0.35],
-		"regionalCoords": [0.52, 0.74]
+		"regionalCoords": [0.51, 0.71]
 	},
 	{
 		"name": "Boston",
 		"regionName": "Northeast",
 		"nationalCoords": [0.95, 0.23],
-		"regionalCoords": [0.69, 0.47]
+		"regionalCoords": [0.64, 0.44]
 	},
 	{
 		"name": "Washington DC",
 		"regionName": "Northeast",
 		"nationalCoords": [0.86, 0.41],
-		"regionalCoords": [0.45, 0.85]
+		"regionalCoords": [0.45, 0.82]
 	},
 	
+	{
+		"name": "Atlanta",
+		"regionName": "South",
+		"nationalCoords": [0.77, 0.62],
+		"regionalCoords": [0.22, 0.76]
+	},
+	{
+		"name": "Houston",
+		"regionName": "South",
+		"nationalCoords": [0.52, 0.80],
+		"regionalCoords": [0.22, 0.76]
+	},
+	{
+		"name": "Miami",
+		"regionName": "South",
+		"nationalCoords": [0.86, 0.90],
+		"regionalCoords": [0.22, 0.76]
+	},
+	{
+		"name": "New Orleans",
+		"regionName": "South",
+		"nationalCoords": [0.64, 0.77],
+		"regionalCoords": [0.22, 0.76]
+	},		
+
+	{
+		"name": "Chicago",
+		"regionName": "Midwest",
+		"nationalCoords": [0.67, 0.33],
+		"regionalCoords": [0.22, 0.76]
+	},
+	{
+		"name": "Des Moines",
+		"regionName": "Midwest",
+		"nationalCoords": [0.58, 0.33],
+		"regionalCoords": [0.22, 0.76]
+	},
+	{
+		"name": "Columbus",
+		"regionName": "Midwest",
+		"nationalCoords": [0.76, 0.37],
+		"regionalCoords": [0.22, 0.76]
+	},
+	{
+		"name": "Omaha",
+		"regionName": "Midwest",
+		"nationalCoords": [0.51, 0.36],
+		"regionalCoords": [0.22, 0.76]
+	},
+		
 	{
 		"name": "Los Angeles",
 		"regionName": "West",
 		"nationalCoords": [0.09, 0.59],
+		"regionalCoords": [0.22, 0.76]
+	},
+	{
+		"name": "Denver",
+		"regionName": "West",
+		"nationalCoords": [0.34, 0.43],
+		"regionalCoords": [0.22, 0.76]
+	},
+	{
+		"name": "Seattle",
+		"regionName": "West",
+		"nationalCoords": [0.09, 0.03],
+		"regionalCoords": [0.22, 0.76]
+	},
+	{
+		"name": "Phoenix",
+		"regionName": "West",
+		"nationalCoords": [0.21, 0.60],
 		"regionalCoords": [0.22, 0.76]
 	}
 ]

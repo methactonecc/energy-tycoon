@@ -17,8 +17,14 @@ body {
 .city{
 	position: absolute;
 	font-size: 110%;
-	width: 10em;
-	background: rgba(255,255,255,0.7);
+	/*width: 10em;
+	background: rgba(255,255,255,0.7);*/
+	height: 1em;
+	width: 1em;
+	text-align: center;
+	margin: auto;
+	background: rgba(255,255,255,0.6);
+	box-shadow: 0 0 1em 1em rgba(255,255,255,0.6);
 	border-radius: .5em;
 	cursor: pointer;
 	/*border-radius: 10px;
