@@ -1,9 +1,5 @@
 $(function(){
 	
-	//World properties (window)
-	window.region = Regions.Nation; //by default
-	//see models for window.cities
-	
 	var WorldRouter = Backbone.Router.extend({
 		/**
 		 * Routes your movement around the game world: seeing different parts of the country, your stats, etc.
@@ -25,6 +21,7 @@ $(function(){
 		 */
 		routeMain: function(){
 			map.set('region', Regions.Nation);
+			
 			//appView.render();
 		},
 		
@@ -51,4 +48,7 @@ $(function(){
 		//pushState: 	true,
 	});
 	worldRouter.navigate("main", { trigger: true });
+	
+	
+	career.researchPlantType(Plants.Solar);
 }); 

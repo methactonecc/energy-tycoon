@@ -24,7 +24,8 @@ $(function(){
 		initialize: function(){
 			//Bind to relevant events here
     		this.listenTo(this.model, "change:region", this.render);
-    		this.listenTo(this.model, "change:city", this.renderCity)
+    		this.listenTo(this.model, "change:city", this.renderCity); //when someone opens a city, show its info
+    		this.listenTo(career.get('cities'), "change", this.render); //re-render city markers when a city is added
 			
 			/*
 			var self = this;
@@ -63,7 +64,10 @@ $(function(){
 			else{
 	    		this.$('.city').click(function(){
 	    			var name = $(this).data('name');
-	    			worldRouter.navigate("city/" + name, { trigger: true });
+	    			var city = cities.findWhere({name: name});
+	    			if(city.get('owned')){
+	    				worldRouter.navigate("city/" + name, { trigger: true });
+	    			}
 	    		});			
 			}
 		
@@ -101,7 +105,7 @@ $(function(){
 		},
 		
 		renderStats: function(){
-			this.$('#sidebar-stats').html(this.statsTemplate({stats: this.model.attributes}));
+			this.$('#sidebar-stats').html(this.statsTemplate({stats: this.model}));
 		},
 		
 		render: function(){

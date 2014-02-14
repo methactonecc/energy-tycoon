@@ -208,59 +208,65 @@
 			<h3 class="text-center"><%= city.name %></h3>
 			
 			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 panel">
-					<div class="panel-body text-center">
-						<img src="res/plants/solar/100.png" class="img-responsive img-center">
-						<h4 class="">Solar Farm</h4>
-						<h5>Level 2</h5>
-						<div class="text-success">
-							<span class="glyphicon glyphicon-usd"></span> +$5,000<span class="text-muted">/year</span>
-						</div>
-						<div class="text-info">
-							<span class="glyphicon glyphicon-flash"></span> 60 <span class="text-muted">GwH</span>
-						</div>
-						<br>
-						<button class="btn btn-block btn-success">
-							Upgrade<br>($200,000)
-						</button>	
-						<button class="btn btn-block btn-sm btn-danger">
-							Destroy<br>($20,000)
-						</button>				
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 panel">
-					<div class="panel-body text-center">
-						<img src="res/plants/geothermal/100.png" class="img-responsive img-center">
-						<h4 class="">Geothermal Plant</h4>
-						<h5>Level 2</h5>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 panel">
-					<div class="panel-body text-center">
-						<button class="btn btn-lg btn-block btn-default btn-info" data-toggle="collapse" data-target="#add-plant">
-    						<h2><span class="glyphicon glyphicon-plus"></span></h2>
-    						<h4>Add new plant</h4>    							
-						</button>
-						<br>
-						<div id="add-plant" class="list-group collapse">
-							<a href="#" class="list-group-item">
-								<img src="res/plants/solar/32.png"> Solar Farm ($25,000)
-							</a>
-						</div>
-					</div>
-				</div>    				    				
+				<%
+					var MAX_PLANTS = 3; //max plants per city
+					for(var i=0; i<city.plants.size(); i++){
+						//show info for this plant
+						var plant = city.plants.at(i);
+						%>
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 panel">
+								<div class="panel-body text-center">
+									<img src="res/plants/solar/100.png" class="img-responsive img-center">
+									<h4 class="">Solar Farm</h4>
+									<h5>Level 2</h5>
+									<div class="text-success">
+										<span class="glyphicon glyphicon-usd"></span> +$5,000<span class="text-muted">/year</span>
+									</div>
+									<div class="text-info">
+										<span class="glyphicon glyphicon-flash"></span> 60 <span class="text-muted">GwH</span>
+									</div>
+									<br>
+									<button class="btn btn-block btn-success">
+										Upgrade<br>($<%=accounting.formatNumber(plant.get('constructionCost'))%>)
+									</button>	
+									<button class="btn btn-block btn-sm btn-danger">
+										Destroy<br>($<%=accounting.formatNumber(plant.get('constructionCost')/10)%>)
+									</button>				
+								</div>
+							</div>						
+						<%
+					}
+					for(var j=city.plants.size(); j<MAX_PLANTS; j++){
+						//fill the rest with "add" buttons
+						%>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 panel">
+							<div class="panel-body text-center">
+								<button class="btn btn-lg btn-block btn-default btn-info" data-toggle="collapse" data-target="#add-plant">
+		    						<h2><span class="glyphicon glyphicon-plus"></span></h2>
+		    						<h4>Add new plant</h4>    							
+								</button>
+								<br>
+								<div id="add-plant" class="list-group collapse">
+									<a href="#" class="list-group-item">
+									</a>
+								</div>
+							</div>
+						</div>  						
+						<%
+					}
+				%>  				    				
 			</div>    		
     	</script> 
     	<script id="template-stats" type="text/template">
 			<h2>
 				<span class="glyphicon glyphicon-flash"></span>
 				Player
-				<span class="pull-right text-info small">Year <%=stats.year%></span>
+				<span class="pull-right text-info small">Year <%=stats.get('year')%></span>
 			</h2>
 			
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 lead">
-					<span class="text-success">$<%=accounting.formatNumber(stats.money)%></span>
+					<span class="text-success">$<%=accounting.formatNumber(stats.get('money'))%></span>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 					<span class="text-success">+$5,000</span><span class="text-muted">/turn</span>
@@ -269,11 +275,11 @@
 			
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-					<span class="glyphicon glyphicon-flash"></span> 400 GWh
+					<span class="glyphicon glyphicon-flash"></span> <%=stats.getPower()%> GWh
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
 					<div class="progress">
-						<div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">    						
+						<div class="progress-bar" role="progressbar" aria-valuenow="<%=stats.getPowerPercent()%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=stats.getPowerPercent()%>%;">    						
 					</div>
 				</div>
 			</div>		    		
@@ -295,10 +301,10 @@
     <script src="lib/backbone.localStorage.js"></script>
     <script src="lib/handlebars-v1.3.0.js"></script>
     
-    <script src="src/utils.js"></script>    
+    <script src="src/utils.js"></script>       
     <script src="src/models.js"></script>
+    <script src="src/enums.js"></script>     
     <script src="src/view.js"></script>
-    <script src="src/enums.js"></script>
     <script src="src/main.js"></script>
     
   </body>
