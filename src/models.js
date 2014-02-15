@@ -103,7 +103,16 @@ $(function(){
 		researchPlantType: function(plant){
 			this.get('plants').add(plant);
 			this.changeMoney(-plant.get('researchCost'));
-		}
+		},
+		
+		/**
+		 * Takes ownership of the given city.
+		 */
+		expandToCity: function(city){
+			city.set('owned', true);
+			this.changeMoney(-city.get('expansionCost'));
+		},		
+		
 	});
 	
 	var Map = Backbone.Model.extend({
@@ -125,6 +134,7 @@ $(function(){
 		 * 	bool owned (by player)
 		 *  bool headquarters
 		 * 	Collection<Plant> plants	(up to 3) plants in this city.
+		 * 	int expansionCost			how much money it costs to unlock this city.
 		 *	Region region (see Regions enum)
 		 * 	int[] nationalCoords		coordinates of city on the national map in form [x,y] where x and y are in percents from top left (in decimal form)
 		 * int[] regionalCoords			coordinates for the region they're in. Same format as national.
@@ -140,7 +150,8 @@ $(function(){
 			return {
 			 owned: 	false,
 			 headquarters: false,	
-			 plants:	new Backbone.Collection			
+			 plants:	new Backbone.Collection,
+			 expansionCost:	20000	
 			};
 		},
 		
@@ -167,6 +178,12 @@ $(function(){
 			return _.reduce(this.get('plants').pluck('powerProduction'), function(sum, x){ return sum + x; }, 0);
 		},		
 		
+		/**
+		 * Returns how much money it would take to make this city your headquarters.
+		 */
+		getHeadquarterCost: function(){
+			return this.get('expansionCost') * 2;
+		},
 		
 		/*
 		 * Constructs the given plant in this city NOW.
@@ -194,6 +211,7 @@ $(function(){
 		
 		url: 'res/stats/cities.json',
 
+		//TODO do the headquarters fns make more sense as part of career?
 		/**
 		 * Returns the City object representing the player's headquarters
 		 */
@@ -208,6 +226,7 @@ $(function(){
 		setHeadquarters: function(city){
 			this.findWhere({ headquarters: true }).set('headquarters', false);
 			city.set('headquarters', true);
+			career.changeMoney(-city.getHeadquarterCost());
 		}
 	});
 

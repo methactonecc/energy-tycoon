@@ -124,7 +124,9 @@ $(function(){
 		//Events hash
 		events: {
 			"click #next-year": 			function(){ this.model.nextYear(); },
-			"click .research-plant-type": "researchPlantType"
+			"click .research-plant-type": "researchPlantType",
+			"click .add-city": 				"addCity",
+			"click #move-headquarters": 	"moveHeadquarters",
 		},
 		
 		initialize: function(){
@@ -174,7 +176,26 @@ $(function(){
 			var plant = Plants[plantTypeString];
 			plant = plant.clone();
 			this.model.researchPlantType(plant);
-		}	
+		},
+
+		/**
+		 * Expands to a certain city.
+		 */		
+		addCity: function(event){
+			var cityName = $(event.currentTarget).data('name');	
+			var city = cities.findWhere({name: cityName});
+			this.model.expandToCity(city);	
+		},
+		
+		
+		/**
+		 * Moves the player's headquarters to the active city.
+		 */
+		moveHeadquarters: function(event){
+			//this can only be clicked from the city view, so the city to move to IS the city being shown
+			var city = map.get('city');	
+			cities.setHeadquarters(city);
+		},		
 	});
 	
 	window.CityView = Backbone.View.extend({	
@@ -189,6 +210,7 @@ $(function(){
 		events: {
 			"click .build-plant": "buildPlant",
 			"click .destroy-plant": "destroyPlant",
+			"click #move-headquarters": "moveHeadquarters",
 		},
 		
 		// Templates
@@ -227,6 +249,6 @@ $(function(){
 			var plantIDString = $(event.currentTarget).data('cid');
 			var plant = this.model.get('plants').findWhere({cid: plantIDString});
 			this.model.destroyPlant(plant);
-		}
+		},
 	});
 });
