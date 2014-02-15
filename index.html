@@ -54,116 +54,14 @@
     			<div id="map"></div>
     			<div id="city-markers"></div>
     		</div>
-    		<div id="city-view" class="col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
+    		<div id="city-view" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    		</div>
     		<div id="sidebar" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
     			<div id="sidebar-stats"></div>
 
-    			
     			<hr>
     			
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs">
-					<li class="active">
-						<a href="#tab-places" data-toggle="tab">Places</a>
-					</li>
-					<li>
-						<a href="#tab-research" data-toggle="tab">Research</a>
-					</li>
-					<li>
-						<a href="#tab-construction" data-toggle="tab">Construction</a>
-					</li>
-				</ul>
-
-				<!-- Tab panes -->
-				<div class="panel panel-default panel-no-top">
-					<div class="panel-body">
-						<div class="tab-content">
-							<div class="tab-pane active" id="tab-places">
-								<span class="glyphicon glyphicon-home"></span> Headquarters: New York
-								<button class="btn btn-default pull-right">
-									Move
-								</button>
-							</div>
-							<div class="tab-pane" id="tab-research">
-								<ul class="list-group">
-									<li class="list-group-item list-group-item-success">
-										<img src="res/plants/fuelcell/32.png"> Fuel Cell
-										<span class="pull-right hidden-sm hidden-xs">
-											<span class="glyphicon glyphicon-ok"></span>
-											<span class="text-muted">Researched</span>
-										</span>
-									</li>
-									<li class="list-group-item">
-										<img src="res/plants/hydroelectric/32.png"> Hydroelectric
-										<span class="pull-right">
-											<button class="btn btn-default">
-												<span class="glyphicon glyphicon-search"></span>
-												Research
-											</button>
-										</span>
-									</li>									
-								</ul>
-							</div>
-							<div class="tab-pane" id="tab-construction">
-								<table class="table table-striped table-condensed">
-									<tr>
-										<td><img src="res/plants/fuelcell/32.png"> Fuel Cell</td>
-										<td>Lv. 3</td>
-										<td>Boston</td>
-										<td>2 years left</td>
-										<td><button class="btn btn-danger btn-sm">
-											<span class="glyphicon glyphicon-remove"></span>
-										</button></td>
-									</tr>
-									<tr>
-										<td><img src="res/plants/biomass/32.png"> Biomass</td>
-										<td>Lv. 1</td>
-										<td>Washington DC</td>
-										<td>1 year left</td>
-									</tr>									
-								</table>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			
-    			<!--
-    			<div class="list-group" id="city-list">
-    				<a href="#" class="list-group-item clearfix">
-    					
-    					<div class="visible-lg visible-md">
-	    					<h4 class="list-group-item-heading">
-	    						Washington DC   					
-	    						<span class="pull-right">
-			    					<img src="res/plants/fuelcell/32.png">
-			    					<img src="res/plants/solar/32.png">
-			    					<img src="res/plants/biofuel/32.png">
-		    					</span>
-	    					</h4>
-	    					<br class="clearfix">
-	    					<p>
-	    						<span class="pull-left">
-	    							<span class="text-success">
-	    								<span class="glyphicon glyphicon-usd"></span>
-	    								+$3,000
-	    							</span>
-	    							<span class="text-muted">/turn</span>
-	    						</span>
-	    						<span class="pull-right">
-	    							<span class="text-info">
-	    								<span class="glyphicon glyphicon-flash"></span>
-	    								500
-	    							</span>
-	    							<span class="text-muted"> GwH</span>
-	    						</span>	    						
-	    					</p>    
-	    					<br>						
-    					</div>
-						
-
-    				</a>
-    			</div>-->
+				<div id="sidebar-menu"></div>
     		</div>
     	</div>
     </div><!-- /.container -->
@@ -216,39 +114,51 @@
 						%>
 							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 panel">
 								<div class="panel-body text-center">
-									<img src="res/plants/solar/100.png" class="img-responsive img-center">
-									<h4 class="">Solar Farm</h4>
-									<h5>Level 2</h5>
+									<img src="res/plants/<%=plant.get('slug')%>/100.png" class="img-responsive img-center">
+									<h4 class=""><%=plant.get('plantName')%></h4>
+									<h5>Level <%=plant.get('level')%></h5>
 									<div class="text-success">
-										<span class="glyphicon glyphicon-usd"></span> +$5,000<span class="text-muted">/year</span>
+										<span class="glyphicon glyphicon-usd"></span> 
+										<%=accounting.formatNumber(plant.get('income'))%><span class="text-muted">/year</span>
 									</div>
 									<div class="text-info">
-										<span class="glyphicon glyphicon-flash"></span> 60 <span class="text-muted">GwH</span>
+										<span class="glyphicon glyphicon-flash"></span> <%=plant.get('powerProduction')%> <span class="text-muted">GWh</span>
 									</div>
 									<br>
 									<button class="btn btn-block btn-success">
 										Upgrade<br>($<%=accounting.formatNumber(plant.get('constructionCost'))%>)
 									</button>	
-									<button class="btn btn-block btn-sm btn-danger">
-										Destroy<br>($<%=accounting.formatNumber(plant.get('constructionCost')/10)%>)
+									<button class="btn btn-block btn-sm btn-danger destroy-plant" data-id="<%=plant.cid%>">
+										Destroy<br>($<%=accounting.formatNumber(plant.getDestructionCost())%>)
 									</button>				
 								</div>
 							</div>						
 						<%
 					}
-					for(var j=city.plants.size(); j<MAX_PLANTS; j++){
-						//fill the rest with "add" buttons
+					for(var j=city.plants.size(); j<MAX_PLANTS && j<city.plants.size()+1; j++){
+						//fill the rest with "add" buttons; max 1 button
 						%>
 						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 panel">
 							<div class="panel-body text-center">
-								<button class="btn btn-lg btn-block btn-default btn-info" data-toggle="collapse" data-target="#add-plant">
+								<button class="btn btn-lg btn-block btn-default btn-info" data-toggle="collapse" data-target="#add-plant-<%=j%>">
 		    						<h2><span class="glyphicon glyphicon-plus"></span></h2>
 		    						<h4>Add new plant</h4>    							
 								</button>
 								<br>
-								<div id="add-plant" class="list-group collapse">
-									<a href="#" class="list-group-item">
-									</a>
+								<div id="add-plant-<%=j%>" class="list-group collapse">
+									<% 
+										stats.get('plants').forEach(function(plantType){
+											//this is a kind of plant you can build
+											if(city.plants)
+											%>
+												<a href="#" class="list-group-item text-center build-plant" data-name="<%=plantType.get('name')%>">
+													<img src="res/plants/<%=plantType.get('slug')%>/32.png">
+													<h4><%=plantType.get('plantName')%></h4>
+													$<%=accounting.formatNumber(plantType.get('constructionCost'))%>
+												</a>
+											<%											
+										});
+									%>
 								</div>
 							</div>
 						</div>  						
@@ -269,7 +179,7 @@
 					<span class="text-success">$<%=accounting.formatNumber(stats.get('money'))%></span>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<span class="text-success">+$5,000</span><span class="text-muted">/turn</span>
+					<span class="text-success">$<%=accounting.formatNumber(stats.getIncome())%></span><span class="text-muted">/turn</span>
 				</div>
 			</div>
 			
@@ -282,8 +192,149 @@
 						<div class="progress-bar" role="progressbar" aria-valuenow="<%=stats.getPowerPercent()%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=stats.getPowerPercent()%>%;">    						
 					</div>
 				</div>
-			</div>		    		
+			</div>		  
+			
+			<button class="btn btn-block btn-primary" id="next-year">
+				<span class="glyphicon glyphicon-fast-forward"></span> Next year
+			</button>		  		
     	</script>	
+    	<script id="template-menu-national" type="text/template">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#tab-places" data-toggle="tab">Places</a>
+				</li>
+				<li>
+					<a href="#tab-research" data-toggle="tab">Research</a>
+				</li>
+				<li>
+					<a href="#tab-construction" data-toggle="tab">Construction</a>
+				</li>
+			</ul>
+
+			<!-- Tab panes -->
+			<div class="panel panel-default panel-no-top">
+				<div class="panel-body">
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab-places">
+							<span class="glyphicon glyphicon-home"></span>
+							Headquarters: 
+							<% if(cities.getHeadquarters()) 
+								print(cities.getHeadquarters().get('name')); %>
+							<button class="btn btn-default pull-right">
+								Move
+							</button>
+						</div>
+						<div class="tab-pane" id="tab-research">
+							<%
+								var researchedPlantNames = stats.get('plants').pluck('name');
+								Plants.forEach(function(plantType){
+									if(_.contains(researchedPlantNames, plantType.get('name'))){
+										//already researched!
+										%>
+										<li class="list-group-item list-group-item-success">
+											<img src="res/plants/<%=plantType.get('slug')%>/32.png"> <%=plantType.get('powerName')%>
+											<span class="pull-right hidden-sm hidden-xs">
+												<span class="glyphicon glyphicon-ok"></span>
+												<span class="text-muted">Researched</span>
+											</span>
+										</li>										
+										<%
+									}
+									else{
+										//button to research it
+										%>
+										<li class="list-group-item clearfix">
+											<img src="res/plants/<%=plantType.get('slug')%>/32.png"> <%=plantType.get('powerName')%>
+											<span class="pull-right">
+												<button class="btn btn-default research-plant-type" data-name="<%=plantType.get('name')%>">
+													<span class="glyphicon glyphicon-search"></span>
+													Research<br>
+													($<%=accounting.formatNumber(plantType.get('researchCost'))%>)
+												</button>
+											</span>
+										</li>											
+										<%
+									}
+								});
+							%>
+							<ul class="list-group">
+
+								
+							</ul>
+						</div>
+						<div class="tab-pane" id="tab-construction">
+							<table class="table table-striped table-condensed">
+								<tr>
+									<td><img src="res/plants/fuelcell/32.png"> Fuel Cell</td>
+									<td>Lv. 3</td>
+									<td>Boston</td>
+									<td>2 years left</td>
+									<td><button class="btn btn-danger btn-sm">
+										<span class="glyphicon glyphicon-remove"></span>
+									</button></td>
+								</tr>
+								<tr>
+									<td><img src="res/plants/biomass/32.png"> Biomass</td>
+									<td>Lv. 1</td>
+									<td>Washington DC</td>
+									<td>1 year left</td>
+								</tr>									
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>    		
+    	</script>
+    	<script id="template-menu-regional" type="text/template">
+			<div class="list-group" id="city-list">
+				<%
+					cities.where({ region: region }).forEach(function(city){
+						//render some info for each of our cities in this region
+						%>
+							<a href="#" class="list-group-item clearfix">
+								
+								<div class="visible-lg visible-md">
+			    					<h4 class="list-group-item-heading">
+			    						<%=city.get('name')%>				
+			    						<span class="pull-right">
+			    							<% city.get('plants').forEach(function(plant){
+			    								//print info about each plant
+			    								%>
+					    							<img src="res/plants/<%=plant.get('slug')%>/32.png">
+			    								<%
+			    							}) %>
+				    					</span>
+			    					</h4>
+			    					<br class="clearfix">
+			    					<p>
+			    						<span class="pull-left">
+			    							<span class="text-success">
+			    								<span class="glyphicon glyphicon-usd"></span>
+			    								<%= accounting.formatNumber(city.getIncome()) %></span><span class="text-muted">/year</span>
+			    						</span>
+			    						<span class="pull-right">
+			    							<span class="text-info">
+			    								<span class="glyphicon glyphicon-flash"></span>
+			    								<%=city.getPower()%>
+			    							</span>
+			    							<span class="text-muted"> GWh</span>
+			    						</span>	    						
+			    					</p>    
+			    					<br>						
+								</div>
+								
+			
+							</a>						
+						<%
+					});
+				%>
+			</div>
+    	</script>   
+    	<script id="template-menu-city" type="text/template">
+    		<%=city.get('name')%>
+    	</script> 	
     </div>
 
 

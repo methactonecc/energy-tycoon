@@ -21,18 +21,20 @@ $(function(){
 		 */
 		routeMain: function(){
 			map.set('region', Regions.Nation);
-			
+			map.set('viewType', ViewTypes.Nation);
 			//appView.render();
 		},
 		
 		routeRegion: function(regionSlug){
 			var region = Regions.findWhere({slug: regionSlug});
 			map.set('region',region);
+			map.set('viewType', ViewTypes.Region);			
 		},
 		
 		routeCity: function(cityName){
 			var city = cities.findWhere({name: cityName});
 			map.set('city',city);
+			map.set('viewType', ViewTypes.City);			
 		},		
 		
 	});

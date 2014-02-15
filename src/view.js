@@ -23,9 +23,8 @@ $(function(){
 		
 		initialize: function(){
 			//Bind to relevant events here
-    		this.listenTo(this.model, "change:region", this.render);
-    		this.listenTo(this.model, "change:city", this.renderCity); //when someone opens a city, show its info
-    		this.listenTo(career.get('cities'), "change", this.render); //re-render city markers when a city is added
+    		this.listenTo(this.model, "change:viewType", this.render);
+    		this.listenTo(career.get('cities'), "change", this.renderCityMarkers); //re-render city markers when a city is added
 			
 			/*
 			var self = this;
@@ -38,9 +37,26 @@ $(function(){
 		},
 		
 		/**
-		 * Used to show a map of a region.
+		 * Used to show the appropriate map/city info.
 		 */
 		render: function(){
+			//get rid of old views
+			if(this.cityView){
+				this.cityView.remove();
+			}
+						
+			//What to show??
+			var viewType = this.model.get('viewType');
+			if(viewType ===	 ViewTypes.City){
+				this.renderCity();
+				return;
+			}
+			else{
+				//carry on
+			}
+			
+			//Now we know we're doing a region
+			
 			//hide old stuff
 			$('#city-view').hide();
 			this.$('#map-container').show();			
@@ -49,9 +65,7 @@ $(function(){
 			var region = this.model.get('region');
 			this.$('#map').html(this.mapTemplate({ regionSlug: region.get('slug') }));
 			
-			this.$('#city-markers').html(this.cityMarkerTemplate({ cities: cities, region: region }));
-			
-			this.$('.add-tooltip').tooltip();
+			this.renderCityMarkers();
 			
 			if(region === Regions.Nation){
 				//zoom into a region on click
@@ -74,12 +88,21 @@ $(function(){
 		},
 		
 		/**
+		 * Renders the markers on the map, one per city.
+		 */
+		renderCityMarkers: function(){
+			var region = this.model.get('region');			
+			this.$('#city-markers').html(this.cityMarkerTemplate({ cities: cities, region: region }));
+			this.$('.add-tooltip').tooltip();		
+		},
+		
+		/**
 		 * Used to show a city.
 		 */
 		renderCity: function(){
 			var city = this.model.get('city'); //city to load
-			var cityView = new CityView({model: city});
-			cityView.render();
+			this.cityView = new CityView({model: city});
+			this.cityView.render();
 		}
 	});
 	
@@ -94,25 +117,64 @@ $(function(){
 		
 		//Template functions to use
 		statsTemplate: template("template-stats"),	//vital stats like money, power, etc.
+		menuNationalTemplate: template("template-menu-national"), //menu info for when you're viewing the whole nation	
+		menuRegionalTemplate: template("template-menu-regional"), //menu for when you're viewing one region of the US (NE, MW, etc.)
+		menuCityTemplate:	  template("template-menu-city"), //for when you're viewing a city
 		
 		//Events hash
 		events: {
+			"click #next-year": 			function(){ this.model.nextYear(); },
+			"click .research-plant-type": "researchPlantType"
 		},
 		
 		initialize: function(){
 			//Bind to relevant events here
-    		this.listenTo(this.model, "change", this.renderStats);
+    		this.listenTo(this.model, "change", this.render);
+    		
+    		//Intercept region changes and update menu on the sidebar accordingly
+    		this.listenTo(appView.model, "change:viewType", this.renderMenu);
 		},
 		
 		renderStats: function(){
-			this.$('#sidebar-stats').html(this.statsTemplate({stats: this.model}));
+			this.$('#sidebar-stats').html(this.statsTemplate({ stats: this.model, cities: cities }));
+		},
+		
+		/**
+		 * Renders the appropriate sidebar.
+		 */
+		renderMenu: function(){
+			switch(appView.model.get('viewType')){
+				case ViewTypes.Nation:
+					var region = appView.model.get('region');
+					this.$('#sidebar-menu').html(this.menuNationalTemplate({ stats: this.model, cities: cities }));
+					break;
+				case ViewTypes.Region:
+					var region = appView.model.get('region');				
+					this.$('#sidebar-menu').html(this.menuRegionalTemplate({ stats: this.model, region: region, cities: cities }));
+					break;
+				case ViewTypes.City:
+					var city = appView.model.get('city');
+					this.$('#sidebar-menu').html(this.menuCityTemplate({ city: city }));					
+			}
 		},
 		
 		render: function(){
 			//By default, re-render everything
-			//Try not to use this since we want to granularize as much as possible	
 			this.renderStats();	
-		},		
+			this.renderMenu();
+			//this.renderRegionalMenu();
+		},	
+		
+		
+		/**
+		 * Researches a clicked power type.
+		 */
+		researchPlantType: function(event){
+			var plantTypeString = $(event.currentTarget).data('name');	
+			var plant = Plants[plantTypeString];
+			plant = plant.clone();
+			this.model.researchPlantType(plant);
+		}	
 	});
 	
 	window.CityView = Backbone.View.extend({	
@@ -122,19 +184,49 @@ $(function(){
 		 * Model: City
 		 */
 		
-		el: $('#city-view'),
+		tagName: "div",
+		
+		events: {
+			"click .build-plant": "buildPlant",
+			"click .destroy-plant": "destroyPlant",
+		},
 		
 		// Templates
 		cityTemplate: template("template-city"),	//for showing an up-close look at a city		
 		
 		initialize: function(){
+			this.listenTo(this.model, "change", this.render);
+			this.listenTo(this.model.get('plants'), "all", this.render);			
 		},
 		
 		render: function(){
 			//hide other stuff
 			$('#map-container').hide();
-			this.$el.show();
-			this.$el.html(this.cityTemplate({city: this.model.attributes}));
+			this.$el.html(this.cityTemplate({city: this.model.attributes, stats: career }));
+			if($('#city-view').has(this.$el).length > 0){
+				//already contains it!
+				//$('#city-view').show();
+			}
+			else{
+				//add it!
+				$('#city-view').append(this.$el).show();
+			}
 		},
+		
+		/**
+		 * Begins the construction of a plant.
+		 */
+		buildPlant: function(event){
+			var plantTypeString = $(event.currentTarget).data('name');
+			var plant = Plants[plantTypeString]; //the type of plant to build
+			plant = plant.clone();
+			this.model.buildPlant(plant);
+		},
+		
+		destroyPlant: function(event){
+			var plantIDString = $(event.currentTarget).data('cid');
+			var plant = this.model.get('plants').findWhere({cid: plantIDString});
+			this.model.destroyPlant(plant);
+		}
 	});
 });
