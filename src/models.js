@@ -21,12 +21,13 @@ $(function(){
 		 * 
 		 * Dynamic fields:
 		 * 	int level			up to 3. //TODO make income/powerprod change as level changes
+		 * 	int hp				how much endurance this plant has; wears down over time. Max 100 (full health); min 0.
 		 */
 		
 		defaults: {
-			level:	1
+			level:	1,
+			hp:		100
 		},
-		
 		
 		getDestructionCost: function(){
 			return this.get('constructionCost')/2;

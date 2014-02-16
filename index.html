@@ -117,6 +117,18 @@
 									<img src="res/plants/<%=plant.get('slug')%>/100.png" class="img-responsive img-center">
 									<h4 class=""><%=plant.get('plantName')%></h4>
 									<h5>Level <%=plant.get('level')%></h5>
+									
+									<div class="row">
+										<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+											HP
+										</div>
+										<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+											<div class="progress">
+												<div class="progress-bar" role="progressbar" aria-valuenow="<%=plant.get('hp')%>" aria-valuemin="0" aria-valuemax="100" style="width:<%=plant.get('hp')%>%;"></div>					
+											</div>												
+										</div>									
+									</div>
+																		
 									<div class="text-success">
 										<span class="glyphicon glyphicon-usd"></span> 
 										<%=accounting.formatNumber(plant.get('income'))%><span class="text-muted">/year</span>
