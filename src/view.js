@@ -65,7 +65,8 @@ $(function(){
 			var region = this.model.get('region');
 			this.$('#map').html(this.mapTemplate({ regionSlug: region.get('slug') }));
 			
-			this.renderCityMarkers();
+			var self = this;
+			_.delay(function(){ self.renderCityMarkers(); }, 100);
 			
 			if(region === Regions.Nation){
 				//zoom into a region on click
