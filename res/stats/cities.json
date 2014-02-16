@@ -53,49 +53,49 @@
 		"name": "Chicago",
 		"regionName": "Midwest",
 		"nationalCoords": [0.67, 0.33],
-		"regionalCoords": [0.22, 0.76]
+		"regionalCoords": [0.65, 0.51]
 	},
 	{
 		"name": "Des Moines",
 		"regionName": "Midwest",
 		"nationalCoords": [0.58, 0.33],
-		"regionalCoords": [0.22, 0.76]
+		"regionalCoords": [0.49, 0.53]
 	},
 	{
 		"name": "Columbus",
 		"regionName": "Midwest",
 		"nationalCoords": [0.76, 0.37],
-		"regionalCoords": [0.22, 0.76]
+		"regionalCoords": [0.82, 0.59]
 	},
 	{
 		"name": "Omaha",
 		"regionName": "Midwest",
 		"nationalCoords": [0.51, 0.36],
-		"regionalCoords": [0.22, 0.76]
+		"regionalCoords": [0.37, 0.58]
 	},
 		
 	{
 		"name": "Los Angeles",
 		"regionName": "West",
 		"nationalCoords": [0.09, 0.59],
-		"regionalCoords": [0.22, 0.76]
+		"regionalCoords": [0.35, 0.76]
 	},
 	{
 		"name": "Denver",
 		"regionName": "West",
-		"nationalCoords": [0.34, 0.43],
-		"regionalCoords": [0.22, 0.76]
+		"nationalCoords": [0.35, 0.43],
+		"regionalCoords": [0.69, 0.55]
 	},
 	{
 		"name": "Seattle",
 		"regionName": "West",
 		"nationalCoords": [0.09, 0.03],
-		"regionalCoords": [0.22, 0.76]
+		"regionalCoords": [0.35, 0.07]
 	},
 	{
 		"name": "Phoenix",
 		"regionName": "West",
 		"nationalCoords": [0.21, 0.60],
-		"regionalCoords": [0.22, 0.76]
+		"regionalCoords": [0.50, 0.78]
 	}
 ]
