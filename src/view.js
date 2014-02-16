@@ -66,25 +66,27 @@ $(function(){
 			this.$('#map').html(this.mapTemplate({ regionSlug: region.get('slug') }));
 			
 			var self = this;
-			_.delay(function(){ self.renderCityMarkers(); }, 100);
-			
-			if(region === Regions.Nation){
-				//zoom into a region on click
-	    		Regions.each(function(region){
-	    			this.$('.city-' + region.get('slug')).click(function(){
-	    				worldRouter.navigate("region/" + region.get('slug'), { trigger: true });	
-	    			});
-	    		}, this);					
-			}
-			else{
-	    		this.$('.city').click(function(){
-	    			var name = $(this).data('name');
-	    			var city = cities.findWhere({name: name});
-	    			if(city.get('owned')){
-	    				worldRouter.navigate("city/" + name, { trigger: true });
-	    			}
-	    		});			
-			}
+			_.delay(function(){ 
+				self.renderCityMarkers(); 		
+				if(region === Regions.Nation){
+					//zoom into a region on click
+		    		Regions.each(function(region){
+		    			this.$('.city-' + region.get('slug')).click(function(){
+		    				worldRouter.navigate("region/" + region.get('slug'), { trigger: true });	
+		    			});
+		    		}, this);					
+				}
+				else{
+		    		this.$('.city').click(function(){
+		    			var name = $(this).data('name');
+		    			var city = cities.findWhere({name: name});
+		    			if(city.get('owned')){
+		    				worldRouter.navigate("city/" + name, { trigger: true });
+		    			}
+		    		});			
+				}
+							
+			}, 100);
 		
 		},
 		
