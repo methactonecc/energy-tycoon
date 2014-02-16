@@ -18,7 +18,6 @@ $(function(){
 		 * 	int constructionYears	How many years it takes to build the plant (min. 1).
 		 * 	int income			how much money you earn each year from this plant.
 		 * 	int powerProduction	how much power this generates.
-		 * 
 		 * Dynamic fields:
 		 * 	int level			up to 3. //TODO make income/powerprod change as level changes
 		 * 	int hp				how much endurance this plant has; wears down over time. Max 100 (full health); min 0.
@@ -32,6 +31,10 @@ $(function(){
 		getDestructionCost: function(){
 			return this.get('constructionCost')/2;
 		},
+		
+		levelUp: function(){
+			this.set('level', this.get('level') + 1);
+		}
 	});	
 	
 	var Career = Backbone.Model.extend({
