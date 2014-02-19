@@ -3,7 +3,12 @@
 		"name": "New York",
 		"regionName": "Northeast",
 		"nationalCoords": [0.91, 0.30],
-		"regionalCoords": [0.55, 0.63]
+		"regionalCoords": [0.55, 0.63],
+		"expansionCost": 20000,
+		"suitability": {
+			"solar": 5,
+			"wind": 5,
+		}
 	},
 	{
 		"name": "Philadelphia",
