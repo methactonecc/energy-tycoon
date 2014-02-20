@@ -75,21 +75,8 @@ $(function(){
 			cities.each(function(city){
 				cities.get('plants')
 				plants.each(function(plant){
-					plant.set("hp", plant.get("hp") - 5 ;)
-				})
-				
-				/**
-				 * Loop through array
-				 * array.each(function(x){
-				 * 	x.set('y', 5)
-				 * }
-				 * 
-				 * ===
-				 * 
-				 * for Item x in array{
-				 *  x.setY(5);
-				 * }
-				 * /
+					plant.set("hp", plant.get("hp") - 5); // arbitrary; change hp loss amount
+				});
 				
 			});
 		},
