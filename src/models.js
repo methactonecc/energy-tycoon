@@ -72,6 +72,26 @@ $(function(){
 		nextYear: function(){
 			this.set('year',this.get('year')+1);
 			this.changeMoney(this.getIncome()); //+cash for this year
+			cities.each(function(city){
+				cities.get('plants')
+				plants.each(function(plant){
+					plant.set("hp", plant.get("hp") - 5 ;)
+				})
+				
+				/**
+				 * Loop through array
+				 * array.each(function(x){
+				 * 	x.set('y', 5)
+				 * }
+				 * 
+				 * ===
+				 * 
+				 * for Item x in array{
+				 *  x.setY(5);
+				 * }
+				 * /
+				
+			});
 		},
 		
 		/**
@@ -138,7 +158,7 @@ $(function(){
 		 * 	bool owned (by player)
 		 *  bool headquarters
 		 * 	Collection<Plant> plants	(up to 3) plants in this city.
-		 * 	int expansionCost			how much money it costs to unlock this city.
+		 * 	int expansionCos		how much money it costs to unlock this city.
 		 *	Region region (see Regions enum)
 		 * 	int[] nationalCoords		coordinates of city on the national map in form [x,y] where x and y are in percents from top left (in decimal form)
 		 * int[] regionalCoords			coordinates for the region they're in. Same format as national.
