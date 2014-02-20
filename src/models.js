@@ -73,8 +73,7 @@ $(function(){
 			this.set('year',this.get('year')+1);
 			this.changeMoney(this.getIncome()); //+cash for this year
 			cities.each(function(city){
-				cities.get('plants')
-				plants.each(function(plant){
+				city.get('plants').each(function(plant){
 					plant.set("hp", plant.get("hp") - 5); // arbitrary; change hp loss amount
 				});
 				
