@@ -8,13 +8,12 @@
 		"suitability": {
 			"solar": 5,
 			"wind": 5,
-			"fuelcell":
-			"geothermal":
-			"biofuel":
-			"biomass":
-			"hydroelectric":
-			"tidal":
-			
+			"fuelcell": 5,
+			"geothermal": 1,
+			"biofuel": 2,
+			"biomass": 2,
+			"hydroelectric": 4, 
+			"tidal": 4
 		}
 	},
 	{
