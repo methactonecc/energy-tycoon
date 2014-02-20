@@ -212,6 +212,8 @@ $(function(){
 		
 		events: {
 			"click .build-plant": "buildPlant",
+			"click .upgrade-plant": "upgradePlant",
+			"click .repair-plant": "repairPlant",			
 			"click .destroy-plant": "destroyPlant",
 			"click #move-headquarters": "moveHeadquarters",
 		},
@@ -248,9 +250,36 @@ $(function(){
 			this.model.buildPlant(plant);
 		},
 		
+		/**
+		 * Upgrades a plant to the next level.
+		 */
+		upgradePlant: function(event){
+			var plantIDString = getClickedElement(event).data('id');
+
+			//find which plant they were referring to
+			var plant = this.model.getPlantByCID(plantIDString);
+			plant.upgrade();
+		},		
+		
+		/**
+		 * Refills the plant's HP.
+		 */
+		repairPlant: function(event){
+			var plantIDString = getClickedElement(event).data('id');
+
+			//find which plant they were referring to
+			var plant = this.model.getPlantByCID(plantIDString);
+			plant.repair();
+		},			
+		
+		/**
+		 * Removes the plant.
+		 */
 		destroyPlant: function(event){
-			var plantIDString = $(event.currentTarget).data('cid');
-			var plant = this.model.get('plants').findWhere({cid: plantIDString});
+			var plantIDString = getClickedElement(event).data('id');
+
+			//find which plant they were referring to
+			var plant = this.model.getPlantByCID(plantIDString);
 			this.model.destroyPlant(plant);
 		},
 	});

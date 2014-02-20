@@ -38,11 +38,11 @@ $(function(){
 	 * These are mutable items for power plants. Grab a copy whenever you use one.
 	 */
 	window.Plants = new Backbone.Collection([
-			{ name: "Solar",	slug: "solar",		powerName: "Solar Power",		plantName: "Solar Farm",
+			{ name: "Solar",	slug: "solar",		powerName: "Solar Power",		plantName: "Solar Farm",	suitabilityName: "Sunniness",
 			researchCost: 20000,	constructionCost: 25000, income: 2000,	powerProduction: 50 },
-			{ name: "Wind",		slug: "wind",		powerName: "Wind Power",		plantName: "Wind Farm",
+			{ name: "Wind",		slug: "wind",		powerName: "Wind Power",		plantName: "Wind Farm", suitabilityName: "Windiness",
 			researchCost: 20000,	constructionCost: 25000, income: 2000,	powerProduction: 100 },
-			{ name: "FuelCell",	slug: "fuelcell",		powerName: "Fuel Cell",		plantName: "Fuel Cell Lab",
+			{ name: "FuelCell",	slug: "fuelcell",		powerName: "Fuel Cell",		plantName: "Fuel Cell Lab", suitabilityName: "Technology",
 			researchCost: 20000,	constructionCost: 25000, income: 10000,	powerProduction: 50 },						
 		], {
 			model: Plant

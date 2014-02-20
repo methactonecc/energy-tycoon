@@ -6,3 +6,11 @@
 function template(source){
 	return _.template($('#' + source).html());
 }
+
+/**
+ * Given an event, returns the jQuery element that was clicked.
+ * @param {jQuery.Event} event	an event passed from a click handler.
+ */
+function getClickedElement(event){
+	 return $($(event)[0].currentTarget);
+}

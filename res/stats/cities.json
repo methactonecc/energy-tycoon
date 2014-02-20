@@ -6,7 +6,7 @@
 		"regionalCoords": [0.55, 0.63],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
+			"solar": 1,
 			"wind": 5,
 			"fuelcell": 5,
 			"geothermal": 1,

@@ -137,10 +137,16 @@
 										<span class="glyphicon glyphicon-flash"></span> <%=plant.get('powerProduction')%> <span class="text-muted">GWh</span>
 									</div>
 									<br>
-									<button class="btn btn-block btn-success">
+									<button class="btn btn-block btn-success upgrade-plant" data-id="<%=plant.cid%>">
+										<span class="glyphicon glyphicon-arrow-up"></span>
 										Upgrade<br>($<%=accounting.formatNumber(plant.get('constructionCost'))%>)
 									</button>	
+									<button class="btn btn-block btn-info repair-plant" data-id="<%=plant.cid%>">
+										<span class="glyphicon glyphicon-wrench"></span>
+										Repair<br>($<%=accounting.formatNumber(plant.getRepairCost())%>)
+									</button>									
 									<button class="btn btn-block btn-sm btn-danger destroy-plant" data-id="<%=plant.cid%>">
+										<span class="glyphicon glyphicon-remove"></span>
 										Destroy<br>($<%=accounting.formatNumber(plant.getDestructionCost())%>)
 									</button>				
 								</div>
@@ -380,7 +386,29 @@
     				<%
     			}
     		%>
-
+    		
+    		<div class="row">
+	    		<%
+	    			_.each(city.get('suitability'), function(value, key){
+	    				// key = power type (slug), value = suitability (1-5)
+	    				powerType = Plants.findWhere({ slug: key });
+	    				if(powerType){
+	    				%>
+	    					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	    						<%=powerType.get('suitabilityName')%>:
+	    						<% 
+	    							for(var i=0; i<value; i++){
+	    								%>
+	    									<span class="glyphicon glyphicon-star"></span>
+	    								<%
+	    							}
+	    						%>
+	    					</div>
+	    				<% 
+	    				}
+	    			});
+	    		%>
+			</div>
     	</script> 	
     </div>
 

@@ -21,20 +21,38 @@ $(function(){
 		 * Dynamic fields:
 		 * 	int level			up to 3. //TODO make income/powerprod change as level changes
 		 * 	int hp				how much endurance this plant has; wears down over time. Max 100 (full health); min 0.
+		 * 	City city			the city that this plant has been placed in.
 		 */
 		
 		defaults: {
 			level:	1,
-			hp:		100
+			hp:		100,
+			city:	null
 		},
 		
 		getDestructionCost: function(){
 			return this.get('constructionCost')/2;
 		},
 		
-		levelUp: function(){
+		getRepairCost: function(){
+			return this.get('constructionCost')/5;
+		},		
+		
+		/**
+		 * Moves this plant up a level.
+		 */
+		upgrade: function(){
 			this.set('level', this.get('level') + 1);
-		}
+			career.changeMoney(-this.get('constructionCost'));
+		},
+		
+		/**
+		 * Refills this plant's HP at a price.
+		 */
+		repair: function(){
+			this.set('hp', 100); //arbitrary max
+			career.changeMoney(-this.getRepairCost());		
+		},
 	});	
 	
 	var Career = Backbone.Model.extend({
@@ -144,7 +162,8 @@ $(function(){
 		 * 	bool owned (by player)
 		 *  bool headquarters
 		 * 	Collection<Plant> plants	(up to 3) plants in this city.
-		 * 	int expansionCos		how much money it costs to unlock this city.
+		 * 	int expansionCost			how much money it costs to unlock this city.
+		 * 	Object suitability			Keeps track of how well each power type does in this city. Contains fields {"solar": 1-5, "fuelcell": 1-5, ... } (uses the power sources' slugs)
 		 *	Region region (see Regions enum)
 		 * 	int[] nationalCoords		coordinates of city on the national map in form [x,y] where x and y are in percents from top left (in decimal form)
 		 * int[] regionalCoords			coordinates for the region they're in. Same format as national.
@@ -201,6 +220,7 @@ $(function(){
 		buildPlant: function(plant){
 			this.get('plants').add(plant);
 			career.changeMoney(-plant.get('constructionCost'));
+			plant.set('city', this);
 		},
 		
 		/*
@@ -209,7 +229,15 @@ $(function(){
 		destroyPlant: function(plant){
 			this.get('plants').remove(plant);
 			career.changeMoney(-plant.getDestructionCost());
-		}		
+		},
+		
+		/**
+		 * Convenience method that returns the one plant whose cid matches the given one.
+		 */
+		getPlantByCID: function(cid){
+			var plants = this.get('plants').filter(function(plant){ return plant.cid === cid });
+			return plants[0];
+		}
 	});
 	
 	var Cities = Backbone.Collection.extend({
