@@ -15,9 +15,15 @@ $(function(){
 		 * 	String plantName	the name for the actual plant.
 		 * 	int researchCost	Cost (in dollars) to research this plant type
 		 * 	int constructionCost	Cost (in dollars) to build the plant or upgrade it
-		 * 	int constructionYears	How many years it takes to build the plant (min. 1).
-		 * 	int income			how much money you earn each year from this plant.
-		 * 	int powerProduction	how much power this generates.
+		 * 	
+		 * 	Dynamically-generated fields:
+		 * 		int income				how much money you earn each year from this plant.
+		 * 		int powerProduction		how much power this generates.
+		 * 
+		 * 	When constructed:
+		 * 	Object[] levels		each object within this array represents a certain level; each level has its own income and power powerProduction. for instance:
+		 * 		levels[0] (level 1 stats) = { income: 5, power: 20 }
+		 * 
 		 * Dynamic fields:
 		 * 	int level			up to 3. //TODO make income/powerprod change as level changes
 		 * 	int hp				how much endurance this plant has; wears down over time. Max 100 (full health); min 0.
@@ -28,6 +34,34 @@ $(function(){
 			level:	1,
 			hp:		100,
 			city:	null
+		},
+		
+		/* Computed properties */
+		
+		getIncome: function(){
+			var levelStats = this.get('levels')[this.get('level')-1];
+			var baseIncome = levelStats.income;
+			var income = baseIncome;
+			
+			//headquarters boost
+			if(this.get('city') && this.get('city').get('headquarters')){
+				income *= 1.1;
+			}
+			
+			return Math.round(income);
+		},
+		
+		getPowerProduction: function(){
+			var levelStats = this.get('levels')[this.get('level')-1];
+			var basePower = levelStats.power;
+			var power = basePower;
+
+			//headquarters boost
+			if(this.get('city') && this.get('city').get('headquarters')){
+				power *= 1.05;
+			}
+			
+			return Math.round(power);			
 		},
 		
 		getDestructionCost: function(){
@@ -42,8 +76,14 @@ $(function(){
 		 * Moves this plant up a level.
 		 */
 		upgrade: function(){
-			this.set('level', this.get('level') + 1);
-			career.changeMoney(-this.get('constructionCost'));
+			// can we even level up?
+			var maxLevel = this.get('levels').length;
+			if(this.get('level') < maxLevel){
+				this.set('level', this.get('level') + 1);
+				career.changeMoney(-this.get('constructionCost'));			
+				return true;	
+			}
+			return false;
 		},
 		
 		/**

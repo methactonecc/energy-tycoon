@@ -1,0 +1,48 @@
+[
+	{
+		"name": 		"Solar",
+		"slug":			"solar",
+		"powerName":	"Solar Power",
+		"plantName":	"Solar Farm",
+		"suitabilityName":	"Sunniness",
+		"researchCost":		20000,
+		"constructionCost":	25000,
+		"levels": [
+			{
+				"power":	10,
+				"income":	500
+			},
+			{
+				"power":	20,
+				"income":	1000
+			},
+			{
+				"power":	30,
+				"income":	2000
+			}	
+		]
+	},
+	{
+		"name": 		"Fuel Cell",
+		"slug":			"fuelcell",
+		"powerName":	"Fuell Cell",
+		"plantName":	"Fuel Cell Lab",
+		"suitabilityName":	"Technology",
+		"researchCost":		20000,
+		"constructionCost":	25000,
+		"levels": [
+			{
+				"power":	10,
+				"income":	500
+			},
+			{
+				"power":	50,
+				"income":	1000
+			},
+			{
+				"power":	100,
+				"income":	2000
+			}	
+		]
+	}	
+]

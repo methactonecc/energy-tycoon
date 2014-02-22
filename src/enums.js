@@ -37,18 +37,34 @@ $(function(){
 	/*
 	 * These are mutable items for power plants. Grab a copy whenever you use one.
 	 */
-	window.Plants = new Backbone.Collection([
+	var _Plants = Backbone.Collection.extend(/*[
 			{ name: "Solar",	slug: "solar",		powerName: "Solar Power",		plantName: "Solar Farm",	suitabilityName: "Sunniness",
 			researchCost: 20000,	constructionCost: 25000, income: 2000,	powerProduction: 50 },
 			{ name: "Wind",		slug: "wind",		powerName: "Wind Power",		plantName: "Wind Farm", suitabilityName: "Windiness",
 			researchCost: 20000,	constructionCost: 25000, income: 2000,	powerProduction: 100 },
 			{ name: "FuelCell",	slug: "fuelcell",		powerName: "Fuel Cell",		plantName: "Fuel Cell Lab", suitabilityName: "Technology",
 			researchCost: 20000,	constructionCost: 25000, income: 10000,	powerProduction: 50 },						
-		], {
-			model: Plant
+		], */
+		{
+			model: 	Plant,
+			url:	"res/stats/power.json"
 		});
-	//Expose members through public fields
-	Plants.each(function(item){
-		Plants[item.get("name")] = item;
-	});			
+	window.Plants = new _Plants();
+	Plants.fetch({
+		success: function(model, response, options){
+			Plants.reset(response);
+			
+			Plants.url = null; //prevent accidentally saving to server later
+			
+			//Expose members through public fields
+			Plants.each(function(item){
+				Plants[item.get("name")] = item;
+			});		
+			
+	
+			career.researchPlantType(Plants.Solar);
+		},
+		error: function(model, response, options){
+		}
+	});		
 });

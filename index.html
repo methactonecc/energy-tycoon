@@ -105,7 +105,7 @@
     	<script id="template-city" type="text/template">
 			<h3 class="text-center"><%= city.name %></h3>
 			
-			<div class="row">
+			<div class="row" id="city-background">
 				<%
 					var MAX_PLANTS = 3; //max plants per city
 					for(var i=0; i<city.plants.size(); i++){
@@ -143,11 +143,11 @@
 									</button>	
 									<button class="btn btn-block btn-info repair-plant" data-id="<%=plant.cid%>">
 										<span class="glyphicon glyphicon-wrench"></span>
-										Repair<br>($<%=accounting.formatNumber(plant.getRepairCost())%>)
+										Repair<br>($<%=accounting.formatNumber(plant.get('repairCost'))%>)
 									</button>									
 									<button class="btn btn-block btn-sm btn-danger destroy-plant" data-id="<%=plant.cid%>">
 										<span class="glyphicon glyphicon-remove"></span>
-										Destroy<br>($<%=accounting.formatNumber(plant.getDestructionCost())%>)
+										Destroy<br>($<%=accounting.formatNumber(plant.get('destructionCost'))%>)
 									</button>				
 								</div>
 							</div>						
@@ -419,14 +419,15 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="lib/bootstrap.min.js"></script>
    <!-- <script src="lib/crafty-min.js"></script>-->
-    
-    <script src="src/plugins.js"></script>
+
     
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone-min.js"></script>
     <script src="lib/backbone.localStorage.js"></script>
     <script src="lib/handlebars-v1.3.0.js"></script>
     
+    
+    <script src="src/plugins.js"></script>    
     <script src="src/utils.js"></script>       
     <script src="src/models.js"></script>
     <script src="src/enums.js"></script>     

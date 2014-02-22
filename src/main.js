@@ -51,6 +51,4 @@ $(function(){
 	});
 	worldRouter.navigate("main", { trigger: true });
 	
-	
-	career.researchPlantType(Plants.Solar);
 }); 
