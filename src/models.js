@@ -45,8 +45,16 @@ $(function(){
 			
 			//headquarters boost
 			if(this.get('city') && this.get('city').get('headquarters')){
-				income *= 1.1;
+				income *= 1.25;
 			}
+			
+			//suitability change
+			if(this.get('city')){
+				var suitabilityObject = this.get('city').get('suitability');
+				var suitability = suitabilityObject[this.get('slug')]; //1-5
+				income *= 1 + (suitability-3)*0.05;
+			}
+
 			
 			return Math.round(income);
 		},
@@ -58,8 +66,15 @@ $(function(){
 
 			//headquarters boost
 			if(this.get('city') && this.get('city').get('headquarters')){
-				power *= 1.05;
+				power *= 1.15;
 			}
+			
+			//suitability change
+			if(this.get('city')){
+				var suitabilityObject = this.get('city').get('suitability');
+				var suitability = suitabilityObject[this.get('slug')]; //1-5
+				power *= 1 + (suitability-3)*0.10;
+			}			
 			
 			return Math.round(power);			
 		},
