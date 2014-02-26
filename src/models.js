@@ -110,6 +110,14 @@ $(function(){
 		},
 	});	
 	
+	var Initiative = Backbone.Model.extend({
+		defaults: {
+			name: "test",
+			description: "test1",
+			yearlyCost: 3000
+		}
+	});
+	
 	var Career = Backbone.Model.extend({
 		/**
 		 * Information about you, the player.
@@ -126,7 +134,7 @@ $(function(){
 			 money:	100000,
 			 year:	1,
 			 name:	"Neel",
-			 
+			 initiatives : new Backbone.Collection([ new Initiative ]),
 			 plants: new Backbone.Collection
 		 },
 		 
@@ -151,6 +159,11 @@ $(function(){
 				});
 				
 			});
+			this.initiatives.each(function(i){
+				this.changeMoney(-i.get("yearlyCost"));
+			});
+			
+			}
 		},
 		
 		/**
