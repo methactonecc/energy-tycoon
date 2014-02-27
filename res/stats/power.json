@@ -25,7 +25,7 @@
 	{
 		"name": 		"Fuel Cell",
 		"slug":			"fuelcell",
-		"powerName":	"Fuell Cell",
+		"powerName":	"Fuel Cell",
 		"plantName":	"Fuel Cell Lab",
 		"suitabilityName":	"Technology",
 		"researchCost":		20000,
@@ -44,5 +44,51 @@
 				"income":	2000
 			}	
 		]
-	}	
+	},
+	{
+		"name": 		"Wind",
+		"slug":			"wind",
+		"powerName":	"Wind Power",
+		"plantName":	"Wind Farm",
+		"suitabilityName":	"Windiness",
+		"researchCost":		20000,
+		"constructionCost":	25000,
+		"levels": [
+			{
+				"power":	10,
+				"income":	500
+			},
+			{
+				"power":	50,
+				"income":	1000
+			},
+			{
+				"power":	100,
+				"income":	2000
+			}	
+		]
+	},
+	{
+		"name": 		"Hydroelectric",
+		"slug":			"hydroelectric",
+		"powerName":	"Hydroeletric Power",
+		"plantName":	"Hydroelectric Dam",
+		"suitabilityName":	"Rivers",
+		"researchCost":		20000,
+		"constructionCost":	25000,
+		"levels": [
+			{
+				"power":	10,
+				"income":	500
+			},
+			{
+				"power":	50,
+				"income":	1000
+			},
+			{
+				"power":	100,
+				"income":	2000
+			}	
+		]
+	}
 ]
