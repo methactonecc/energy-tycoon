@@ -57,6 +57,16 @@
 		"regionName": "Northeast",
 		"nationalCoords": [0.86, 0.41],
 		"regionalCoords": [0.45, 0.82],
+			"suitability": {
+			"solar": 5,
+			"wind": 5,
+			"fuelcell": 5,
+			"geothermal": 1,
+			"biofuel": 2,
+			"biomass": 2,
+			"hydroelectric": 4, 
+			"tidal": 4
+		}
 	},
 	
 	{
