@@ -28,20 +28,20 @@
 		"powerName":	"Fuel Cell",
 		"plantName":	"Fuel Cell Lab",
 		"suitabilityName":	"Technology",
-		"researchCost":		20000,
-		"constructionCost":	25000,
+		"researchCost":		25000,
+		"constructionCost":	40000,
 		"levels": [
 			{
-				"power":	10,
-				"income":	500
-			},
-			{
-				"power":	50,
+				"power":	25,
 				"income":	1000
 			},
 			{
-				"power":	100,
+				"power":	45,
 				"income":	2000
+			},
+			{
+				"power":	70,
+				"income":	5000
 			}	
 		]
 	},
@@ -51,6 +51,29 @@
 		"powerName":	"Wind Power",
 		"plantName":	"Wind Farm",
 		"suitabilityName":	"Windiness",
+		"researchCost":		10000,
+		"constructionCost":	5000,
+		"levels": [
+			{
+				"power":	5,
+				"income":	500
+			},
+			{
+				"power":	10,
+				"income":	1000
+			},
+			{
+				"power":	20,
+				"income":	2000
+			}	
+		]
+	},
+	{
+		"name": 		"Hydroelectric",
+		"slug":			"hydroelectric",
+		"powerName":	"Hydroeletric Power",
+		"plantName":	"Dam",
+		"suitabilityName":	"Proximity to rivers",
 		"researchCost":		20000,
 		"constructionCost":	25000,
 		"levels": [
@@ -69,11 +92,80 @@
 		]
 	},
 	{
-		"name": 		"Hydroelectric",
-		"slug":			"hydroelectric",
-		"powerName":	"Hydroeletric Power",
-		"plantName":	"Hydroelectric Dam",
-		"suitabilityName":	"Rivers",
+		"name": 		"Tidal",
+		"slug":			"tidal",
+		"powerName":	"Tidal Power",
+		"plantName":	"Tidal Stream Generator",
+		"suitabilityName":	"Proximity to ocean",
+		"researchCost":		20000,
+		"constructionCost":	25000,
+		"levels": [
+			{
+				"power":	10,
+				"income":	500
+			},
+			{
+				"power":	50,
+				"income":	1000
+			},
+			{
+				"power":	100,
+				"income":	2000
+			}	
+		]
+	},
+	{
+		"name": 		"Biofuel",
+		"slug":			"biofuel",
+		"powerName":	"Biofuel",
+		"plantName":	"Biofuel Factory",
+		"suitabilityName":	"Industry",
+		"researchCost":		20000,
+		"constructionCost":	25000,
+		"levels": [
+			{
+				"power":	10,
+				"income":	500
+			},
+			{
+				"power":	50,
+				"income":	1000
+			},
+			{
+				"power":	100,
+				"income":	2000
+			}	
+		]
+	},
+	{
+		"name": 		"Biomass",
+		"slug":			"biomass",
+		"powerName":	"Biomass",
+		"plantName":	"Biomass-to-Energy Plant",
+		"suitabilityName":	"Forests",
+		"researchCost":		20000,
+		"constructionCost":	25000,
+		"levels": [
+			{
+				"power":	10,
+				"income":	500
+			},
+			{
+				"power":	50,
+				"income":	1000
+			},
+			{
+				"power":	100,
+				"income":	2000
+			}	
+		]
+	},
+	{
+		"name": 		"Geothermal",
+		"slug":			"geothermal",
+		"powerName":	"Geothermal Power",
+		"plantName":	"Geothermal Plant",
+		"suitabilityName":	"Seismic Activity",
 		"researchCost":		20000,
 		"constructionCost":	25000,
 		"levels": [

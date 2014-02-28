@@ -33,12 +33,14 @@ body {
 
 .city .city-name{
 }
-/*
+
 #city-background{
 	background-position: center top;
 	background-size: 100% auto;
 	background-repeat: no-repeat;
-	background-image: url(http://aieseclife.org/wp-content/uploads/2011/05/Midtown_Skyline_New_York_wallpaper.jpg);
+
+	padding: 1em;
+	min-height: 510px;
 }
 
 #city-background>*{
@@ -46,9 +48,10 @@ body {
 }
 
 #city-view{
-	padding: 0 1em;
+	padding-left: 1.5em;
+	padding-right: 1.5em;
 }
-*/
+
 
 /** UTILITIES **/
 	

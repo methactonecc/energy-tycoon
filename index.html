@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="Methacton Electric Car Club (methactonecc.org)">
 
@@ -23,6 +23,8 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <link rel="shortcut icon" type="image/png" href="res/plants/wind/32.png">
   </head>
 
   <body>
@@ -50,13 +52,13 @@
 
     <div class="container">
     	<div id="game-main" class="row">
-    		<div id="map-container" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    		<div id="map-container" class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
     			<div id="map"></div>
     			<div id="city-markers"></div>
     		</div>
-    		<div id="city-view" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    		<div id="city-view" class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
     		</div>
-    		<div id="sidebar" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    		<div id="sidebar" class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
     			<div id="sidebar-stats"></div>
 
     			<hr>
@@ -105,7 +107,7 @@
     	<script id="template-city" type="text/template">
 			<h3 class="text-center"><%= city.name %></h3>
 			
-			<div class="row" id="city-background">
+			<div class="row" id="city-background" style="background-image: url(res/cities/<%= city.name %>-2.jpg)">
 				<%
 					var MAX_PLANTS = 3; //max plants per city
 					for(var i=0; i<city.plants.size(); i++){

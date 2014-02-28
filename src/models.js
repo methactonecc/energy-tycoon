@@ -162,8 +162,7 @@ $(function(){
 			this.initiatives.each(function(i){
 				this.changeMoney(-i.get("yearlyCost"));
 			});
-			
-			}
+				
 		},
 		
 		/**
