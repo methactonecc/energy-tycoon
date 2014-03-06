@@ -121,7 +121,7 @@
 		"plantName":	"Biofuel Factory",
 		"suitabilityName":	"Industry",
 		"researchCost":		20000,
-		"constructionCost":	25000,
+		"constructionCost":	30000,
 		"levels": [
 			{
 				"power":	10,
@@ -144,7 +144,7 @@
 		"plantName":	"Biomass-to-Energy Plant",
 		"suitabilityName":	"Forests",
 		"researchCost":		20000,
-		"constructionCost":	25000,
+		"constructionCost":	30000,
 		"levels": [
 			{
 				"power":	10,
