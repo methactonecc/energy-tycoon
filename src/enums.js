@@ -68,6 +68,32 @@ $(function(){
 		}
 	});	
 	
+	//****************** Initiatives
+	/*
+	 * Immutable items representing initiatives.
+	 */
+	var _Inits = Backbone.Collection.extend(
+		{
+			model: 	Initiative,
+			url:	"res/stats/initiatives.json"
+		});
+	window.Initiatives = new _Inits();
+	Initiatives.fetch({
+		success: function(model, response, options){
+			Initiatives.reset(response);
+			
+			Initiatives.url = null; //prevent accidentally saving to server later
+			
+			//Expose members through public fields
+			Initiatives.each(function(item){
+				Initiatives[item.get("name")] = item;
+			});		
+			
+			career.startInitiative(Initiatives["Lab Grant"]);
+		},
+		error: function(model, response, options){
+		}
+	});		
 	
 	//****************** Months
 	window.Months = [
@@ -83,6 +109,6 @@ $(function(){
 		"Oct",
 		"Nov",
 		"Dec"
-	]
+	];
 			
 });

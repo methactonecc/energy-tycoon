@@ -24,7 +24,7 @@ $(function(){
 		initialize: function(){
 			//Bind to relevant events here
     		this.listenTo(this.model, "change:viewType", this.render);
-    		this.listenTo(career.get('cities'), "change", this.renderCityMarkers); //re-render city markers when a city is added
+    		this.listenTo(cities, "change", this.renderCityMarkers); //re-render city markers when a city is added
 			
 			/*
 			var self = this;
@@ -133,6 +133,9 @@ $(function(){
 		},
 		
 		initialize: function(){
+			//create throttled versions of commonly-called fns
+			this.render = _.throttle(this._render, 500);
+			
 			//Bind to relevant events here
     		this.listenTo(this.model, "change", this.render);
     		this.listenTo(this.model.get('plants'), "all", this.render);
@@ -171,7 +174,10 @@ $(function(){
 			$('#sidebar-menu .nav-tabs').find(_.format('li:eq(<%=index%>) a', {index: activeTabIndex})).tab('show');
 		},
 		
-		render: function(){
+		/**
+		 * This is effectively render, but we're throttling it so that's why we have a _ in front. It's the same otherwise.
+		 */
+		_render: function(){
 			//By default, re-render everything
 			this.renderStats();	
 			this.renderMenu();

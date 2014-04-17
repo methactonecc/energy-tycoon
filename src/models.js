@@ -113,12 +113,16 @@ $(function(){
 		},
 	});	
 	
-	var Initiative = Backbone.Model.extend({
+	window.Initiative = Backbone.Model.extend({
 		defaults: {
-			name: "test",
-			description: "test1",
-			yearlyCost: 3000
-		}
+			name:		 	"",
+			description: 	"",
+			yearlyCost: 	0
+		},
+		
+		initialize: function(){
+			//TODO initialize a "slug" field based on the name. For instance, "Power Plant" becomes "power_plant".
+		},
 	});
 	
 	var Career = Backbone.Model.extend({
@@ -138,7 +142,7 @@ $(function(){
 			 year:	1,
 			 month:	1,
 			 name:	"Neel",
-			 initiatives : new Backbone.Collection([ new Initiative ]),
+			 initiatives : new Backbone.Collection([]),
 			 plants: new Backbone.Collection
 		 },
 		 
@@ -168,21 +172,32 @@ $(function(){
 		},
 		
 		/**
+		 * Either adds or subtracts money from your coffers.
+		 * Shortcut method. Use this if you're not sure if the amount you're passing is positive or negative.
+		 * @param {int} amount	if positive, you gain money; if negative, you lose money (the expenditure will be forced, meaning that you may go into the red.)
+		 */
+		changeMoney: function(amount){
+			if(amount > 0){
+				this.gainMoney(amount);
+			}
+			else{
+				this.spendMoney(-amount, true);
+			}
+		},
+		
+		/**
 		 * Increments the year. Skips any months in between now and January of the next year.
 		 */
 		nextYear: function(){
 			this.set('year',this.get('year')+1);
 			this.set('month', 1);
-			this.gainMoney(this.getIncome()); //+cash for this year
+			this.changeMoney(this.getIncome()); //+-cash for this year
 			cities.each(function(city){
 				city.get('plants').each(function(plant){
 					plant.set("hp", plant.get("hp") - 5); // arbitrary; change hp loss amount
 				});
 				
 			});
-			/*this.initiatives.each(function(i){
-				this.spendMoney(i.get("yearlyCost"), true); //mandatory expenditure
-			});*/
 				
 		},
 		
@@ -201,12 +216,16 @@ $(function(){
 		},
 		
 		/**
-		 * Returns the amount of money you earn each year from all of your plants/cities.
+		 * Returns the amount of money you earn each year from all of your plants/cities, minus your outlays for initiatives.
 		 */
 		getIncome: function(){
-			return cities.reduce(function(sum, city){
+			var revenue = cities.reduce(function(sum, city){
 				return sum + city.getIncome();
 			}, 0);
+			var expenditures = this.get('initiatives').reduce(function(sum, init){
+				return sum + init.get("yearlyCost");
+			}, 0);
+			return revenue - expenditures;
 		},
 				
 		/**
@@ -244,6 +263,13 @@ $(function(){
 				city.set('owned', true);
 			}
 		},		
+		
+		/**
+		 * Begins the given initiative.
+		 */
+		startInitiative: function(initiative){
+			this.get('initatives').add(intiative);
+		}
 		
 	});
 	

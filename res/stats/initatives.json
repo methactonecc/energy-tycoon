@@ -1,0 +1,20 @@
+[
+	{
+		"name": 		"Lab Grant",
+		"slug": 		"lab_grant",
+		"description":	"Funds colleges’ green energy research programs to help develop new technology.",
+		"yearlyCost":	"3000"
+	},
+	{
+		"name": 		"Advocacy Campaign",
+		"slug": 		"advocacy_campaign",
+		"description":	"Funds pro-green energy awareness groups, environmental clubs, and protesters in cities around the nation.",
+		"yearlyCost":	"3500"
+	},
+	{
+		"name": 		"Regional Manufacturing",
+		"slug": 		"regional_mfg",
+		"description":	"Ensures that all parts are made near your city, helping make your city’s workers happier and more efficient.",
+		"yearlyCost":	"4000"
+	},
+]

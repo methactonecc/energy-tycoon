@@ -227,6 +227,9 @@
 					<a href="#tab-research" data-toggle="tab">Research</a>
 				</li>
 				<li>
+					<a href="#tab-initiatives" data-toggle="tab">Initiatives</a>
+				</li>
+				<li>
 					<a href="#tab-construction" data-toggle="tab">Construction</a>
 				</li>
 			</ul>
@@ -278,6 +281,41 @@
 
 								
 							</ul>
+						</div>
+						<div class="tab-pane" id="tab-initiatives">
+							<%
+								var activeInitNames = stats.get('initiatives').pluck('name');
+								alert(activeInitNames);
+								Initiatives.forEach(function(init){
+									if(_.contains(activeInitNames, init.get('name'))){
+										//its in effect
+										%>
+											<li class="list-group-item list-group-item-success">
+												<%=init.get('name')%>
+												<span class="pull-right hidden-sm hidden-xs">
+													<span class="glyphicon glyphicon-ok"></span>
+													<span class="text-muted">Researched</span>
+												</span>
+											</li>									
+										<%
+									}
+									else{
+										//button to start it
+										%>
+											<li class="list-group-item clearfix">
+												<%=init.get('name')%>
+												<span class="pull-right">
+													<button class="btn btn-default research-plant-type" data-name="<%=plantType.get('name')%>">
+														<span class="glyphicon glyphicon-search"></span>
+														Start<br>
+														($<%=accounting.formatNumber(init.get('yearlyCost'))%>/year)
+													</button>
+												</span>
+											</li>			
+										<%									
+									}
+								});
+							%>							
 						</div>
 						<div class="tab-pane" id="tab-construction">
 							<table class="table table-striped table-condensed">
