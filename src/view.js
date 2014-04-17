@@ -135,6 +135,7 @@ $(function(){
 		initialize: function(){
 			//Bind to relevant events here
     		this.listenTo(this.model, "change", this.render);
+    		this.listenTo(this.model.get('plants'), "change", this.render);
     		
     		//Intercept region changes and update menu on the sidebar accordingly
     		this.listenTo(appView.model, "change:viewType", this.renderMenu);
@@ -148,6 +149,9 @@ $(function(){
 		 * Renders the appropriate sidebar.
 		 */
 		renderMenu: function(){
+			//first, save the index of the current tab so we can activate it later!
+			var activeTabIndex = $('#sidebar-menu .nav-tabs').find('.active').index(); //PROBLEM: if you switch to another view (region -> city), the old tab index will be remembered
+			
 			switch(appView.model.get('viewType')){
 				case ViewTypes.Nation:
 					var region = appView.model.get('region');
@@ -161,6 +165,9 @@ $(function(){
 					var city = appView.model.get('city');
 					this.$('#sidebar-menu').html(this.menuCityTemplate({ city: city }));					
 			}
+			
+			//re-activate that tab
+			$('#sidebar-menu .nav-tabs').find(_.format('li:eq(<%=index%>) a', {index: activeTabIndex})).tab('show');
 		},
 		
 		render: function(){
@@ -282,5 +289,26 @@ $(function(){
 			var plant = this.model.getPlantByCID(plantIDString);
 			this.model.destroyPlant(plant);
 		},
+	});
+	
+	
+	window.TimerControlView = Backbone.View.extend({
+		/*
+		 * For rendering the buttons that control the timer.
+		 */
+		
+		el: $('#timer-buttons'),
+		
+		buttonTemplate: template("template-timer-buttons"),		//showing buttons to control the timer	
+		
+		events: {
+			"click #timer-pause": 			function(){ this.model.pause() },
+			"click #timer-speed1": 			function(){ this.model.setSpeed(0) },
+			"click #timer-speed2": 			function(){ this.model.setSpeed(1) },
+		},
+		
+		render: function(){
+			this.$el.html(this.buttonTemplate());			
+		}
 	});
 });

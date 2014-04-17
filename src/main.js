@@ -1,4 +1,17 @@
 $(function(){
+	//Underscore custom mixins!
+	_.mixin({
+		/**
+		 * Makes String interpretation a lot easier.
+		 * Usage: _.format("Hi, <%=name%>", {name: "Lorax"}) -> "Hi, Lorax" 
+		 * @param {String} string	Contains variables mixed with normal text, with variables wrapped in: <%= ... %>
+		 * @param {Object} object	Contains name-value pairs. The name matches with the variable named in string, and the value is what it's replaced with.
+		 * @return	{String}	An interpolated string.
+		 */
+		  format: function(string, object) {
+		    return (_.template(string))(object);
+		  }
+	});	
 	
 	var WorldRouter = Backbone.Router.extend({
 		/**
@@ -43,6 +56,8 @@ $(function(){
 	window.appView = new AppView({ model: map });	
 	window.careerView = new CareerView({ model: career });
 	careerView.render();
+	window.timerControlView = new TimerControlView({ model: timer });
+	timerControlView.render();
 	//appView.render();
 	
 	window.worldRouter = new WorldRouter();
@@ -51,4 +66,6 @@ $(function(){
 	});
 	worldRouter.navigate("main", { trigger: true });
 	
+	
+
 }); 

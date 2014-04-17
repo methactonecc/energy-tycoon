@@ -94,9 +94,11 @@ $(function(){
 			// can we even level up?
 			var maxLevel = this.get('levels').length;
 			if(this.get('level') < maxLevel){
-				this.set('level', this.get('level') + 1);
-				career.changeMoney(-this.get('constructionCost'));			
-				return true;	
+				if(career.spendMoney(this.get('constructionCost'))){
+					this.set('level', this.get('level') + 1);
+					return true;
+				}		
+				return false;
 			}
 			return false;
 		},
@@ -105,8 +107,9 @@ $(function(){
 		 * Refills this plant's HP at a price.
 		 */
 		repair: function(){
-			this.set('hp', 100); //arbitrary max
-			career.changeMoney(-this.getRepairCost());		
+			if(career.spendMoney(this.getRepairCost())){
+				this.set('hp', 100); //arbitrary max
+			}
 		},
 	});	
 	
@@ -131,7 +134,7 @@ $(function(){
 		 */	
 		 
 		 defaults: {
-			 money:	100000,
+			 money:	1000000,
 			 year:	1,
 			 name:	"Neel",
 			 initiatives : new Backbone.Collection([ new Initiative ]),
@@ -141,10 +144,26 @@ $(function(){
 		 /* Functions */
 		
 		/**
-		 * Changes the amount of money you have (whether positive or negative.)
+		 * You gain money.
 		 */
-		changeMoney: function(amount){
+		gainMoney: function(amount){
 			this.set('money',this.get('money') + amount);
+		},
+		
+		/**
+		 * Attempts to spend money on a project, plant, city, etc. If you have enough money, deducts it from your total and returns true; otherwise returns false.
+		 * @param {int} amount	How much money to spend. Positive.
+		 * @param {boolean} force	[optional, default false] Pass true if this expense is MANDATORY (like interest on a loan.) If the user can't afford it, then instead of failing, the user goes into debt. Effectively this overrides the min-cash limit.
+		 */
+		spendMoney: function(amount, force){
+			if(this.get('money') < amount && force !== true){
+				//fail!
+				return false;
+			}
+			else{
+				this.set('money',this.get('money') - amount);
+				return true;
+			}
 		},
 		
 		/**
@@ -152,16 +171,16 @@ $(function(){
 		 */
 		nextYear: function(){
 			this.set('year',this.get('year')+1);
-			this.changeMoney(this.getIncome()); //+cash for this year
+			this.gainMoney(this.getIncome()); //+cash for this year
 			cities.each(function(city){
 				city.get('plants').each(function(plant){
 					plant.set("hp", plant.get("hp") - 5); // arbitrary; change hp loss amount
 				});
 				
 			});
-			this.initiatives.each(function(i){
-				this.changeMoney(-i.get("yearlyCost"));
-			});
+			/*this.initiatives.each(function(i){
+				this.spendMoney(i.get("yearlyCost"), true); //mandatory expenditure
+			});*/
 				
 		},
 		
@@ -196,16 +215,18 @@ $(function(){
 		 * Adds the given plant type to the list of plants we can build.
 		 */
 		researchPlantType: function(plant){
-			this.get('plants').add(plant);
-			this.changeMoney(-plant.get('researchCost'));
+			if(this.spendMoney(plant.get('researchCost'))){
+				this.get('plants').add(plant);
+			}
 		},
 		
 		/**
 		 * Takes ownership of the given city.
 		 */
 		expandToCity: function(city){
-			city.set('owned', true);
-			this.changeMoney(-city.get('expansionCost'));
+			if(this.spendMoney(city.get('expansionCost'))){
+				city.set('owned', true);
+			}
 		},		
 		
 	});
@@ -285,17 +306,20 @@ $(function(){
 		 * Constructs the given plant in this city NOW.
 		 */
 		buildPlant: function(plant){
-			this.get('plants').add(plant);
-			career.changeMoney(-plant.get('constructionCost'));
-			plant.set('city', this);
+			if(career.spendMoney(plant.get('constructionCost'))){
+				this.get('plants').add(plant);
+				plant.set('city', this);				
+			}
+
 		},
 		
 		/*
 		 * Destroys the given plant in this city NOW.
 		 */
 		destroyPlant: function(plant){
-			this.get('plants').remove(plant);
-			career.changeMoney(-plant.getDestructionCost());
+			if(career.spendMoney(plant.getDestructionCost())){
+				this.get('plants').remove(plant);
+			}
 		},
 		
 		/**
@@ -329,11 +353,51 @@ $(function(){
  		 * @param {City} city	the new headquarters.
 		 */
 		setHeadquarters: function(city){
-			this.findWhere({ headquarters: true }).set('headquarters', false);
-			city.set('headquarters', true);
-			career.changeMoney(-city.getHeadquarterCost());
+			if(career.spendMoney(city.getHeadquarterCost())){
+				this.findWhere({ headquarters: true }).set('headquarters', false);
+				city.set('headquarters', true);				
+			}
 		}
 	});
+	
+	var Timer = Backbone.Model.extend({
+		/**
+		 * To keep track of the years going by. A wrapper around the $.timer object.
+		 * To use, use timer.get('timer').
+		 * 
+		 * Fields:
+		 * 	timer - a Timer object from $.timer.
+		 */
+		defaults: {
+			timer: $.timer(function(){
+				career.nextYear();
+			}),
+			baseSpeeds: [ 10000, 5000, 2500 ], //ms between year switches for the various speed settings
+		},
+		
+		initialize: function(){
+		},
+		
+		/**
+		 * Adjusts the speed the timer is running at. If the timer is stopped, starts it.
+ 		 * @param {int} speedSetting	Pass 0 for the base speed (slowest), 1 for a faster speed, etc. This will be mapped to the number of ms between year updates.
+		 */
+		setSpeed: function(speedSetting){
+			var baseSpeeds = this.get('baseSpeeds');
+			this.get('timer').set({ 
+				time: baseSpeeds[speedSetting]
+			});
+			this.get('timer').play();
+		},
+		
+		/**
+		 * Pauses the timer.
+		 */
+		pause: function(){
+			this.get('timer').pause();
+		}
+	});
+	window.timer = new Timer();
 
 	
 	
