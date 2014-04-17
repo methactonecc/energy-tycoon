@@ -136,6 +136,7 @@ $(function(){
 		 defaults: {
 			 money:	1000000,
 			 year:	1,
+			 month:	1,
 			 name:	"Neel",
 			 initiatives : new Backbone.Collection([ new Initiative ]),
 			 plants: new Backbone.Collection
@@ -167,10 +168,11 @@ $(function(){
 		},
 		
 		/**
-		 * Increments the year.
+		 * Increments the year. Skips any months in between now and January of the next year.
 		 */
 		nextYear: function(){
 			this.set('year',this.get('year')+1);
+			this.set('month', 1);
 			this.gainMoney(this.getIncome()); //+cash for this year
 			cities.each(function(city){
 				city.get('plants').each(function(plant){
@@ -182,6 +184,20 @@ $(function(){
 				this.spendMoney(i.get("yearlyCost"), true); //mandatory expenditure
 			});*/
 				
+		},
+		
+		/**
+		 * Increments the month, which may lead to the year rolling over.
+		 */
+		nextMonth: function(){
+			var month = this.get('month');
+			if(month == 12){
+				this.set('month', 1);
+				this.nextYear();
+			}
+			else{
+				this.set('month', month+1);
+			}
 		},
 		
 		/**
@@ -370,7 +386,7 @@ $(function(){
 		 */
 		defaults: {
 			timer: $.timer(function(){
-				career.nextYear();
+				career.nextMonth(); //step through a month at a time
 			}),
 			baseSpeeds: [ 10000, 5000, 2500 ], //ms between year switches for the various speed settings
 		},
@@ -385,7 +401,7 @@ $(function(){
 		setSpeed: function(speedSetting){
 			var baseSpeeds = this.get('baseSpeeds');
 			this.get('timer').set({ 
-				time: baseSpeeds[speedSetting]
+				time: baseSpeeds[speedSetting] / 12 //we step through a month at a time
 			});
 			this.get('timer').play();
 		},

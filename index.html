@@ -191,8 +191,10 @@
     	<script id="template-stats" type="text/template">
 			<h2>
 				<span class="glyphicon glyphicon-flash"></span>
-				Player
-				<span class="pull-right text-info small">Year <%=stats.get('year')%></span>
+				<%=stats.get('name')%>
+				<span class="pull-right text-info small">
+					<%=Months[stats.get('month')-1]%>,
+					Year <%=stats.get('year')%></span>
 			</h2>
 			
 			<div class="row">

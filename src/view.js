@@ -135,7 +135,8 @@ $(function(){
 		initialize: function(){
 			//Bind to relevant events here
     		this.listenTo(this.model, "change", this.render);
-    		this.listenTo(this.model.get('plants'), "change", this.render);
+    		this.listenTo(this.model.get('plants'), "all", this.render);
+    		this.listenTo(this.model.get('cities'), "all", this.render);
     		
     		//Intercept region changes and update menu on the sidebar accordingly
     		this.listenTo(appView.model, "change:viewType", this.renderMenu);

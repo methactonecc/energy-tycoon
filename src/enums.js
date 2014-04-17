@@ -66,5 +66,23 @@ $(function(){
 		},
 		error: function(model, response, options){
 		}
-	});		
+	});	
+	
+	
+	//****************** Months
+	window.Months = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec"
+	]
+			
 });
