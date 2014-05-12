@@ -11,7 +11,7 @@ $(function(){
 		 * 
 		 */
 		
-		el: $('#game-main'),
+		el: $('#pane-map'),
 		
 		//Template functions to use
 		mapTemplate: template("template-map"),	//showing a region on the map
@@ -127,7 +127,8 @@ $(function(){
 		//Events hash
 		events: {
 			"click #next-year": 			function(){ this.model.nextYear(); },
-			"click .research-plant-type": "researchPlantType",
+			"click .research-plant-type": 	"researchPlantType",
+			"click .start-initiative": 		"startInitiative",
 			"click .add-city": 				"addCity",
 			"click #move-headquarters": 	"moveHeadquarters",
 		},
@@ -159,15 +160,15 @@ $(function(){
 			switch(appView.model.get('viewType')){
 				case ViewTypes.Nation:
 					var region = appView.model.get('region');
-					this.$('#sidebar-menu').html(this.menuNationalTemplate({ stats: this.model, cities: cities }));
+					$('#sidebar-menu').html(this.menuNationalTemplate({ stats: this.model, cities: cities }));
 					break;
 				case ViewTypes.Region:
 					var region = appView.model.get('region');				
-					this.$('#sidebar-menu').html(this.menuRegionalTemplate({ stats: this.model, region: region, cities: cities }));
+					$('#sidebar-menu').html(this.menuRegionalTemplate({ stats: this.model, region: region, cities: cities }));
 					break;
 				case ViewTypes.City:
 					var city = appView.model.get('city');
-					this.$('#sidebar-menu').html(this.menuCityTemplate({ city: city }));					
+					$('#sidebar-menu').html(this.menuCityTemplate({ city: city }));					
 			}
 			
 			//re-activate that tab
@@ -193,6 +194,13 @@ $(function(){
 			var plant = Plants[plantTypeString];
 			plant = plant.clone();
 			this.model.researchPlantType(plant);
+		},
+		
+		startInitiative: function(event){
+			var typeString = $(event.currentTarget).data('name');	
+			var init = Initiatives[typeString];
+			console.log(init);
+			this.model.startInitiative(init);		
 		},
 
 		/**

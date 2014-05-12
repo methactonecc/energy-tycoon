@@ -57,7 +57,8 @@
 		"regionName": "Northeast",
 		"nationalCoords": [0.86, 0.41],
 		"regionalCoords": [0.45, 0.82],
-			"suitability": {
+		"expansionCost": 20000,		
+		"suitability": {
 			"solar": 5,
 			"wind": 5,
 			"fuelcell": 5,

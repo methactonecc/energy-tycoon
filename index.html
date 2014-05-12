@@ -11,9 +11,11 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+	
     <!-- Custom styles for this template -->
     <link href="css/custom.css" rel="stylesheet">
+    
+    <link href="css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -40,33 +42,134 @@
           </button>
           <a class="navbar-brand" href="#">Energy Tycoon</a>
         </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#main">Home</a></li>
-            <li><a href="http://methactonecc.org">About us</a></li>
-            <li><a href="http://icons8.com">icons8</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+        <ul class="nav navbar-nav">
+        	<li class="active"><a href="#main" data-toggle="tab">
+        		<i class="fa fa-globe"></i>
+        		<span class="hidden-xs">Map</span>
+        	</a></li>
+        	<li><a href="#main" data-toggle="tab">
+        		<i class="fa fa-envelope"></i>
+        		<span class="hidden-xs">News</span>
+        	</a></li>     	
+        	<li><a href="#pane-manage" data-toggle="tab">
+        		<i class="fa fa-building-o"></i>
+        		<span class="hidden-xs">Business</span>
+        	</a></li>     
+        	<li><a href="#main" data-toggle="tab">
+        		<i class="fa fa-bolt"></i>
+        		<span class="hidden-xs">Plants</span>
+        	</a></li>             	        	
+        </div>
       </div>
     </div>
 
-    <div class="container">
-    	<div id="game-main" class="row">
-    		<div id="map-container" class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-    			<div id="map"></div>
-    			<div id="city-markers"></div>
-    		</div>
-    		<div id="city-view" class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-    		</div>
-    		<div id="sidebar" class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-    			<div id="sidebar-stats"></div>
-    			
-    			<div id="timer-buttons"></div>	
-    			<hr>
-    			
-				<div id="sidebar-menu"></div>
-    		</div>
+    <div class="container" class="row">
+    	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" id="sidebar">
+			<div id="sidebar-stats"></div>
+			
+			<hr>
+			
+			<div id="timer-buttons"></div>	
+			
+			<hr>
+			
+			<div id="sidebar-news" class="panel panel-default">
+				<div class="panel-body" class="row">
+					<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+						Studies show water is 22% wetter this year
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<div class="btn-group-vertical">
+							<button class="btn btn-default">
+								<i class="fa fa-sort-up"></i>
+							</button>
+							<button class="btn btn-default">
+								<i class="fa fa-sort-down"></i>
+							</button>							
+						</div>
+					</div>
+					
+				</div>
+			</div>
     	</div>
+    	<div id="display-area" class="tab-content col-lg-9 col-md-9 col-sm-9 col-xs-12">
+	    	<div id="pane-map" class="row tab-pane active fade in">
+	    		<div id="map-container" class="col-lg-9">
+	    			<div id="map"></div>
+	    			<div id="city-markers"></div>
+	    		</div>
+	    		<div id="city-view">
+	    		</div>
+	    		
+				<div id="sidebar-menu-holder" class="col-lg-3">
+					<a href="#main" class="btn btn-default">Home</a>
+					<div id="sidebar-menu"></div>
+				</div>
+	    	</div>    	
+	    	<div id="pane-manage" class="row tab-pane fade">
+	    		<div class="row">
+	    			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	    				<div class="panel panel-default">
+	    					<div class="panel-heading">
+	    						<i class="fa fa-briefcase"></i> Initiatives
+	    					</div>
+	    					<div class="panel-body">
+	    						
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	    				<div class="panel panel-default">
+	    					<div class="panel-heading">
+	    						<i class="fa fa-flask"></i> Research
+	    					</div>
+	    					<div class="panel-body">
+	    						
+	    					</div>
+	    				</div>
+	    			</div>	    			
+	    		</div>
+	    		<div class="row">
+	    			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	    				<div class="panel panel-default">
+	    					<div class="panel-heading">
+	    						<i class="fa fa-dollar"></i> Loan
+	    					</div>
+	    					<div class="panel-body">
+	    						
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	    				<div class="panel panel-default">
+	    					<div class="panel-heading">
+	    						<i class="fa fa-map-marker"></i> Cities
+	    					</div>
+	    					<div class="panel-body">
+	    						<div class="row">
+	    							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+	    								Headquarters:
+	    							</div>
+	    							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-9">
+		    							<select class="form-control">
+		    								<option>New York (current)</option>
+		    								<option>Boston</option>
+		    								<option>Philadelphia</option>
+		    							</select>    								
+	    							</div>
+	    							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+	    								<button class="btn btn-primary">
+	    									Save
+	    								</button>
+	    							</div>	    							
+	    						</div>
+	    					</div>
+	    				</div>
+	    			</div>	    			
+	    		</div>
+	    	</div>	
+    	</div>
+
     </div><!-- /.container -->
     
     
@@ -215,7 +318,19 @@
 						<div class="progress-bar" role="progressbar" aria-valuenow="<%=stats.getPowerPercent()%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=stats.getPowerPercent()%>%;">    						
 					</div>
 				</div>
-			</div>		    		
+			</div>		  
+			
+			<div>
+				<%
+					var hq = stats.getHeadquarters();
+					if(hq){
+						%>
+							Headquarters: <%=hq.get('name')%>
+						<%
+					}
+				%>
+			</div>
+			  		
     	</script>	
     	<script id="template-menu-national" type="text/template">
 			<!-- Nav tabs -->
@@ -284,17 +399,24 @@
 						</div>
 						<div class="tab-pane" id="tab-initiatives">
 							<%
-								var activeInitNames = stats.get('initiatives').pluck('name');
-								alert(activeInitNames);
+								var activeInitNames = stats.get('initiatives').pluck('name');	
 								Initiatives.forEach(function(init){
 									if(_.contains(activeInitNames, init.get('name'))){
 										//its in effect
 										%>
 											<li class="list-group-item list-group-item-success">
 												<%=init.get('name')%>
-												<span class="pull-right hidden-sm hidden-xs">
-													<span class="glyphicon glyphicon-ok"></span>
-													<span class="text-muted">Researched</span>
+												<span class="pull-right">
+													<!--<span class="hidden-sm hidden-xs">
+														<span class="glyphicon glyphicon-play"></span>
+														<span class="text-muted">Started</span>
+													</span>-->
+													
+													<button class="btn btn-default research-plant-type" data-name="<%=init.get('name')%>">
+														<span class="glyphicon glyphicon-stop"></span>
+														End
+													</button>	
+													<br>												
 												</span>
 											</li>									
 										<%
@@ -305,8 +427,8 @@
 											<li class="list-group-item clearfix">
 												<%=init.get('name')%>
 												<span class="pull-right">
-													<button class="btn btn-default research-plant-type" data-name="<%=plantType.get('name')%>">
-														<span class="glyphicon glyphicon-search"></span>
+													<button class="btn btn-default start-initiative" data-name="<%=init.get('name')%>">
+														<span class="glyphicon glyphicon-play"></span>
 														Start<br>
 														($<%=accounting.formatNumber(init.get('yearlyCost'))%>/year)
 													</button>

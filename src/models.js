@@ -267,8 +267,14 @@ $(function(){
 		/**
 		 * Begins the given initiative.
 		 */
-		startInitiative: function(initiative){
-			this.get('initatives').add(intiative);
+		startInitiative: function(init){
+			this.get('initiatives').add(init);
+		},
+		
+		
+		/* Getters */
+		getHeadquarters: function(){
+			return this.get('cities').getHeadquarters();
 		}
 		
 	});

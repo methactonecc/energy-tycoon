@@ -16,5 +16,5 @@
 		"slug": 		"regional_mfg",
 		"description":	"Ensures that all parts are made near your city, helping make your city’s workers happier and more efficient.",
 		"yearlyCost":	"4000"
-	},
+	}
 ]
