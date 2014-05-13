@@ -18,9 +18,11 @@ $(function(){
 		 * Routes your movement around the game world: seeing different parts of the country, your stats, etc.
 		 */
 		routes: {
-			"main": 			"routeMain",
-			"region/:region": 	"routeRegion",
-			"city/:city": 		"routeCity",
+			"pane/map/main": 			"routeMain",
+			"pane/map/region/:region": 	"routeRegion",
+			"pane/map/city/:city": 		"routeCity",
+			
+			"pane/:name": 		"routePane"
 		},
 		
 		/*
@@ -33,6 +35,7 @@ $(function(){
 		 * Loads main view (the whole country).
 		 */
 		routeMain: function(){
+			$('#tab-map').tab('show');
 			map.set('region', Regions.Nation);
 			map.set('viewType', ViewTypes.Nation);
 			//appView.render();
@@ -50,6 +53,11 @@ $(function(){
 			map.set('viewType', ViewTypes.City);			
 		},		
 		
+		routePane: function(paneName){
+			//activate that tab
+			$('#tab-' + paneName).tab('show');
+		}
+		
 	});
 	
 	//init view
@@ -64,7 +72,7 @@ $(function(){
 	Backbone.history.start({ 
 		//pushState: 	true,
 	});
-	worldRouter.navigate("main", { trigger: true });
+	worldRouter.navigate("pane/map/main", { trigger: true });
 	
 	
 

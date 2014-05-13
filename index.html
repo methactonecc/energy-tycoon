@@ -42,20 +42,20 @@
           </button>
           <a class="navbar-brand" href="#">Energy Tycoon</a>
         </div>
-        <ul class="nav navbar-nav">
-        	<li class="active"><a href="#main" data-toggle="tab">
+        <ul class="nav navbar-nav" id="pane-tabs">
+        	<li><a href="#pane/map" data-target="#pane-map" id="tab-map">
         		<i class="fa fa-globe"></i>
         		<span class="hidden-xs">Map</span>
         	</a></li>
-        	<li><a href="#main" data-toggle="tab">
+        	<li><a href="#main">
         		<i class="fa fa-envelope"></i>
         		<span class="hidden-xs">News</span>
         	</a></li>     	
-        	<li><a href="#pane-manage" data-toggle="tab">
+        	<li><a href="#pane/manage" data-target="#pane-manage" id="tab-manage">
         		<i class="fa fa-building-o"></i>
         		<span class="hidden-xs">Business</span>
         	</a></li>     
-        	<li><a href="#main" data-toggle="tab">
+        	<li><a href="#main">
         		<i class="fa fa-bolt"></i>
         		<span class="hidden-xs">Plants</span>
         	</a></li>             	        	
@@ -64,7 +64,7 @@
     </div>
 
     <div class="container" class="row">
-    	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" id="sidebar">
+    	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 well" id="sidebar">
 			<div id="sidebar-stats"></div>
 			
 			<hr>
@@ -93,7 +93,7 @@
 			</div>
     	</div>
     	<div id="display-area" class="tab-content col-lg-9 col-md-9 col-sm-9 col-xs-12">
-	    	<div id="pane-map" class="row tab-pane active fade in">
+	    	<div id="pane-map" class="row tab-pane active">
 	    		<div id="map-container" class="col-lg-9">
 	    			<div id="map"></div>
 	    			<div id="city-markers"></div>
@@ -102,11 +102,11 @@
 	    		</div>
 	    		
 				<div id="sidebar-menu-holder" class="col-lg-3">
-					<a href="#main" class="btn btn-default">Home</a>
+					<a href="#pane/map/main" class="btn btn-default">Home</a>
 					<div id="sidebar-menu"></div>
 				</div>
 	    	</div>    	
-	    	<div id="pane-manage" class="row tab-pane fade">
+	    	<div id="pane-manage" class="row tab-pane">
 	    		<div class="row">
 	    			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 	    				<div class="panel panel-default">
@@ -470,7 +470,7 @@
 						//render some info for each of our cities in this region
 						if(city.get('owned') === true){
 						%>
-							<a href="#city/<%=city.get('name')%>" class="list-group-item clearfix">
+							<a href="#pane/map/city/<%=city.get('name')%>" class="list-group-item clearfix">
 								
 								<div>
 			    					<h4 class="list-group-item-heading">

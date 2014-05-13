@@ -72,7 +72,7 @@ $(function(){
 					//zoom into a region on click
 		    		Regions.each(function(region){
 		    			this.$('.city-' + region.get('slug')).click(function(){
-		    				worldRouter.navigate("region/" + region.get('slug'), { trigger: true });	
+		    				worldRouter.navigate("pane/map/region/" + region.get('slug'), { trigger: true });	
 		    			});
 		    		}, this);					
 				}
@@ -81,7 +81,7 @@ $(function(){
 		    			var name = $(this).data('name');
 		    			var city = cities.findWhere({name: name});
 		    			if(city.get('owned')){
-		    				worldRouter.navigate("city/" + name, { trigger: true });
+		    				worldRouter.navigate("pane/map/city/" + name, { trigger: true });
 		    			}
 		    		});			
 				}
