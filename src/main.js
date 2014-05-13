@@ -1,4 +1,6 @@
 $(function(){
+	window.ET = {}; //new app namespace instead of window
+		
 	//Underscore custom mixins!
 	_.mixin({
 		/**
@@ -53,19 +55,16 @@ $(function(){
 	});
 	
 	//init view
-	window.appView = new AppView({ model: map });	
-	window.careerView = new CareerView({ model: career });
-	careerView.render();
-	window.timerControlView = new TimerControlView({ model: timer });
-	timerControlView.render();
+	ET.appView = new AppView({ model: map });	
+	ET.careerView = new CareerView({ model: career });
+	ET.careerView.render();
+	ET.timerControlView = new TimerControlView({ model: timer });
+	ET.timerControlView.render();
 	//appView.render();
 	
-	window.worldRouter = new WorldRouter();
+	ET.worldRouter = new WorldRouter();
 	Backbone.history.start({ 
 		//pushState: 	true,
 	});
-	worldRouter.navigate("main", { trigger: true });
-	
-	
-
+	ET.worldRouter.navigate("main", { trigger: true });
 }); 
