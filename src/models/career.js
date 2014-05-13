@@ -11,10 +11,10 @@ ET.Career = Backbone.Model.extend({
 */	
 
 defaults: {
-money:	1000000,
+money:	100000,
 year:	1,
 month:	1,
-name:	"Neel",
+name:	"MECC",
 initiatives : new Backbone.Collection([]),
 plants: new Backbone.Collection
 },
