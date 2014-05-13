@@ -1,11 +1,11 @@
 ET.CareerView = Backbone.View.extend({
 /**
-* Updates the career information in the sidebar.
+* Updates the career information in the career panel.
 *
 * Model: Career
 */
 
-el: $('#sidebar'),
+el: $('#pane-manage'),
 
 //Template functions to use
 statsTemplate: template("template-stats"),	//vital stats like money, power, etc.
