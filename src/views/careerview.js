@@ -8,7 +8,6 @@ ET.CareerView = Backbone.View.extend({
 el: $('#pane-manage'),
 
 //Template functions to use
-statsTemplate: template("template-stats"),	//vital stats like money, power, etc.
 menuNationalTemplate: template("template-menu-national"), //menu info for when you're viewing the whole nation
 menuRegionalTemplate: template("template-menu-regional"), //menu for when you're viewing one region of the US (NE, MW, etc.)
 menuCityTemplate:	template("template-menu-city"), //for when you're viewing a city
@@ -34,11 +33,6 @@ this.render = _.throttle(this._render, 500);
      //Intercept region changes and update menu on the sidebar accordingly
      this.listenTo(appView.model, "change:viewType", this.renderMenu);
 },
-
-renderStats: function(){
-this.$('#sidebar-stats').html(this.statsTemplate({ stats: this.model, cities: cities }));
-},
-
 /**
 * Renders the appropriate sidebar.
 */
@@ -69,7 +63,6 @@ $('#sidebar-menu .nav-tabs').find(_.format('li:eq(<%=index%>) a', {index: active
 */
 _render: function(){
 //By default, re-render everything
-this.renderStats();	
 this.renderMenu();
 //this.renderRegionalMenu();
 },	
