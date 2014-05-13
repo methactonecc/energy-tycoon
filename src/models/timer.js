@@ -9,7 +9,7 @@ ET.Timer = Backbone.Model.extend({
 	 */
 	defaults : {
 		timer : $.timer(function() {
-			career.nextMonth();
+			ET.career.nextMonth();
 			//step through a month at a time
 		}),
 		baseSpeeds : [10000, 5000, 2500], //ms between year switches for the various speed settings

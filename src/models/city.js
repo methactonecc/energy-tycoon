@@ -33,7 +33,7 @@ ET.City = Backbone.Model.extend({
 		Backbone.Model.prototype.constructor.apply(this, arguments);
 
 		if (this.get('regionName')) {
-			this.set('region', Regions[this.get('regionName')]);
+			this.set('region', ET.Regions[this.get('regionName')]);
 		}
 	},
 
@@ -66,7 +66,7 @@ ET.City = Backbone.Model.extend({
 	 * Constructs the given plant in this city NOW.
 	 */
 	buildPlant : function(plant) {
-		if (career.spendMoney(plant.get('constructionCost'))) {
+		if (ET.career.spendMoney(plant.get('constructionCost'))) {
 			this.get('plants').add(plant);
 			plant.set('city', this);
 		}
@@ -77,7 +77,7 @@ ET.City = Backbone.Model.extend({
 	 * Destroys the given plant in this city NOW.
 	 */
 	destroyPlant : function(plant) {
-		if (career.spendMoney(plant.getDestructionCost())) {
+		if (ET.career.spendMoney(plant.getDestructionCost())) {
 			this.get('plants').remove(plant);
 		}
 	},

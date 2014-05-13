@@ -70,7 +70,7 @@ ET.MapView = Backbone.View.extend({
 				//zoom into a region on click
 				ET.Regions.each(function(region) {
 					this.$('.city-' + region.get('slug')).click(function() {
-						ET.worldRouter.navigate("region/" + region.get('slug'), {
+						ET.worldRouter.navigate("pane/map/region/" + region.get('slug'), {
 							trigger : true
 						});
 					});
@@ -78,11 +78,11 @@ ET.MapView = Backbone.View.extend({
 			} else {
 				this.$('.city').click(function() {
 					var name = $(this).data('name');
-					var city = cities.findWhere({
+					var city = ET.cities.findWhere({
 						name : name
 					});
 					if (city.get('owned')) {
-						ET.worldRouter.navigate("city/" + name, {
+						ET.worldRouter.navigate("pane/map/city/" + name, {
 							trigger : true
 						});
 					}

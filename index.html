@@ -83,7 +83,7 @@
 	    		</div>
 	    		
 				<div id="sidebar-menu-holder" class="col-lg-3">
-					<a href="#pane/map/main" class="btn btn-default">Home</a>
+					<a href="#pane/map" class="btn btn-default">Home</a>
 					<div id="sidebar-menu"></div>
 				</div>
 	    	</div>    	
@@ -162,11 +162,11 @@
     		<%
     			var width = $('#map').width();
     			var height = $('#map').height();
-    			cities.each(function(city){
-    				var region = map.get('region');
-    				if(region !== Regions.Nation && city.get('region').get('name') !== region.get('name')) return;
+    			ET.cities.each(function(city){
+    				var region = ET.map.get('region');
+    				if(region !== ET.Regions.Nation && city.get('region').get('name') !== region.get('name')) return;
     				var coords;
-    				if(region === Regions.Nation) coords = city.get('nationalCoords');
+    				if(region === ET.Regions.Nation) coords = city.get('nationalCoords');
     				else coords = city.get('regionalCoords');
     				var x = coords[0] * width; //TODO adjust for citys width
     				var y = coords[1] * height;
@@ -277,7 +277,7 @@
 				<span class="glyphicon glyphicon-flash"></span>
 				<%=stats.get('name')%>
 				<span class="pull-right text-info small">
-					<%=Months[stats.get('month')-1]%>,
+					<%=ET.Months[stats.get('month')-1]%>,
 					Year <%=stats.get('year')%></span>
 			</h2>
 			
@@ -620,6 +620,7 @@
     <script defer src="src/views/careerview.js"></script>
     <script defer src="src/views/mapview.js"></script>
     <script defer src="src/views/sidebarview.js"></script>
+    <script defer src="src/views/cityview.js"></script>
     <script defer src="src/views/timercontrolview.js"></script>
     
     <script defer src="src/enums.js"></script>

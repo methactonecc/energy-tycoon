@@ -65,7 +65,7 @@ ET.Career = Backbone.Model.extend({
 		this.set('month', 1);
 		this.changeMoney(this.getIncome());
 		//+-cash for this year
-		cities.each(function(city) {
+		ET.cities.each(function(city) {
 			city.get('plants').each(function(plant) {
 				plant.set("hp", plant.get("hp") - 5);
 				// arbitrary; change hp loss amount
@@ -92,7 +92,7 @@ ET.Career = Backbone.Model.extend({
 	 * Returns the amount of money you earn each year from all of your plants/cities, minus your outlays for initiatives.
 	 */
 	getIncome : function() {
-		var revenue = cities.reduce(function(sum, city) {
+		var revenue = ET.cities.reduce(function(sum, city) {
 			return sum + city.getIncome();
 		}, 0);
 		var expenditures = this.get('initiatives').reduce(function(sum, init) {
@@ -105,7 +105,7 @@ ET.Career = Backbone.Model.extend({
 	 * Returns the amount of power, in GWh, that are produced by all the cities/plants put together.
 	 */
 	getPower : function() {
-		return cities.reduce(function(sum, city) {
+		return ET.cities.reduce(function(sum, city) {
 			return sum + city.getPower();
 		}, 0);
 	},

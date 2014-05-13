@@ -4,7 +4,7 @@ $(function(){
 		 * Routes your movement around the game world: seeing different parts of the country, your stats, etc.
 		 */
 		routes: {
-			"pane/map/main": 			"routeMain",
+			"pane/map": 				"routeMain",
 			"pane/map/region/:region": 	"routeRegion",
 			"pane/map/city/:city": 		"routeCity",
 			
@@ -21,25 +21,27 @@ $(function(){
 		 * Loads main view (the whole country).
 		 */
 		routeMain: function(){
+			console.log(5);
 			$('#tab-map').tab('show');
-			map.set('region', Regions.Nation);
-			map.set('viewType', ViewTypes.Nation);
+			ET.map.set('region', ET.Regions.Nation);
+			ET.map.set('viewType', ET.ViewTypes.Nation);
 			//appView.render();
 		},
 		
 		routeRegion: function(regionSlug){
-			var region = Regions.findWhere({slug: regionSlug});
-			map.set('region',region);
-			map.set('viewType', ViewTypes.Region);			
+			var region = ET.Regions.findWhere({slug: regionSlug});
+			ET.map.set('region',region);
+			ET.map.set('viewType', ET.ViewTypes.Region);			
 		},
 		
 		routeCity: function(cityName){
-			var city = cities.findWhere({name: cityName});
-			map.set('city',city);
-			map.set('viewType', ViewTypes.City);			
+			var city = ET.cities.findWhere({name: cityName});
+			ET.map.set('city',city);
+			ET.map.set('viewType', ET.ViewTypes.City);			
 		},		
 		
 		routePane: function(paneName){
+			console.log(7);
 			//activate that tab
 			$('#tab-' + paneName).tab('show');
 		}
@@ -60,6 +62,6 @@ $(function(){
 	Backbone.history.start({
 	//pushState: true,
 	});
-	ET.worldRouter.navigate("panel/map/main", { trigger: true });
+	ET.worldRouter.navigate("pane/map", { trigger: true });
 });
 	

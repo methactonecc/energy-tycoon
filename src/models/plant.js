@@ -91,7 +91,7 @@ $(function() {
 			// can we even level up?
 			var maxLevel = this.get('levels').length;
 			if (this.get('level') < maxLevel) {
-				if (career.spendMoney(this.get('constructionCost'))) {
+				if (ET.career.spendMoney(this.get('constructionCost'))) {
 					this.set('level', this.get('level') + 1);
 					return true;
 				}
@@ -104,7 +104,7 @@ $(function() {
 		 * Refills this plant's HP at a price.
 		 */
 		repair : function() {
-			if (career.spendMoney(this.getRepairCost())) {
+			if (ET.career.spendMoney(this.getRepairCost())) {
 				this.set('hp', 100);
 				//arbitrary max
 			}

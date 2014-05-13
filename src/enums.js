@@ -62,7 +62,7 @@ $(function(){
 			});		
 			
 	
-			career.researchPlantType(ET.Plants.Solar);
+			ET.career.researchPlantType(ET.Plants.Solar);
 		},
 		error: function(model, response, options){
 		}
@@ -89,7 +89,7 @@ $(function(){
 				ET.Initiatives[item.get("name")] = item;
 			});		
 			
-			career.startInitiative(ET.Initiatives["Lab Grant"]);
+			//ET.career.startInitiative(ET.Initiatives["Lab Grant"]);
 		},
 		error: function(model, response, options){
 		}

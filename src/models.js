@@ -19,13 +19,13 @@ $(function(){
 			
 			//TEMP
 			ET.cities.each(function(c){
-				if(c.get('region') === Regions.Northeast){
+				if(c.get('region') === ET.Regions.Northeast){
 					c.set('owned',true);
 				}
 			});
 			ET.cities.findWhere({"name": "New York"}).set('headquarters',true);
 			
-			ET.appView.render(); 
+			ET.mapView.render(); 
 		},
 		error: function(model, response, options){
 		}
