@@ -5,7 +5,7 @@ $(function(){
 	
 	//****************** Regions
 	var Region = Backbone.Model.extend({}); //String name
-	window.Regions = new Backbone.Collection([
+	ET.Regions = new Backbone.Collection([
 			{ name: "Nation",		slug: "usa" }, //entire country
 			{ name: "Northeast",	slug: "northeast" },
 			{ name: "South",		slug: "south" },
@@ -15,13 +15,13 @@ $(function(){
 			model: Region
 		});
 	//Expose members through public fields; eg Regions.Northeast.
-	Regions.each(function(item){
-		Regions[item.get("name")] = item;
+	ET.Regions.each(function(item){
+		ET.Regions[item.get("name")] = item;
 	});
 	
 	//****************** View types
 	var ViewType = Backbone.Model.extend({});
-	window.ViewTypes = new Backbone.Collection([
+	ET.ViewTypes = new Backbone.Collection([
 			{ name: "Nation" },
 			{ name: "Region" },
 			{ name: "City" }
@@ -29,8 +29,8 @@ $(function(){
 			model: ViewType
 		});
 	//Expose members through public fields
-	ViewTypes.each(function(item){
-		ViewTypes[item.get("name")] = item;
+	ET.ViewTypes.each(function(item){
+		ET.ViewTypes[item.get("name")] = item;
 	});	
 	
 	//****************** Plants
@@ -46,23 +46,23 @@ $(function(){
 			researchCost: 20000,	constructionCost: 25000, income: 10000,	powerProduction: 50 },						
 		], */
 		{
-			model: 	Plant,
+			model: 	ET.Plant,
 			url:	"res/stats/power.json"
 		});
-	window.Plants = new _Plants();
-	Plants.fetch({
+	ET.Plants = new _Plants();
+	ET.Plants.fetch({
 		success: function(model, response, options){
-			Plants.reset(response);
+			ET.Plants.reset(response);
 			
-			Plants.url = null; //prevent accidentally saving to server later
+			ET.Plants.url = null; //prevent accidentally saving to server later
 			
 			//Expose members through public fields
-			Plants.each(function(item){
-				Plants[item.get("name")] = item;
+			ET.Plants.each(function(item){
+				ET.Plants[item.get("name")] = item;
 			});		
 			
 	
-			career.researchPlantType(Plants.Solar);
+			career.researchPlantType(ET.Plants.Solar);
 		},
 		error: function(model, response, options){
 		}
@@ -74,29 +74,29 @@ $(function(){
 	 */
 	var _Inits = Backbone.Collection.extend(
 		{
-			model: 	Initiative,
+			model: 	ET.Initiative,
 			url:	"res/stats/initiatives.json"
 		});
-	window.Initiatives = new _Inits();
-	Initiatives.fetch({
+	ET.Initiatives = new _Inits();
+	ET.Initiatives.fetch({
 		success: function(model, response, options){
-			Initiatives.reset(response);
+			ET.Initiatives.reset(response);
 			
-			Initiatives.url = null; //prevent accidentally saving to server later
+			ET.Initiatives.url = null; //prevent accidentally saving to server later
 			
 			//Expose members through public fields
-			Initiatives.each(function(item){
-				Initiatives[item.get("name")] = item;
+			ET.Initiatives.each(function(item){
+				ET.Initiatives[item.get("name")] = item;
 			});		
 			
-			career.startInitiative(Initiatives["Lab Grant"]);
+			career.startInitiative(ET.Initiatives["Lab Grant"]);
 		},
 		error: function(model, response, options){
 		}
 	});		
 	
 	//****************** Months
-	window.Months = [
+	ET.Months = [
 		"Jan",
 		"Feb",
 		"Mar",

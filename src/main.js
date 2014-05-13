@@ -1,4 +1,6 @@
 $(function(){
+	window.ET = {}; //new app namespace instead of window		
+	
 	//Underscore custom mixins!
 	_.mixin({
 		/**
@@ -12,68 +14,5 @@ $(function(){
 		    return (_.template(string))(object);
 		  }
 	});	
-	
-	var WorldRouter = Backbone.Router.extend({
-		/**
-		 * Routes your movement around the game world: seeing different parts of the country, your stats, etc.
-		 */
-		routes: {
-			"pane/map/main": 			"routeMain",
-			"pane/map/region/:region": 	"routeRegion",
-			"pane/map/city/:city": 		"routeCity",
-			
-			"pane/:name": 		"routePane"
-		},
-		
-		/*
-		 * 
-		 * Handling routing.
-		 * 
-		 */
-		
-		/*
-		 * Loads main view (the whole country).
-		 */
-		routeMain: function(){
-			$('#tab-map').tab('show');
-			map.set('region', Regions.Nation);
-			map.set('viewType', ViewTypes.Nation);
-			//appView.render();
-		},
-		
-		routeRegion: function(regionSlug){
-			var region = Regions.findWhere({slug: regionSlug});
-			map.set('region',region);
-			map.set('viewType', ViewTypes.Region);			
-		},
-		
-		routeCity: function(cityName){
-			var city = cities.findWhere({name: cityName});
-			map.set('city',city);
-			map.set('viewType', ViewTypes.City);			
-		},		
-		
-		routePane: function(paneName){
-			//activate that tab
-			$('#tab-' + paneName).tab('show');
-		}
-		
-	});
-	
-	//init view
-	window.appView = new AppView({ model: map });	
-	window.careerView = new CareerView({ model: career });
-	careerView.render();
-	window.timerControlView = new TimerControlView({ model: timer });
-	timerControlView.render();
-	//appView.render();
-	
-	window.worldRouter = new WorldRouter();
-	Backbone.history.start({ 
-		//pushState: 	true,
-	});
-	worldRouter.navigate("pane/map/main", { trigger: true });
-	
-	
 
 }); 
