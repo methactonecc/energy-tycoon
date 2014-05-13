@@ -15,8 +15,8 @@ this.render = _.throttle(this._render, 500);
 
 //Bind to relevant events here
      this.listenTo(this.model, "all", this.render);
-     this.listenTo(ET.plants, "all", this.render);
-     this.listenTo(ET.cities, "all", this.render);
+     this.listenTo(this.model.get('plants'), "all", this.render);
+     this.listenTo(this.model.get('cities'), "all", this.render);
     
      //Intercept region changes and update menu on the sidebar accordingly
      //this.listenTo(ET,.appView.model, "change:viewType", this.renderMenu);
