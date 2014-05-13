@@ -55,10 +55,12 @@ $(function(){
 	});
 	
 	//init view
-	ET.appView = new AppView({ model: map });	
-	ET.careerView = new CareerView({ model: career });
+	ET.appView = new ET.AppView({ model: ET.map });	
+	ET.careerView = new ET.CareerView({ model: ET.career });
 	ET.careerView.render();
-	ET.timerControlView = new TimerControlView({ model: timer });
+	ET.sidebarView = new ET.SidebarView({ model: ET.career });
+	ET.sidebarView.render();
+	ET.timerControlView = new ET.TimerControlView({ model: ET.timer });
 	ET.timerControlView.render();
 	//appView.render();
 	
