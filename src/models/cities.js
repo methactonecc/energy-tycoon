@@ -23,7 +23,7 @@ ET.Cities = Backbone.Collection.extend({
 	 * @param {City} city the new headquarters.
 	 */
 	setHeadquarters : function(city) {
-		if (career.spendMoney(city.getHeadquarterCost())) {
+		if (ET.career.spendMoney(city.getHeadquarterCost())) {
 			this.findWhere({
 				headquarters : true
 			}).set('headquarters', false);

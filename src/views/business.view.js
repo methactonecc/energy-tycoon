@@ -6,13 +6,18 @@
 		 Model: ET.career
 		 */
 		el : $('#pane-manage'),
+		
+		events: {
+			"click #btn-set-headquarters": "setHeadquarters"
+			
+		},
 
 		//Template functions to use
 		businessTemplate : template("template-business-info"),
 
 		initialize : function() {
 			//create throttled versions of commonly-called fns
-			this.render = _.throttle(this._render, 500);
+			this.render = _.throttle(this._render, 0);
 
 			//Bind to relevant events here
 			this.listenTo(this.model, "all", this.render);
@@ -26,4 +31,14 @@
 				cities: ET.cities
 			}));
 		},
+		
+		
+		/**
+		 * Moves the headquarters, if possible.
+		 */
+		setHeadquarters: function(event) {
+			var cityName = $('#select-choose-headquarters').val();
+			ET.cities.setHeadquarters(ET.cities.findWhere({"name": cityName}));
+			this.render();
+		},		
 	});

@@ -90,5 +90,19 @@ ET.City = Backbone.Model.extend({
 			return plant.cid === cid
 		});
 		return plants[0];
-	}
+	},
+	
+	/**
+	 * Returns true iff this city is the HQ.
+	 */
+	isHeadquarters: function(){
+		return this.get('headquarters') === true;
+	},
+	
+	/**
+	 * Returns true iff this city is commanded by the player.
+	 */
+	isOwned: function(){
+		return this.get('owned') === true;
+	}	
 });
