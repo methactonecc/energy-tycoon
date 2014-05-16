@@ -1,4 +1,4 @@
-$(function(){
+
 ET.Cities = Backbone.Collection.extend({
 	/*
 	 * List of cities.
@@ -30,5 +30,4 @@ ET.Cities = Backbone.Collection.extend({
 			city.set('headquarters', true);
 		}
 	}
-});
 });

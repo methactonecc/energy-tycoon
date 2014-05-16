@@ -1,4 +1,4 @@
-$(function(){
+
 ET.Career = Backbone.Model.extend({
 	/**
 	 * Information about you, the player.
@@ -147,5 +147,4 @@ ET.Career = Backbone.Model.extend({
 	getHeadquarters : function() {
 		return this.get('cities').getHeadquarters();
 	}
-});
 });

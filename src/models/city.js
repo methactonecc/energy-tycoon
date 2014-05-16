@@ -1,4 +1,4 @@
-$(function(){
+
 ET.City = Backbone.Model.extend({
 	/*
 	 * Data for an individual city, where you can build plants.
@@ -91,5 +91,4 @@ ET.City = Backbone.Model.extend({
 		});
 		return plants[0];
 	}
-});
 });

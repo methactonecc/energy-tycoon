@@ -1,4 +1,4 @@
-$(function(){
+
 ET.CareerView = Backbone.View.extend({
 	/**
 	 * Updates the career information in the career panel.
@@ -9,7 +9,7 @@ ET.CareerView = Backbone.View.extend({
 	el : $('#pane-manage'),
 
 	//Template functions to use
-	menuNationalTemplate : template("template-menu-national"), //menu info for when you're viewing the whole nation
+	//menuNationalTemplate : template("template-menu-national"), //menu info for when you're viewing the whole nation
 	menuRegionalTemplate : template("template-menu-regional"), //menu for when you're viewing one region of the US (NE, MW, etc.)
 	menuCityTemplate : template("template-menu-city"), //for when you're viewing a city
 
@@ -120,5 +120,4 @@ ET.CareerView = Backbone.View.extend({
 		var city = map.get('city');
 		ET.cities.setHeadquarters(city);
 	},
-});
 });

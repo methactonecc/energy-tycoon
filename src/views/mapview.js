@@ -1,4 +1,4 @@
-$(function(){
+
 ET.MapView = Backbone.View.extend({
 	/**
 	 * Shows the map UI.
@@ -116,5 +116,4 @@ ET.MapView = Backbone.View.extend({
 		});
 		this.cityView.render();
 	}
-});
 });

@@ -1,4 +1,4 @@
-$(function(){
+
 ET.Timer = Backbone.Model.extend({
 	/**
 	 * To keep track of the years going by. A wrapper around the $.timer object.
@@ -36,5 +36,4 @@ ET.Timer = Backbone.Model.extend({
 	pause : function() {
 		this.get('timer').pause();
 	}
-});
 });

@@ -1,4 +1,4 @@
-$(function(){
+
 ET.TimerControlView = Backbone.View.extend({
 	/*
 	 * For rendering the buttons that control the timer.
@@ -23,5 +23,4 @@ ET.TimerControlView = Backbone.View.extend({
 	render : function() {
 		this.$el.html(this.buttonTemplate());
 	}
-});
 });

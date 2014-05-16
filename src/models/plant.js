@@ -1,4 +1,3 @@
-$(function() {
 
 	ET.Plant = Backbone.Model.extend({
 		/**
@@ -110,4 +109,3 @@ $(function() {
 			}
 		},
 	});
-});

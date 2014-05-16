@@ -1,4 +1,4 @@
-$(function(){
+
 ET.Initiative = Backbone.Model.extend({
 	defaults : {
 		name : "",
@@ -9,5 +9,4 @@ ET.Initiative = Backbone.Model.extend({
 	initialize : function() {
 		//TODO initialize a "slug" field based on the name. For instance, "Power Plant" becomes "power_plant".
 	},
-});
 });

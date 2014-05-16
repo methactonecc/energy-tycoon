@@ -1,4 +1,4 @@
-$(function(){
+
 ET.CityView = Backbone.View.extend({
 	/**
 	 * For rendering a close-up of a city. This is ONLY rendered when you zoom in on a city.
@@ -83,5 +83,4 @@ ET.CityView = Backbone.View.extend({
 		var plant = this.model.getPlantByCID(plantIDString);
 		this.model.destroyPlant(plant);
 	},
-});
 });

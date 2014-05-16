@@ -1,5 +1,5 @@
 $(function(){
-	var WorldRouter = Backbone.Router.extend({
+	ET.WorldRouter = Backbone.Router.extend({
 		/**
 		 * Routes your movement around the game world: seeing different parts of the country, your stats, etc.
 		 */
@@ -21,7 +21,6 @@ $(function(){
 		 * Loads main view (the whole country).
 		 */
 		routeMain: function(){
-			console.log(5);
 			$('#tab-map').tab('show');
 			ET.map.set('region', ET.Regions.Nation);
 			ET.map.set('viewType', ET.ViewTypes.Nation);
@@ -41,27 +40,10 @@ $(function(){
 		},		
 		
 		routePane: function(paneName){
-			console.log(7);
 			//activate that tab
 			$('#tab-' + paneName).tab('show');
 		}
 		
 	});
-	
-	//init view
-	ET.mapView = new ET.MapView({ model: ET.map });	
-	ET.careerView = new ET.CareerView({ model: ET.career });
-	ET.careerView.render();
-	ET.sidebarView = new ET.SidebarView({ model: ET.career });
-	ET.sidebarView.render();
-	ET.timerControlView = new ET.TimerControlView({ model: ET.timer });
-	ET.timerControlView.render();
-	//appView.render();
-	
-	ET.worldRouter = new WorldRouter();
-	Backbone.history.start({
-	//pushState: true,
-	});
-	ET.worldRouter.navigate("pane/map", { trigger: true });
 });
 	
