@@ -167,11 +167,11 @@
 		}
 	},
 	{
-		"name": "Des Moines",
-		"state": "IA",
+		"name": "St Louis",
+		"state": "MO",
 		"regionName": "Midwest",
-		"nationalCoords": [0.58, 0.33],
-		"regionalCoords": [0.49, 0.53],
+		"nationalCoords": [0.62, 0.44],
+		"regionalCoords": [0.56, 0.72],
 		"expansionCost": 20000,
 		"suitability": {
 			"solar": 5,
