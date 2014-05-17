@@ -5,6 +5,7 @@ $(function(){
 	
 	//init models
 	ET.timer = new ET.Timer();
+	ET.loan = new ET.Loan();
 	
 	
 	//instantiating models
@@ -35,14 +36,16 @@ $(function(){
 	
 	//init view
 	ET.mapView = new ET.MapView({ model: ET.map });	
-	ET.careerView = new ET.CareerView({ model: ET.career });
-	ET.careerView.render();
+	//ET.careerView = new ET.CareerView({ model: ET.career });
+	//ET.careerView.render();
 	ET.sidebarView = new ET.SidebarView({ model: ET.career });
 	ET.sidebarView.render();
 	ET.timerControlView = new ET.TimerControlView({ model: ET.timer });
 	ET.timerControlView.render();
 	ET.businessView = new ET.BusinessView({ model: ET.career });
 	ET.businessView.render();
+	ET.plantsView = new ET.PlantsView({ model: ET.career });
+	ET.plantsView.render();
 	//appView.render();
 	
 	ET.worldRouter = new ET.WorldRouter();

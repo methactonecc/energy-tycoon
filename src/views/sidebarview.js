@@ -1,7 +1,7 @@
 
 	ET.SidebarView = Backbone.View.extend({
 		/*
-		 Handles career stuff in the sidebar only.
+		 Handles career stuff in the main sidebar only.
 
 		 Model: career
 		 */

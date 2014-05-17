@@ -7,7 +7,7 @@ ET.Career = Backbone.Model.extend({
 	 * int money
 	 * int year the current round (known as a year.) Starts at 1.
 	 * String name
-	 * Collection<Plant> plants a list of plant types the user has researched. NOT the same as the Plants enum.
+	 * Collection<Plant> plants a list of plant types the user has RESEARCHED. NOT the same as the Plants enum.
 	 * Cities cities the list of all cities. Will be modified as they develop.
 	 */
 

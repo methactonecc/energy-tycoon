@@ -55,7 +55,7 @@
         		<i class="fa fa-building-o"></i>
         		<span class="hidden-xs">Business</span>
         	</a></li>     
-        	<li><a href="#main">
+        	<li><a href="#pane/plants" data-target="#pane-plants" id="tab-plants">
         		<i class="fa fa-bolt"></i>
         		<span class="hidden-xs">Plants</span>
         	</a></li>             	        	
@@ -88,8 +88,17 @@
 				</div>
 	    	</div>    	
 	    	<div id="pane-manage" class="row tab-pane">
-
+	    		<div class="row">
+	    			<div id="manage-initiatives"></div>
+	    			<div id="manage-research"></div>
+	    		</div>
+	    		<div class="row">
+	    			<div id="manage-loan"></div>
+	    			<div id="manage-cities"></div>		
+	    		</div>	
 	    	</div>	
+	    	<div id="pane-plants" class="row tab-pane">
+	    	</div>
     	</div>
 
     </div><!-- /.container -->
@@ -217,10 +226,10 @@
 			<h2>
 				<span class="glyphicon glyphicon-flash"></span>
 				<%=stats.get('name')%>
-				<span class="pull-right text-info small">
-					<%=ET.Months[stats.get('month')-1]%>,
-					Year <%=stats.get('year')%></span>
 			</h2>
+			<span class="lead text-info">
+				<%=ET.Months[stats.get('month')-1]%>,
+				Year <%=stats.get('year')%></span>
 			
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 lead">
@@ -253,6 +262,7 @@
 				%>
 			</div>
 			
+			<div class="clearfix"></div>
 			<div id="sidebar-news" class="panel panel-default">
 				<div class="panel-body" class="row">
 					<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -273,151 +283,235 @@
 			</div>			
 			  		
     	</script>	
-    	<script id="template-business-info" type="text/template">
-    		<div class="row">
-    			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-    				<div class="panel panel-default">
-    					<div class="panel-heading">
-    						<i class="fa fa-briefcase"></i> Initiatives
-    					</div>
-    					<ul class="list-group">
-							<%
-								var activeInitNames = career.get('initiatives').pluck('name');	
-								ET.Initiatives.forEach(function(init){
-									if(_.contains(activeInitNames, init.get('name'))){
-										//its in effect
-										%>
-											<li class="list-group-item list-group-item-success">
-												<%=init.get('name')%>
-												<span class="pull-right">
-													<!--<span class="hidden-sm hidden-xs">
-														<span class="glyphicon glyphicon-play"></span>
-														<span class="text-muted">Started</span>
-													</span>-->
-						
-													<button class="btn btn-default research-plant-type" data-name="<%=init.get('name')%>">
-														<span class="glyphicon glyphicon-stop"></span>
-														End
-													</button>	
-													<br>												
-												</span>
-											</li>									
-										<%
-									}
-									else{
-										//button to start it
-										%>
-											<li class="list-group-item clearfix">
-												<%=init.get('name')%>
-												<span class="pull-right">
-													<button class="btn btn-default start-initiative" data-name="<%=init.get('name')%>">
-														<span class="glyphicon glyphicon-play"></span>
-														Start<br>
-														($<%=accounting.formatNumber(init.get('yearlyCost'))%>/year)
-													</button>
-												</span>
-											</li>			
-										<%									
-									}
-								});
-							%>			    						
-    					</ul>
-    				</div>
-    			</div>
-    			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-    				<div class="panel panel-default">
-    					<div class="panel-heading">
-    						<i class="fa fa-flask"></i> Research
-    					</div>
-    					<ul class="list-group">
-							<%
-								var researchedPlantNames = career.get('plants').pluck('name');
-								ET.Plants.forEach(function(plantType){
-									if(_.contains(researchedPlantNames, plantType.get('name'))){
-										//already researched!
-										%>
+    	<script id="template-business-initiatives" type="text/template">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-briefcase"></i> Initiatives
+					</div>
+					<ul class="list-group">
+						<%
+							var activeInitNames = career.get('initiatives').pluck('name');	
+							ET.Initiatives.forEach(function(init){
+								if(_.contains(activeInitNames, init.get('name'))){
+									//its in effect
+									%>
 										<li class="list-group-item list-group-item-success">
-											<img src="res/plants/<%=plantType.get('slug')%>/32.png"> <%=plantType.get('powerName')%>
-											<span class="pull-right hidden-sm hidden-xs">
-												<span class="glyphicon glyphicon-ok"></span>
-												<span class="text-muted">Researched</span>
-											</span>
-										</li>										
-										<%
-									}
-									else{
-										//button to research it
-										%>
-										<li class="list-group-item clearfix">
-											<img src="res/plants/<%=plantType.get('slug')%>/32.png"> <%=plantType.get('powerName')%>
+											<%=init.get('name')%>
 											<span class="pull-right">
-												<button class="btn btn-default research-plant-type" data-name="<%=plantType.get('name')%>">
-													<span class="glyphicon glyphicon-search"></span>
-													Research<br>
-													($<%=accounting.formatNumber(plantType.get('researchCost'))%>)
+												<!--<span class="hidden-sm hidden-xs">
+													<span class="glyphicon glyphicon-play"></span>
+													<span class="text-muted">Started</span>
+												</span>-->
+					
+												<button class="btn btn-default research-plant-type" data-name="<%=init.get('name')%>">
+													<span class="glyphicon glyphicon-stop"></span>
+													End
+												</button>	
+												<br>												
+											</span>
+										</li>									
+									<%
+								}
+								else{
+									//button to start it
+									%>
+										<li class="list-group-item clearfix">
+											<%=init.get('name')%>
+											<span class="pull-right">
+												<button class="btn btn-default start-initiative" data-name="<%=init.get('name')%>">
+													<span class="glyphicon glyphicon-play"></span>
+													Start<br>
+													($<%=accounting.formatNumber(init.get('yearlyCost'))%>/year)
 												</button>
 											</span>
-										</li>											
-										<%
-									}
-								});
-							%>	    						
-    					</ul>
-    				</div>
-    			</div>	    			
-    		</div>
-    		<div class="row">
-    			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-    				<div class="panel panel-default">
-    					<div class="panel-heading">
-    						<i class="fa fa-dollar"></i> Loan
-    					</div>
-    					<div class="panel-body">
-    						
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-    				<div class="panel panel-default">
-    					<div class="panel-heading">
-    						<i class="fa fa-map-marker"></i> Cities
-    					</div>
-    					<div class="panel-body">
-    						<div class="row">
-    							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-    								Headquarters:
+										</li>			
+									<%									
+								}
+							});
+						%>			    						
+					</ul>
+				</div>
+			</div>    		
+    	</script>
+    	<script id="template-business-research" type="text/template">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-flask"></i> Research
+					</div>
+					<ul class="list-group">
+						<%
+							var researchedPlantNames = career.get('plants').pluck('name');
+							ET.Plants.forEach(function(plantType){
+								if(_.contains(researchedPlantNames, plantType.get('name'))){
+									//already researched!
+									%>
+									<li class="list-group-item list-group-item-success">
+										<img src="res/plants/<%=plantType.get('slug')%>/32.png"> <%=plantType.get('powerName')%>
+										<span class="pull-right hidden-sm hidden-xs">
+											<span class="glyphicon glyphicon-ok"></span>
+											<span class="text-muted">Researched</span>
+										</span>
+									</li>										
+									<%
+								}
+								else{
+									//button to research it
+									%>
+									<li class="list-group-item clearfix">
+										<img src="res/plants/<%=plantType.get('slug')%>/32.png"> <%=plantType.get('powerName')%>
+										<span class="pull-right">
+											<button class="btn btn-default research-plant-type" data-name="<%=plantType.get('name')%>">
+												<span class="glyphicon glyphicon-search"></span>
+												Research<br>
+												($<%=accounting.formatNumber(plantType.get('researchCost'))%>)
+											</button>
+										</span>
+									</li>											
+									<%
+								}
+							});
+						%>	    						
+					</ul>
+				</div>
+			</div>    		
+    	</script>
+    	<script id="template-business-cities" type="text/template">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-map-marker"></i> Cities
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+								Headquarters:
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-9">
+    							<select class="form-control" id="select-choose-headquarters">
+    								<%
+    									ET.cities.filter(function(city){
+    										return city.isOwned(); 
+    									}).forEach(function(city){
+    										%>
+    										
+    										<option value="<%=city.get('name')%>">
+    											<%=city.get('name')%>
+    											<% if(city.isHeadquarters()){
+    												print("(current)");
+    											} %>
+    										</option>
+    										
+    										<%
+    									});
+    								%>
+    							</select>    								
+							</div>
+							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
+								<button class="btn btn-primary" id="btn-set-headquarters">
+									Save
+								</button>
+							</div>	    							
+						</div>
+					</div>
+				</div>
+			</div>	     		
+    	</script>
+    	<script id="template-loan" type="text/template">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<i class="fa fa-map-dollar"></i> Loan
+					</div>
+					<div class="panel-body">
+						<p class="lead">
+							$<%=accounting.formatNumber(loan.get('balance'))%> owed
+						</p>
+						<% if(loan.getMaxBorrow() > 0){ %>
+						<div class="row">
+							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+								<div class="input-group">
+									<span class="input-group-addon">$</span>
+									<input type="number" class="form-control" id="input-loan-borrow"
+										min="0"
+										max="<%=loan.getMaxBorrow()%>"
+										step="5000"
+										value="0"
+										>
+							      <span class="input-group-btn">
+							        <button class="btn btn-primary" type="button" id="btn-loan-borrow">Borrow</button>
+							      </span>		
+								</div>							
+							</div>		
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+								@ <%=loan.get('interestRate')*100%>% interest
+							</div>					
+						</div>
+						<% } else{ %>
+							<div class="alert alert-warning">
+								You've reached/surpassed your borrowing limit of $<%=accounting.formatNumber(loan.get('borrowingCap'))%>.
+							</div>
+						<% } %>
+						<% if(loan.getMaxRepayment() > 0){ %>
+						<div class="row">
+							<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+								<div class="input-group">
+									<span class="input-group-addon">$</span>
+									<input type="number" class="form-control" id="input-loan-repay"
+										min="0"
+										max="<%=loan.getMaxRepayment()%>"
+										step="5000"
+										value="0"
+										>
+							      <span class="input-group-btn">
+							        <button class="btn btn-primary" type="button" id="btn-loan-repay">Repay</button>
+							      </span>		
+								</div>							
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+								<button class="btn btn-default" id="btn-loan-repay-full">Repay in full</button>
+							</div>			
+						</div>		
+						<% } %>				
+					</div>
+				</div>
+			</div>	    
+    	</script>   
+    	<script id="template-plants" type="text/template">
+    		<%
+    			ET.cities.where({"owned": true}).forEach(function(city){
+    				var cssClass = city.isHeadquarters() ? "panel-primary" : "panel-info";
+    				%>
+    				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+    					<div class="panel <%=cssClass%>">
+    						<div class="panel-heading">
+    							<%=city.get('name')%>
+    							<small><%=city.get('state')%></small>
+    							
+    							<% if(city.isHeadquarters()){ %>
+    								<span class="fa fa-building pull-right"></span> 
+    							<% } %>
+    						</div>
+    						<div class="panel-body">
+    							<a href="#pane/map/city/<%=city.get('name')%>" data-target="#pane-map" class="btn btn-default">
+    								<span class="fa fa-suitcase"></span> Go to
+    							</a>
+    							<div class="row">
+    								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    									$<%=accounting.formatNumber(city.getIncome())%><span class="text-muted">/year</span>
+    								</div>
+    								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    									<span class="fa fa-bolt"></span> <%=accounting.formatNumber(city.getPower())%> <span class="text-muted">GWh</span>
+    								</div>
     							</div>
-    							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-9">
-	    							<select class="form-control" id="select-choose-headquarters">
-	    								<%
-	    									ET.cities.filter(function(city){
-	    										return city.isOwned(); 
-	    									}).forEach(function(city){
-	    										%>
-	    										
-	    										<option value="<%=city.get('name')%>">
-	    											<%=city.get('name')%>
-	    											<% if(city.isHeadquarters()){
-	    												print("(current)");
-	    											} %>
-	    										</option>
-	    										
-	    										<%
-	    									});
-	    								%>
-	    							</select>    								
-    							</div>
-    							<div class="col-lg-2 col-md-2 col-sm-2 col-xs-3">
-    								<button class="btn btn-primary" id="btn-set-headquarters">
-    									Save
-    								</button>
-    							</div>	    							
     						</div>
     					</div>
     				</div>
-    			</div>	    			
-    		</div>		
-    	</script>
+    				<%
+    			});
+    		%>
+    	</script>    	
     	<script id="template-menu-regional" type="text/template">
 			<div class="list-group" id="city-list">
 				<%
@@ -539,6 +633,7 @@
 			  </label>
 			</div>    		
     	</script>
+
     </div>
 
 
@@ -563,16 +658,19 @@
     <script defer src="src/models/plant.js"></script>
     <script defer src="src/models/initiative.js"></script>    
     <script defer src="src/models/timer.js"></script>
+    <script defer src="src/models/loan.js"></script>    
     <script defer src="src/models/city.js"></script>
     <script defer src="src/models/cities.js"></script>
     <script defer src="src/models/map.js"></script>
     <script defer src="src/models/career.js"></script>
     
-    <script defer src="src/views/careerview.js"></script>
+    <!--<script defer src="src/views/careerview.js"></script>-->
     <script defer src="src/views/mapview.js"></script>
     <script defer src="src/views/sidebarview.js"></script>
     <script defer src="src/views/cityview.js"></script>
     <script defer src="src/views/timercontrolview.js"></script>
+    <script defer src="src/views/loan.view.js"></script>
+    <script defer src="src/views/plants.view.js"></script>
     <script defer src="src/views/business.view.js"></script>
     
     <script defer src="src/enums.js"></script>

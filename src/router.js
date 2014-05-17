@@ -8,7 +8,7 @@ $(function(){
 			"pane/map/region/:region": 	"routeRegion",
 			"pane/map/city/:city": 		"routeCity",
 			
-			"pane/:name": 		"routePane"
+			"pane/:name": 				"routePane"
 		},
 		
 		/*
@@ -30,13 +30,17 @@ $(function(){
 		routeRegion: function(regionSlug){
 			var region = ET.Regions.findWhere({slug: regionSlug});
 			ET.map.set('region',region);
-			ET.map.set('viewType', ET.ViewTypes.Region);			
+			ET.map.set('viewType', ET.ViewTypes.Region);	
+			
+			this.routePane("map");		
 		},
 		
 		routeCity: function(cityName){
 			var city = ET.cities.findWhere({name: cityName});
 			ET.map.set('city',city);
 			ET.map.set('viewType', ET.ViewTypes.City);			
+			
+			this.routePane("map");
 		},		
 		
 		routePane: function(paneName){

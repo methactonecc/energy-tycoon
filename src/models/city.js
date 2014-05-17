@@ -18,6 +18,9 @@ ET.City = Backbone.Model.extend({
 	 * String regionName ("Northeast", "West", etc.)
 	 * int[] nationalCoords
 	 * int[] regionalCoords
+	 * 
+	 * Events fired:
+	 * change:plants		When the plants in this city are changed (new one built, one upgraded, etc.)
 	 */
 
 	defaults : function() {
@@ -35,6 +38,10 @@ ET.City = Backbone.Model.extend({
 		if (this.get('regionName')) {
 			this.set('region', ET.Regions[this.get('regionName')]);
 		}
+		
+		this.listenTo(this.get('plants'), "change", function(){
+			this.trigger('change:plants');
+		});
 	},
 
 	/**

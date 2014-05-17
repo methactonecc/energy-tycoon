@@ -20,6 +20,7 @@ ET.MapView = Backbone.View.extend({
 	initialize : function() {
 		//Bind to relevant events here
 		this.listenTo(this.model, "change:viewType", this.render);
+		this.listenTo(this.model, "change:city", this.render);
 		this.listenTo(ET.cities, "change", this.renderCityMarkers);
 		//re-render city markers when a city is added
 
