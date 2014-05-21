@@ -17,9 +17,6 @@
     
     <link href="css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -480,10 +477,12 @@
     	</script>   
     	<script id="template-plants" type="text/template">
     		<%
+    			ET.cities.sortBy('owned');
+    			
     			ET.cities.where({"owned": true}).forEach(function(city){
     				var cssClass = city.isHeadquarters() ? "panel-primary" : "panel-info";
     				%>
-    				<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+    				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 city-tile">
     					<div class="panel <%=cssClass%>">
     						<div class="panel-heading">
     							<%=city.get('name')%>
@@ -494,10 +493,12 @@
     							<% } %>
     						</div>
     						<div class="panel-body">
-    							<a href="#pane/map/city/<%=city.get('name')%>" data-target="#pane-map" class="btn btn-default">
+    							<a href="#pane/map/city/<%=city.get('name')%>" data-target="#pane-map" class="btn btn-default btn-block">
     								<span class="fa fa-suitcase"></span> Go to
     							</a>
+    							<br>
     							<div class="row">
+    								
     								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
     									$<%=accounting.formatNumber(city.getIncome())%><span class="text-muted">/year</span>
     								</div>
@@ -505,11 +506,60 @@
     									<span class="fa fa-bolt"></span> <%=accounting.formatNumber(city.getPower())%> <span class="text-muted">GWh</span>
     								</div>
     							</div>
+    							<div class="row">
+    								<%
+    									var plants = city.get('plants');
+    									var MAX_PLANTS = 3;
+    									for(var i=0; i<plants.length; i++){
+    										//they have a plant here; draw it
+    										var plant = plants.at(i);
+    										%>
+    										<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+    											<img src="res/plants/<%=plant.get('slug')%>/100.png" class="img-responsive img-center">
+											</div>	   										
+    										<%
+    									}
+    									/*for(var i=plants.length; i<MAX_PLANTS; i++){
+    										//no plant; draw an add button
+    										%>
+    										<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+				    							<a href="#pane/map/city/<%=city.get('name')%>" data-target="#pane-map" class="btn btn-default btn-block">
+				    								<span class="fa fa-plus"></span><br>Build
+				    							</a>
+											</div>	 
+    										<%
+    									}*/
+    								%>
+    							</div>
     						</div>
     					</div>
     				</div>
     				<%
     			});
+    			
+    			ET.cities.where({'owned': false}).forEach(function(city){
+    				%>
+    				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 city-tile">
+    					<div class="panel panel-default">
+    						<div class="panel-heading">
+    							<%=city.get('name')%>
+    							<small><%=city.get('state')%></small>
+    						</div>
+    						<div class="panel-body">
+    							<div class="text-center">
+    								<div>
+    									<span class="fa fa-lock fa-3x"></span>
+    								</div>
+    								<button class="btn btn-default btn-city-expand" data-name="<%=city.get('name')%>">
+    									<span class="fa fa-unlock"></span> Expand ($<%=accounting.formatNumber(city.get('expansionCost'))%>)
+    								</button>
+    							</div>
+    						</div>
+    					</div>
+    				</div>    				
+    				<%
+    			});
+    			_.delay(function(){ $('.city-tile').equalizeHeights(); }, 1000);
     		%>
     	</script>    	
     	<script id="template-menu-regional" type="text/template">

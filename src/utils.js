@@ -30,3 +30,18 @@ function constrain(value, min, max){
 	if(value < min) return min;
 	return value;
 }
+
+
+/**
+ * Finds the max height of the elements in this collection and sets all elements to have that same height.
+ */
+$.fn.equalizeHeights = function(){
+	$(this).css('height', ''); //removes any inline heights we applied so that the elements re-flow naturally
+	
+	var heights = $(this).map(function(i,e){
+		return $(e).height();
+	}); //jQuery array
+	heights = heights.toArray(); //JS array
+	var maxHeight = _.max(heights);
+	$(this).height(maxHeight);
+};

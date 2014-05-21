@@ -13,7 +13,7 @@ ET.PlantsView = Backbone.View.extend({
 	events: {
 		"click #btn-set-headquarters": "setHeadquarters",
 		"click .research-plant-type" : "researchPlantType",
-		"click .start-initiative" : "startInitiative",			
+		"click .btn-city-expand" : "expandToCity",			
 	},
 
 	//Template functions to use
@@ -24,8 +24,9 @@ ET.PlantsView = Backbone.View.extend({
 		this.render = _.throttle(this._render, 500);
 
 		//Bind to relevant events here
-		this.listenTo(this.model.get('cities'), "all change", this.render);
-		this.listenTo(this.model.get('cities'), "change:plants", this.render);
+		this.listenTo(this.model.get('cities'), "change change:plants", this.render);
+		
+		this.render();
 	},
 
 	_render : function() {
@@ -33,4 +34,10 @@ ET.PlantsView = Backbone.View.extend({
 			career: this.model
 		}));
 	},	
+	
+	expandToCity: function(event){
+		var cityName = $(event.currentTarget).data('name');		
+		var city = ET.cities.findWhere({ "name": cityName });
+		this.model.expandToCity(city);
+	}
 });
