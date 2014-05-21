@@ -73,7 +73,9 @@
     	<div id="display-area" class="tab-content col-lg-9 col-md-9 col-sm-9 col-xs-12">
 	    	<div id="pane-map" class="row tab-pane active">
 	    		<div id="map-container" class="col-lg-9">
-	    			<div id="map"></div>
+	    			<div id="map">
+    					<div id="canvas-map"></div>
+	    			</div>
 	    			<div id="city-markers"></div>
 	    		</div>
 	    		<div id="city-view">
@@ -103,7 +105,7 @@
     
     <div id="templates" class="hidden">
     	<script id="template-map" type="text/template">
-    		<img src="res/maps/resized/<%= regionSlug %>.png" class="img-responsive">
+    		<!--<img src="res/maps/resized/<%= regionSlug %>.png" class="img-responsive">-->
     	</script>
     	<script id="template-city-marker" type="text/template">
     		<%
@@ -699,6 +701,7 @@
     <script src="lib/backbone-min.js"></script>
     <script src="lib/backbone.localStorage.js"></script>
     <script src="lib/handlebars-v1.3.0.js"></script>
+    <script src="lib/kinetic-v5.1.0.min.js"></script>
     
     <script src="src/plugins.js"></script>    
     <script src="src/utils.js"></script>    

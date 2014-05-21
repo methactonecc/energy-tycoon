@@ -7,10 +7,10 @@ $(function(){
 	var Region = Backbone.Model.extend({}); //String name
 	ET.Regions = new Backbone.Collection([
 			{ name: "Nation",		slug: "usa" }, //entire country
-			{ name: "Northeast",	slug: "northeast" },
-			{ name: "South",		slug: "south" },
-			{ name: "Midwest",		slug: "midwest" },
-			{ name: "West",			slug: "west" },
+			{ name: "Northeast",	slug: "northeast",		bounds: { northwest: [.772,.016], 		southeast: [.999,.448] } },
+			{ name: "South",		slug: "south",			bounds: { northwest: [.366,.482], 		southeast: [.916,.992] }  },
+			{ name: "Midwest",		slug: "midwest",		bounds: { northwest: [.380,.064], 		southeast: [.788,.556] }  },
+			{ name: "West",			slug: "west",			bounds: { northwest: [.000,.000], 		southeast: [.384,.752] }  },
 		], {
 			model: Region
 		});

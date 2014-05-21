@@ -31,7 +31,9 @@ ET.MapView = Backbone.View.extend({
 		});
 		*/
 
-		//Backbone.View.prototype.constructor.apply(this, arguments);
+		this.stage = new Kinetic.Stage({
+			container : 'canvas-map'
+		});
 	},
 
 	/**
@@ -60,35 +62,90 @@ ET.MapView = Backbone.View.extend({
 
 		//reload map to show appropriate stuff
 		var region = this.model.get('region');
-		this.$('#map').html(this.mapTemplate({
+		/*this.$('#map').html(this.mapTemplate({
 			regionSlug : region.get('slug')
-		}));
+		}));*/
+		
+		//render map
+		var image = new Image();
+		var $image = $(image);
+		var map = $('#map');	
+		var self = this;
+		$image.load(function(){
+			//scale image proportionally
+			var imageWidth = image.width;
+			var imageHeight = image.height;
+			var containerWidth = map.width();
+			
+			var resultWidth = Math.min(containerWidth, imageWidth);
+			var resultHeight = imageHeight * resultWidth / imageWidth;
+			
+			self.stage.width(resultWidth);
+			self.stage.height(resultHeight);
+			var layer = new Kinetic.Layer();		
+			var img = new Kinetic.Image({
+				x : 0,
+				y : 0,
+				image : image,
+				width : resultWidth,
+				height : resultHeight
+			});
+			
+			img.on('click', function(e) {
+		    	var clickX = e.evt.layerX;
+		    	var clickY = e.evt.layerY;
+		    	
+		    	if(region === ET.Regions.Nation){
+		    		//figure out what region they clicked in, then go there
+		    		//each region is bound by a rectangle; its northwest and southeast points are specified. Figure out of the clicked point lies within each region.
+					var subregions = ET.Regions.filter(function(region){
+						return region !== ET.Regions.Nation; //you can't zoom into the nation itself
+					});
+					_.each(subregions, function(region) {
+						var northwest = region.get('bounds').northwest;
+						var southeast = region.get('bounds').southeast;
+						
+						//northwest and southeast give decimals (i.e. fractions of the map's actual size); convert to real value
+						var map = $('#map');
+						var mapWidth = map.width();
+						var mapHeight = map.height();
+						
+						var minX = northwest[0] * mapWidth;
+						var maxX = southeast[0] * mapWidth;
+						var minY = northwest[1] * mapHeight;
+						var maxY = southeast[1] * mapHeight;
+						
+						if(minX <= clickX && clickX <= maxX && minY <= clickY && clickY <= maxY){
+							ET.worldRouter.navigate("pane/map/region/" + region.get('slug'), {
+								trigger : true
+							});		
+							return false;					
+						}
+					});		    		
+		    	}
+		    });	    
+
+			layer.add(img);
+			self.stage.removeChildren().add(layer);				
+		});
+		$image.attr('src', 'res/maps/resized/' +  region.get('slug') + '.png');
 
 		var self = this;
 		_.delay(function() {
 			self.renderCityMarkers();
-			if (region === ET.Regions.Nation) {
-				//zoom into a region on click
-				ET.Regions.each(function(region) {
-					this.$('.city-' + region.get('slug')).click(function() {
-						ET.worldRouter.navigate("pane/map/region/" + region.get('slug'), {
-							trigger : true
-						});
-					});
-				}, this);
-			} else {
-				this.$('.city').click(function() {
-					var name = $(this).data('name');
-					var city = ET.cities.findWhere({
-						name : name
-					});
-					if (city.get('owned')) {
-						ET.worldRouter.navigate("pane/map/city/" + name, {
-							trigger : true
-						});
-					}
+			
+			//zoom into city on click
+			this.$('.city').click(function() {
+				var name = $(this).data('name');
+				var city = ET.cities.findWhere({
+					name : name
 				});
-			}
+				if (city.get('owned')) {
+					ET.worldRouter.navigate("pane/map/city/" + name, {
+						trigger : true
+					});
+				}
+			});
 
 		}, 100);
 
