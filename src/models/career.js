@@ -17,7 +17,9 @@ ET.Career = Backbone.Model.extend({
 		month : 1,
 		name : "MECC",
 		initiatives : new Backbone.Collection([]),
-		plants : new Backbone.Collection
+		plants : new Backbone.Collection,
+		
+		taxRate: 0.05 //fraction of income you lose due to taxes
 	},
 
 	/* Functions */
@@ -89,12 +91,13 @@ ET.Career = Backbone.Model.extend({
 	},
 
 	/**
-	 * Returns the amount of money you earn each year from all of your plants/cities, minus your outlays for initiatives.
+	 * Returns the amount of money you earn each year from all of your plants/cities, minus your outlays.
 	 */
 	getIncome : function() {
 		var revenue = ET.cities.reduce(function(sum, city) {
 			return sum + city.getIncome();
 		}, 0);
+		revenue = Math.round(revenue * (1 - this.get('taxRate'))); //subtract tax
 		var expenditures = this.get('initiatives').reduce(function(sum, init) {
 			return sum + init.get("yearlyCost");
 		}, 0);
@@ -139,5 +142,9 @@ ET.Career = Backbone.Model.extend({
 	/* Getters */
 	getHeadquarters : function() {
 		return this.get('cities').getHeadquarters();
+	},
+	
+	hasInitiative: function(init){
+		return this.get('initiatives').contains(init);
 	}
 });

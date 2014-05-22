@@ -10,7 +10,8 @@
 		events: {
 			"click #btn-set-headquarters": "setHeadquarters",
 			"click .research-plant-type" : "researchPlantType",
-			"click .start-initiative" : "startInitiative",			
+			"click .start-initiative" : "startInitiative",		
+			"click .end-initiative": 	"endInitiative"	
 		},
 
 		//Template functions to use
@@ -23,9 +24,10 @@
 			this.render = _.throttle(this._render, 50);
 
 			//Bind to relevant events here
-			this.listenTo(this.model, "all", this.render);
-			this.listenTo(this.model.get('plants'), "all", this.render);
+			//this.listenTo(this.model, "all", this.render);
+			this.listenTo(this.model.get('plants'), "all", this.renderResearch);
 			this.listenTo(this.model.get('cities'), "all", this.render);
+			this.listenTo(ET.Initiatives, "change:active", this.renderInitiatives);
 			
 			this.loanView = new ET.LoanView({ model: ET.loan });
 			this.loanView.render();
@@ -80,9 +82,14 @@
 	},
 
 	startInitiative : function(event) {
-		var typeString = $(event.currentTarget).data('name');
+		var typeString = $(event.currentTarget).data('slug');
 		var init = ET.Initiatives[typeString];
-		console.log(init);
-		this.model.startInitiative(init);
+		init.start();
+	},		
+
+	endInitiative : function(event) {
+		var typeString = $(event.currentTarget).data('slug');
+		var init = ET.Initiatives[typeString];
+		init.end();
 	},		
 	});

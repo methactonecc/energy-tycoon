@@ -33,6 +33,7 @@ ET.PlantsView = Backbone.View.extend({
 		this.$el.html(this.mainTemplate({
 			career: this.model
 		}));
+		$('.city-tile').equalizeHeights(); 
 	},	
 	
 	expandToCity: function(event){

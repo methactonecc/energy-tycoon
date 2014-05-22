@@ -129,11 +129,17 @@
     				else if(city.get('owned') === true){
     					markerClass = 'map-marker';
     				}
+    				
+    				if(city.get('owned') === true){
+    					%>
+	    				<div class="city city-<%=regionSlug%>" style="left:<%=x%>px;top:<%=y%>px" data-name="<%=name%>">
+	    					<span class="glyphicon glyphicon-<%=markerClass%> add-tooltip %>" title="<%=name%>"></span>
+	    					<!--<span class="city-name hidden-sm hidden-xs"><% print(city.get('name')); %></span>-->
+	    				</div>    					
+    					<%
+    				}
     				%>
-    				<div class="city city-<%=regionSlug%>" style="left:<%=x%>px;top:<%=y%>px" data-name="<%=name%>">
-    					<span class="glyphicon glyphicon-<%=markerClass%> add-tooltip" title="<%=name%>"></span>
-    					<!--<span class="city-name hidden-sm hidden-xs"><% print(city.get('name')); %></span>-->
-    				</div>
+
     				<%
     			})
     		%>
@@ -290,24 +296,22 @@
 					</div>
 					<ul class="list-group">
 						<%
-							var activeInitNames = career.get('initiatives').pluck('name');	
 							ET.Initiatives.forEach(function(init){
-								if(_.contains(activeInitNames, init.get('name'))){
+								if(init.get('active') === true){
 									//its in effect
 									%>
-										<li class="list-group-item list-group-item-success">
+										<li class="list-group-item list-group-item-info clearfix">
 											<%=init.get('name')%>
-											<span class="pull-right">
-												<!--<span class="hidden-sm hidden-xs">
+											<span class="pull-right text-center">
+												<span class="hidden-sm hidden-xs">
 													<span class="glyphicon glyphicon-play"></span>
-													<span class="text-muted">Started</span>
-												</span>-->
-					
-												<button class="btn btn-default research-plant-type" data-name="<%=init.get('name')%>">
+													<span class="">$<%=accounting.formatNumber(init.get('yearlyCost'))%>/year</span>
+												</span>
+												<br>
+												<button class="btn btn-danger end-initiative" data-slug="<%=init.get('slug')%>">
 													<span class="glyphicon glyphicon-stop"></span>
 													End
-												</button>	
-												<br>												
+												</button>										
 											</span>
 										</li>									
 									<%
@@ -318,7 +322,7 @@
 										<li class="list-group-item clearfix">
 											<%=init.get('name')%>
 											<span class="pull-right">
-												<button class="btn btn-default start-initiative" data-name="<%=init.get('name')%>">
+												<button class="btn btn-primary start-initiative" data-slug="<%=init.get('slug')%>">
 													<span class="glyphicon glyphicon-play"></span>
 													Start<br>
 													($<%=accounting.formatNumber(init.get('yearlyCost'))%>/year)
@@ -361,7 +365,7 @@
 									<li class="list-group-item clearfix">
 										<img src="res/plants/<%=plantType.get('slug')%>/32.png"> <%=plantType.get('powerName')%>
 										<span class="pull-right">
-											<button class="btn btn-default research-plant-type" data-name="<%=plantType.get('name')%>">
+											<button class="btn btn-primary research-plant-type" data-name="<%=plantType.get('name')%>">
 												<span class="glyphicon glyphicon-search"></span>
 												Research<br>
 												($<%=accounting.formatNumber(plantType.get('researchCost'))%>)
@@ -479,7 +483,7 @@
     	</script>   
     	<script id="template-plants" type="text/template">
     		<%
-    			ET.cities.sortBy('owned');
+    			//ET.cities.sortBy('owned');
     			
     			ET.cities.where({"owned": true}).forEach(function(city){
     				var cssClass = city.isHeadquarters() ? "panel-primary" : "panel-info";
@@ -561,7 +565,7 @@
     				</div>    				
     				<%
     			});
-    			_.delay(function(){ $('.city-tile').equalizeHeights(); }, 1000);
+    			_.delay(function(){ $('.city-tile').equalizeHeights(); }, 500);
     		%>
     	</script>    	
     	<script id="template-menu-regional" type="text/template">

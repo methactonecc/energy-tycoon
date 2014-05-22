@@ -126,28 +126,16 @@ ET.MapView = Backbone.View.extend({
 		    });	    
 
 			layer.add(img);
-			self.stage.removeChildren().add(layer);				
+			self.stage.removeChildren().add(layer);		
+			
+			self.renderCityMarkers();		
 		});
 		$image.attr('src', 'res/maps/resized/' +  region.get('slug') + '.png');
 
 		var self = this;
 		_.delay(function() {
-			self.renderCityMarkers();
 			
-			//zoom into city on click
-			this.$('.city').click(function() {
-				var name = $(this).data('name');
-				var city = ET.cities.findWhere({
-					name : name
-				});
-				if (city.get('owned')) {
-					ET.worldRouter.navigate("pane/map/city/" + name, {
-						trigger : true
-					});
-				}
-			});
-
-		}, 100);
+		}, 200);
 
 	},
 
@@ -159,8 +147,21 @@ ET.MapView = Backbone.View.extend({
 		this.$('#city-markers').html(this.cityMarkerTemplate({
 			cities : ET.cities,
 			region : region
-		}));
+			}));
 		this.$('.add-tooltip').tooltip();
+			
+		//zoom into city on click
+		this.$('.city').click(function() {
+			var name = $(this).data('name');
+			var city = ET.cities.findWhere({
+				name : name
+			});
+			if (city.get('owned')) {
+				ET.worldRouter.navigate("pane/map/city/" + name, {
+					trigger : true
+				});
+			}
+		});
 	},
 
 	/**

@@ -86,7 +86,7 @@ $(function(){
 			
 			//Expose members through public fields
 			ET.Initiatives.each(function(item){
-				ET.Initiatives[item.get("name")] = item;
+				ET.Initiatives[item.get("slug")] = item;
 			});		
 			
 			//ET.career.startInitiative(ET.Initiatives["Lab Grant"]);
