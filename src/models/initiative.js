@@ -6,8 +6,7 @@ ET.Initiative = Backbone.Model.extend({
 		yearlyCost : 0
 	},
 
-	initialize : start() {
+	start: function() {
 		ET.Career.startInitiative(this),
-		
 	},
 });
