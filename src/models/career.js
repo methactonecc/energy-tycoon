@@ -135,14 +135,7 @@ ET.Career = Backbone.Model.extend({
 			city.set('owned', true);
 		}
 	},
-
-	/**
-	 * Begins the given initiative.
-	 */
-	startInitiative : function(init) {
-		this.get('initiatives').add(init);
-	},
-
+	
 	/* Getters */
 	getHeadquarters : function() {
 		return this.get('cities').getHeadquarters();
