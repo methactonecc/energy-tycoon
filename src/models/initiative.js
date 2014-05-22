@@ -7,6 +7,6 @@ ET.Initiative = Backbone.Model.extend({
 	},
 
 	start: function() {
-		ET.Career.startInitiative(this),
+		ET.Career.get('initiatives').add(this);
 	},
 });
