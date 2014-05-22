@@ -16,5 +16,24 @@
 		"slug": 		"regional_mfg",
 		"description":	"Ensures that all parts are made near your city, helping make your city’s workers happier and more efficient.",
 		"yearlyCost":	"4000"
-	}
+	},
+	{
+		"name": "Pro-Green Election Campaign",
+		"slug": "election_campaign",
+		"description": "Supports politicians who support green energy, helping your power plants get approved and built more quickly.",
+		"yearlyCost": "4500"
+	},
+	{
+		"name": "Engineer Recruitment Program",
+		"slug": "eng_recruit_prog",
+		"description": "Recruits engineers from the nation’s top colleges to improve your power plants’ efficiency and uptime.",
+		"yearlyCost": "3000"
+	},
+	{
+		"name": "Business Partnership",
+		"slug": "bsnss_partnership",
+		"description": "Works with businesses to audit power plants, streamline power production, reduce costs.",
+		"yearlycost": "3500"
+
+	},
 ]
