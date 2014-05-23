@@ -17,6 +17,8 @@ $(function(){
 	//Expose members through public fields; eg Regions.Northeast.
 	ET.Regions.each(function(item){
 		ET.Regions[item.get("name")] = item;
+		item.mapImage = new Image();
+		item.mapImage.src = 'res/maps/resized/' + item.get('slug') + '.png';
 	});
 	
 	//****************** View types

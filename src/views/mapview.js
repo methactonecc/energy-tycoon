@@ -67,11 +67,12 @@ ET.MapView = Backbone.View.extend({
 		}));*/
 		
 		//render map
-		var image = new Image();
+		//We're gonna use the region's preloaded image file so that switching between regions is snappy
+		var image = region.mapImage;
 		var $image = $(image);
 		var map = $('#map');	
 		var self = this;
-		$image.load(function(){
+		var imageLoadFn = function(){
 			//scale image proportionally
 			var imageWidth = image.width;
 			var imageHeight = image.height;
@@ -123,14 +124,17 @@ ET.MapView = Backbone.View.extend({
 						}
 					});		    		
 		    	}
-		    });	    
+		    });  
 
 			layer.add(img);
 			self.stage.removeChildren().add(layer);		
 			
 			self.renderCityMarkers();		
-		});
-		$image.attr('src', 'res/maps/resized/' +  region.get('slug') + '.png');
+		};
+		
+		//if the image is already loaded, ready() is fired; if it gets loaded sometime during this function, load() is fired
+		$image.ready(imageLoadFn);
+		$image.load(imageLoadFn);
 
 		var self = this;
 		_.delay(function() {

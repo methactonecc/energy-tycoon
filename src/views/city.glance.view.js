@@ -8,6 +8,8 @@ ET.CityGlanceView = Backbone.View.extend({
 	tagName: "div",
 
 	events : {
+		"click .btn-city-expand" : "expandToCity",
+		"click .btn-move-headquarters": "moveHeadquarters"			
 	},
 	
 	options: {
@@ -28,5 +30,14 @@ ET.CityGlanceView = Backbone.View.extend({
 			city : this.model,
 			options:	this.options
 		}));
+	},
+	
+
+	expandToCity: function(){
+		ET.career.expandToCity(this.model);
+	},
+	
+	moveHeadquarters: function(){
+		ET.cities.setHeadquarters(this.model);
 	}
 });

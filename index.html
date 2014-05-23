@@ -45,7 +45,7 @@
 	        		<i class="fa fa-globe"></i>
 	        		Map
 	        	</a></li>
-	        	<li><a href="#main">
+	        	<li><a href="#pane/news">
 	        		<i class="fa fa-envelope"></i>
 	        		News
 	        	</a></li>     	
@@ -84,7 +84,9 @@
 	    		</div>
 	    		
 				<div id="sidebar-menu-holder" class="col-lg-3">
-					<a href="#pane/map" class="btn btn-default"><span class="glyphicon glyphicon-home"></span></a>
+					<a href="#pane/map" class="btn btn-default">
+						<span class="glyphicon glyphicon-home"></span> Main map
+					</a>
 					<div id="sidebar-menu">
 						<div id="city-hover-info" class="row">
 						</div>
@@ -588,13 +590,19 @@
 							<small><%=city.get('state')%></small>
 							
 							<% if(city.isHeadquarters()){ %>
-								<span class="fa fa-building pull-right"></span> 
+								<span class="fa fa-building pull-right"></span>
 							<% } %>
 						</div>
 						<div class="panel-body">
-							<a href="#pane/map/city/<%=city.get('name')%>" data-target="#pane-map" class="btn btn-default btn-block">
+							<a href="#pane/map/city/<%=city.get('name')%>" data-target="#pane-map" class="btn btn-primary btn-block btn-lg">
 								<span class="fa fa-suitcase"></span> Go to
 							</a>
+							<% if(!city.isHeadquarters()){ %>
+								<button class="btn btn-default btn-block btn-move-headquarters">
+									<i class="fa fa-arrow-right"></i> <i class="fa fa-building-o"></i>
+									Move HQ here
+								</button>								
+							<% } %>
 							<br>
 							<div class="row">
 								
@@ -633,7 +641,7 @@
 								<div>
 									<span class="fa fa-lock fa-3x"></span>
 								</div>
-								<button class="btn btn-default btn-city-expand" data-name="<%=city.get('name')%>">
+								<button class="btn btn-primary btn-city-expand" data-name="<%=city.get('name')%>">
 									<span class="fa fa-unlock"></span> Expand ($<%=accounting.formatNumber(city.get('expansionCost'))%>)
 								</button>
 							</div>
