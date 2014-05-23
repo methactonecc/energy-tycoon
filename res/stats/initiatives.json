@@ -3,6 +3,7 @@
 		"name": 		"Lab Grant",
 		"slug": 		"lab_grant",
 		"description":	"Funds colleges’ green energy research programs to help develop new technology.",
+		"icon":			"flask",
 		"yearlyCost":	3000,
 		
 		"researchCostMultiplier":	0.75
@@ -11,6 +12,7 @@
 		"name": 		"Advocacy Campaign",
 		"slug": 		"advocacy_campaign",
 		"description":	"Funds pro-green energy awareness groups, environmental clubs, and protesters in cities around the nation.",
+		"icon":			"comments-o",
 		"yearlyCost":	3500,
 		
 		"expansionCostMultiplier":	0.80
@@ -19,6 +21,7 @@
 		"name": 		"Regional Manufacturing",
 		"slug": 		"regional_mfg",
 		"description":	"Ensures that all parts are made near your city, helping make your city’s workers happier and more efficient.",
+		"icon":			"wrench",
 		"yearlyCost":	4000,
 		
 		"constructionCostMultiplier":	0.90
@@ -27,6 +30,7 @@
 		"name": "Pro-Green Election Campaign",
 		"slug": "election_campaign",
 		"description": "Supports pro-environment politicians who give tax breaks to green energy companies like yours.",
+		"icon":			"university",
 		"yearlyCost": 1500,
 		
 		"taxRateMultiplier":	0.50
@@ -35,6 +39,7 @@
 		"name": "Engineer Recruitment Program",
 		"slug": "engr_recruit_program",
 		"description": "Recruits engineers from the nation’s top colleges to improve your power plants’ efficiency and uptime.",
+		"icon":			"graduation-cap",
 		"yearlyCost": 3000,
 		
 		"powerGenMultiplier":	1.05
@@ -43,6 +48,7 @@
 		"name": "Business Partnership",
 		"slug": "business_partnership",
 		"description": "Works with businesses to audit power plants, streamline power production, and reduce costs.",
+		"icon":			"gears",
 		"yearlyCost": 3500,
 		
 		"profitMultiplier":	1.10		
