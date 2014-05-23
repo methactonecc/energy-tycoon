@@ -30,10 +30,16 @@ ET.PlantsView = Backbone.View.extend({
 	},
 
 	_render : function() {
-		this.$el.html(this.mainTemplate({
-			career: this.model
-		}));
-		$('.city-tile').equalizeHeights(); 
+		//make a bunch of CityGlanceViews to fill the el with
+		this.$el.empty();
+		this.model.get('cities').forEach(function(city){
+			var cityGlance = new ET.CityGlanceView({
+				model: city,
+				panelWidth: 4
+			});
+			this.$el.append(cityGlance.$el);
+		}, this);
+		_.delay(function(){$('.city-tile').equalizeHeights();},500);
 	},	
 	
 	expandToCity: function(event){

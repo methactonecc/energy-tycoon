@@ -39,23 +39,25 @@
           </button>
           <a class="navbar-brand" href="#">Energy Tycoon</a>
         </div>
-        <ul class="nav navbar-nav" id="pane-tabs">
-        	<li><a href="#pane/map" data-target="#pane-map" id="tab-map">
-        		<i class="fa fa-globe"></i>
-        		<span class="hidden-xs">Map</span>
-        	</a></li>
-        	<li><a href="#main">
-        		<i class="fa fa-envelope"></i>
-        		<span class="hidden-xs">News</span>
-        	</a></li>     	
-        	<li><a href="#pane/manage" data-target="#pane-manage" id="tab-manage">
-        		<i class="fa fa-building-o"></i>
-        		<span class="hidden-xs">Business</span>
-        	</a></li>     
-        	<li><a href="#pane/plants" data-target="#pane-plants" id="tab-plants">
-        		<i class="fa fa-bolt"></i>
-        		<span class="hidden-xs">Plants</span>
-        	</a></li>             	        	
+        <div class="collapse navbar-collapse">
+	        <ul class="nav navbar-nav" id="pane-tabs">
+	        	<li><a href="#pane/map" data-target="#pane-map" id="tab-map">
+	        		<i class="fa fa-globe"></i>
+	        		Map
+	        	</a></li>
+	        	<li><a href="#main">
+	        		<i class="fa fa-envelope"></i>
+	        		News
+	        	</a></li>     	
+	        	<li><a href="#pane/manage" data-target="#pane-manage" id="tab-manage">
+	        		<i class="fa fa-building-o"></i>
+	        		Business
+	        	</a></li>     
+	        	<li><a href="#pane/plants" data-target="#pane-plants" id="tab-plants">
+	        		<i class="fa fa-bolt"></i>
+	        		Plants</span>
+	        	</a></li>             	        	
+	        </ul>
         </div>
       </div>
     </div>
@@ -83,7 +85,10 @@
 	    		
 				<div id="sidebar-menu-holder" class="col-lg-3">
 					<a href="#pane/map" class="btn btn-default"><span class="glyphicon glyphicon-home"></span></a>
-					<div id="sidebar-menu"></div>
+					<div id="sidebar-menu">
+						<div id="city-hover-info" class="row">
+						</div>
+					</div>
 				</div>
 	    	</div>    	
 	    	<div id="pane-manage" class="row tab-pane">
@@ -129,17 +134,11 @@
     				else if(city.get('owned') === true){
     					markerClass = 'map-marker';
     				}
-    				
-    				if(city.get('owned') === true){
-    					%>
-	    				<div class="city city-<%=regionSlug%>" style="left:<%=x%>px;top:<%=y%>px" data-name="<%=name%>">
-	    					<span class="glyphicon glyphicon-<%=markerClass%> add-tooltip %>" title="<%=name%>"></span>
-	    					<!--<span class="city-name hidden-sm hidden-xs"><% print(city.get('name')); %></span>-->
-	    				</div>    					
-    					<%
-    				}
     				%>
-
+    				<div class="city city-<%=regionSlug%>" style="left:<%=x%>px;top:<%=y%>px" data-name="<%=name%>">
+    					<span class="glyphicon glyphicon-<%=markerClass%> add-tooltip" title="<%=name%>"></span>
+    					<!--<span class="city-name hidden-sm hidden-xs"><% print(city.get('name')); %></span>-->
+    				</div>
     				<%
     			})
     		%>
@@ -568,73 +567,81 @@
     			_.delay(function(){ $('.city-tile').equalizeHeights(); }, 500);
     		%>
     	</script>    	
-    	<script id="template-menu-regional" type="text/template">
-			<div class="list-group" id="city-list">
-				<%
-					cities.where({ region: region }).forEach(function(city){
-						//render some info for each of our cities in this region
-						if(city.get('owned') === true){
-						%>
-							<a href="#pane/map/city/<%=city.get('name')%>" class="list-group-item clearfix">
+    	<script id="template-city-glance" type="text/template">
+    		<%
+    			var w = options.panelWidth;
+    			var cssClass = "panel-default";
+    			if(city.isOwned()){
+    				if(city.isHeadquarters()){
+    					cssClass = "panel-primary";
+    				}
+    				else{
+    					cssClass = "panel-info";
+    				}
+    			}
+    		%>
+			<div class="col-lg-<%=w%> col-md-<%=w%> col-sm-12 col-xs-12 city-tile">
+				<% if(city.isOwned()){ %>
+					<div class="panel <%=cssClass%>">
+						<div class="panel-heading lead">
+							<%=city.get('name')%>
+							<small><%=city.get('state')%></small>
+							
+							<% if(city.isHeadquarters()){ %>
+								<span class="fa fa-building pull-right"></span> 
+							<% } %>
+						</div>
+						<div class="panel-body">
+							<a href="#pane/map/city/<%=city.get('name')%>" data-target="#pane-map" class="btn btn-default btn-block">
+								<span class="fa fa-suitcase"></span> Go to
+							</a>
+							<br>
+							<div class="row">
 								
-								<div>
-			    					<h4 class="list-group-item-heading">
-			    						<%=city.get('name')%>				
-			    						<span class="pull-right">
-			    							<% city.get('plants').forEach(function(plant){
-			    								//print info about each plant
-			    								%>
-					    							<img src="res/plants/<%=plant.get('slug')%>/32.png">
-			    								<%
-			    							}) %>
-				    					</span>
-			    					</h4>
-			    					<br class="clearfix">
-			    					<p>
-			    						<span class="pull-left">
-			    							<span class="text-success">
-			    								<span class="glyphicon glyphicon-usd"></span>
-			    								<%= accounting.formatNumber(city.getIncome()) %></span><span class="text-muted">/year</span>
-			    						</span>
-			    						<span class="pull-right">
-			    							<span class="text-info">
-			    								<span class="glyphicon glyphicon-flash"></span>
-			    								<%=city.getPower()%>
-			    							</span>
-			    							<span class="text-muted"> GWh</span>
-			    						</span>	    						
-			    					</p>    
-			    					<br>						
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									$<%=accounting.formatNumber(city.getIncome())%><span class="text-muted">/year</span>
 								</div>
-								
-			
-							</a>						
-						<%
-						}
-						else{
-							//unowned; show basic info & buying link
-						%>
-							<a class="list-group-item clearfix">
-								<div>
-			    					<h4 class="list-group-item-heading">
-			    						<span class="glyphicon glyphicon-lock"></span>
-			    						<%=city.get('name')%>				
-			    					</h4>
-			    					<button class="btn btn-primary pull-right add-city" data-name="<%=city.get('name')%>">
-			    						<span class="glyphicon glyphicon-plus"></span>
-			    						Expand to this city<br>
-			    						($<%=accounting.formatNumber(city.get('expansionCost'))%>)
-			    					</button>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+									<span class="fa fa-bolt"></span> <%=accounting.formatNumber(city.getPower())%> <span class="text-muted">GWh</span>
 								</div>
-								
-			
-							</a>						
-						<%							
-						}
-					});
-				%>
-			</div>
-    	</script>   
+							</div>
+							<div class="row">
+								<%
+									var plants = city.get('plants');
+									var MAX_PLANTS = 3;
+									for(var i=0; i<plants.length; i++){
+										//they have a plant here; draw it
+										var plant = plants.at(i);
+										%>
+										<div class="col-lg-4 col-sm-4 col-md-4 col-xs-4">
+											<img src="res/plants/<%=plant.get('slug')%>/100.png" class="img-responsive img-center">
+										</div>	   										
+										<%
+									}
+								%>
+							</div>
+						</div>
+					</div>					
+				<% } else { %>
+					<div class="panel <%=cssClass%>">
+						<div class="panel-heading lead">
+							<%=city.get('name')%>
+							<small><%=city.get('state')%></small>
+						</div>
+						<div class="panel-body">
+							<div class="text-center">
+								<div>
+									<span class="fa fa-lock fa-3x"></span>
+								</div>
+								<button class="btn btn-default btn-city-expand" data-name="<%=city.get('name')%>">
+									<span class="fa fa-unlock"></span> Expand ($<%=accounting.formatNumber(city.get('expansionCost'))%>)
+								</button>
+							</div>
+						</div>
+					</div>					
+				<% } %>
+			</div>      		
+    	</script>
     	<script id="template-menu-city" type="text/template">
     		<%
     			if(city.get('headquarters') === true){
@@ -725,6 +732,7 @@
     <script defer src="src/views/mapview.js"></script>
     <script defer src="src/views/sidebarview.js"></script>
     <script defer src="src/views/cityview.js"></script>
+    <script defer src="src/views/city.glance.view.js"></script>
     <script defer src="src/views/timercontrolview.js"></script>
     <script defer src="src/views/loan.view.js"></script>
     <script defer src="src/views/plants.view.js"></script>

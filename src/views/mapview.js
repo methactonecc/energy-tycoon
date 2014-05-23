@@ -149,6 +149,7 @@ ET.MapView = Backbone.View.extend({
 			region : region
 			}));
 		this.$('.add-tooltip').tooltip();
+		this.$('.add-popover').popover();
 			
 		//zoom into city on click
 		this.$('.city').click(function() {
@@ -162,6 +163,19 @@ ET.MapView = Backbone.View.extend({
 				});
 			}
 		});
+		//show info about city in sidebar on click
+		//zoom into city on click
+		this.$('.city').on('mouseover', function() {
+			var name = $(this).data('name');
+			var city = ET.cities.findWhere({
+				name : name
+			});
+			cityGlance = new ET.CityGlanceView({ 
+				model: city,
+				panelWidth: 12	//show it in the sidebar, full-size
+			});
+			$('#city-hover-info').empty().append(cityGlance.$el);
+		});		
 	},
 
 	/**

@@ -52,6 +52,10 @@ body {
 	padding-right: 1.5em;
 }
 
+#sidebar-menu-holder{
+	padding: 0;
+}
+
 
 /** UTILITIES **/
 	
