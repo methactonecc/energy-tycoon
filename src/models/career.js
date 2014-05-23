@@ -6,6 +6,7 @@ ET.Career = Backbone.Model.extend({
 	 * Fields:
 	 * int money
 	 * int year the current round (known as a year.) Starts at 1.
+	 * float taxRate	the tax rate (in decimal form). This fraction of your INCOME is taken away.
 	 * String name
 	 * Collection<Plant> plants a list of plant types the user has RESEARCHED. NOT the same as the Plants enum.
 	 * Cities cities the list of all cities. Will be modified as they develop.
@@ -19,7 +20,7 @@ ET.Career = Backbone.Model.extend({
 		initiatives : new Backbone.Collection([]),
 		plants : new Backbone.Collection,
 		
-		taxRate: 0.05 //fraction of income you lose due to taxes
+		baseTaxRate: 0.05 //fraction of income you lose due to taxes
 	},
 
 	/* Functions */
@@ -140,11 +141,24 @@ ET.Career = Backbone.Model.extend({
 	},
 	
 	/* Getters */
+	
+	getTaxRate: function(){
+		var rate = this.get('baseTaxRate');
+		
+		//Green Election Campaign reduces taxes
+		var init = ET.Initiatives.election_campaign;
+		if(ET.career.hasActiveInitiative(init)){
+			rate = Math.round(rate * init.get('taxRateMultiplier'));
+		}		
+		
+		return rate;
+	},
+	
 	getHeadquarters : function() {
 		return this.get('cities').getHeadquarters();
 	},
 	
-	hasInitiative: function(init){
+	hasActiveInitiative: function(init){
 		return this.get('initiatives').contains(init);
 	}
 });

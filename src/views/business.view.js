@@ -24,10 +24,11 @@
 			this.render = _.throttle(this._render, 50);
 
 			//Bind to relevant events here
-			//this.listenTo(this.model, "all", this.render);
+			//this.listenTo(this.model, "change", this.render);
 			this.listenTo(this.model.get('plants'), "all", this.renderResearch);
 			this.listenTo(this.model.get('cities'), "all", this.render);
-			this.listenTo(ET.Initiatives, "change:active", this.renderInitiatives);
+			//this.listenTo(ET.Initiatives, "change:active", this.renderInitiatives);
+			this.listenTo(ET.Initiatives, "change:active", this.render);
 			
 			this.loanView = new ET.LoanView({ model: ET.loan });
 			this.loanView.render();
@@ -43,7 +44,9 @@
 		renderInitiatives: function(){
 			this.$el.find('#manage-initiatives').html(this.tInitiatives({
 				career: this.model
-			}));			
+			}));		
+			
+			$('.add-tooltip').tooltip();	
 		},
 		
 		renderResearch: function(){

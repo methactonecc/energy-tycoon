@@ -50,6 +50,12 @@
 				//1-5
 				income *= 1 + (suitability - 3) * 0.05;
 			}
+			
+			//initiative effect (Business Partnership increases output)
+			var init = ET.Initiatives.business_partnership;
+			if(ET.career.hasActiveInitiative(init)){
+				income *= init.get('profitMultiplier');
+			}			
 
 			return Math.round(income);
 		},
@@ -71,8 +77,27 @@
 				//1-5
 				power *= 1 + (suitability - 3) * 0.10;
 			}
+			
+			//initiative effect (Engineer Recruitment Program increases output)
+			var init = ET.Initiatives.engr_recruit_program;
+			if(ET.career.hasActiveInitiative(init)){
+				power *= init.get('powerGenMultiplier');
+			}
 
 			return Math.round(power);
+		},
+		
+		getConstructionCost: function(){
+			var cost = this.attributes.constructionCost;
+			
+			//Regional Manufacturing initiative reduces this cost
+			var init = ET.Initiatives.regional_mfg;
+			if(ET.career.hasActiveInitiative(init)){
+				//this one reduces cost by a certain percent
+				cost = Math.round(cost * init.get('constructionCostMultiplier'));
+			}
+			
+			return cost;			
 		},
 
 		getDestructionCost : function() {
@@ -81,6 +106,18 @@
 
 		getRepairCost : function() {
 			return this.get('constructionCost') / 5;
+		},
+		
+		getResearchCost: function(){
+			//This may be impacted by our initiatives
+			var cost = this.attributes.researchCost;
+			
+			if(ET.career.hasActiveInitiative(ET.Initiatives.lab_grant)){
+				//this one reduces cost by a certain percent
+				cost = Math.round(cost * ET.Initiatives.lab_grant.get('researchCostMultiplier'));
+			}
+			
+			return cost;
 		},
 
 		/**

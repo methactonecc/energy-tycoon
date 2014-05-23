@@ -61,7 +61,7 @@ $(function(){
 			//Expose members through public fields
 			ET.Plants.each(function(item){
 				ET.Plants[item.get("name")] = item;
-			});		
+			});	
 			
 	
 			ET.career.researchPlantType(ET.Plants.Solar);

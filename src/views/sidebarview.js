@@ -18,6 +18,7 @@
 			this.listenTo(this.model, "all", this.render);
 			this.listenTo(this.model.get('plants'), "all", this.render);
 			this.listenTo(this.model.get('cities'), "all", this.render);
+			this.listenTo(this.model.get('initiatives'), "all", this.render);
 
 			//Intercept region changes and update menu on the sidebar accordingly
 			//this.listenTo(ET,.appView.model, "change:viewType", this.renderMenu);

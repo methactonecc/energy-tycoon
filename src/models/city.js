@@ -68,6 +68,18 @@ ET.City = Backbone.Model.extend({
 	getHeadquarterCost : function() {
 		return this.get('expansionCost') * 2;
 	},
+	
+	getExpansionCost: function(){
+		var cost = this.attributes.expansionCost;
+		
+		//Advocacy Campaign reduces cost to expand
+		var init = ET.Initiatives.advocacy_campaign;
+		if(ET.career.hasActiveInitiative(init)){
+			cost = Math.round(cost * init.get('expansionCostMultiplier'));
+		}
+		
+		return cost;
+	},
 
 	/*
 	 * Constructs the given plant in this city NOW.
