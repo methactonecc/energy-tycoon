@@ -96,6 +96,11 @@ ET.MapView = Backbone.View.extend({
 		    	var clickX = e.evt.layerX;
 		    	var clickY = e.evt.layerY;
 		    	
+		    	/* //This is a way to get the color of the place the user clicked. TODO use it instead of bounding rectangles to determine where to go. 
+		    	var canvasRaw = $('#canvas-map').find('canvas');
+		    	var canvas = canvasRaw.get(0);
+		    	console.log(canvas.getContext('2d').getImageData(clickX, clickY, 1, 1).data);
+		    	*/
 		    	if(region === ET.Regions.Nation){
 		    		//figure out what region they clicked in, then go there
 		    		//each region is bound by a rectangle; its northwest and southeast points are specified. Figure out of the clicked point lies within each region.

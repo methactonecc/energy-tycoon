@@ -96,6 +96,34 @@ $(function(){
 		error: function(model, response, options){
 		}
 	});		
+
+	//****************** NewsItems
+	/*
+	 * Mutable items representing news items.
+	 */
+	var _Items = Backbone.Collection.extend(
+		{
+			model: 	ET.NewsItem,
+			url:	"res/stats/newsitems.json"
+		});
+	ET.NewsItems = new _Items();
+	ET.NewsItems.fetch({
+		success: function(model, response, options){
+			ET.NewsItems.reset(response);
+			
+			ET.NewsItems.url = null; //prevent accidentally saving to server later
+			
+			//Expose members through public fields
+			ET.NewsItems.each(function(item){
+				ET.NewsItems[item.get("name")] = item;
+			});	
+			
+			//start a test news item
+			ET.NewsItems.welcome.activate();
+		},
+		error: function(model, response, options){
+		}
+	});	
 	
 	//****************** Months
 	ET.Months = [

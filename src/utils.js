@@ -45,3 +45,26 @@ $.fn.equalizeHeights = function(){
 	var maxHeight = _.max(heights);
 	$(this).height(maxHeight);
 };
+
+$.fn.ticker = function(options){
+	var $this = $(this);
+	var Ticker = {
+		options: {},
+		defaults: {
+			itemsToShow: 3,
+			autoPlay: false,
+			$upBtn: null,
+			$downBtn: null
+		},
+		
+		init: function(elem){
+			this.elem = $(elem);
+			this.options = $.extend(this.defaults, options);
+			alert(5);
+		}
+	};
+	
+	var t = new Ticker();
+	t.init(this);
+	
+};

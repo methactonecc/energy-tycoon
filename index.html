@@ -48,6 +48,7 @@
 	        	<li><a href="#pane/news">
 	        		<i class="fa fa-envelope fa-lg"></i>
 	        		News
+	        		<span class="badge badge-default">0</span>
 	        	</a></li>     	
 	        	<li><a href="#pane/manage" data-target="#pane-manage" id="tab-manage">
 	        		<i class="fa fa-dashboard fa-lg"></i>
@@ -67,6 +68,15 @@
 			<div id="sidebar-stats"></div>
 			
 			<hr>
+			
+			<div class="clearfix"></div>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					News
+				</div>
+				<div id="sidebar-news"></div>
+			</div>			
+			  	
 			
 			<div id="timer-buttons"></div>	
 			
@@ -269,29 +279,19 @@
 						<%
 					}
 				%>
-			</div>
-			
-			<div class="clearfix"></div>
-			<div id="sidebar-news" class="panel panel-default">
-				<div class="panel-body" class="row">
-					<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-						Studies show water is 22% wetter this year
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<div class="btn-group-vertical">
-							<button class="btn btn-default">
-								<i class="fa fa-sort-up"></i>
-							</button>
-							<button class="btn btn-default">
-								<i class="fa fa-sort-down"></i>
-							</button>							
-						</div>
-					</div>
-					
-				</div>
-			</div>			
-			  		
-    	</script>	
+			</div>	
+    </script>	
+		<script id="template-sidebar-news" type="text-template">
+			<ul id="demo3" class="list-group">
+				<%
+					news.forEach(function(item){
+						%>
+							<li class="list-group-item"><%=item.getText()%></li>
+						<%
+					});
+				%>
+			</ul>
+		</script>
     	<script id="template-business-initiatives" type="text/template">
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="panel panel-default">
@@ -433,7 +433,7 @@
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<i class="fa fa-map-dollar"></i> Loan
+						<i class="fa fa-money"></i> Loan
 					</div>
 					<div class="panel-body">
 						<p class="lead">
@@ -735,7 +735,9 @@
     <script src="src/init.js"></script>
     
     <script defer src="src/models/plant.js"></script>
-    <script defer src="src/models/initiative.js"></script>    
+    <script defer src="src/models/initiative.js"></script>   
+    <script defer src="src/models/newsitem.js"></script>
+    <script defer src="src/models/newsreel.js"></script>    
     <script defer src="src/models/timer.js"></script>
     <script defer src="src/models/loan.js"></script>    
     <script defer src="src/models/city.js"></script>

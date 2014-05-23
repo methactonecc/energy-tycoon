@@ -34,6 +34,13 @@ $(function(){
 	});
 	ET.career.set('cities',ET.cities);	
 	
+	
+	
+	ET.newsReel = new ET.NewsReel();
+	
+	
+	//ALL MODEL INITIATION SHOULD BE DONE BY NOW
+	
 	//init view
 	ET.mapView = new ET.MapView({ model: ET.map });	
 	//ET.careerView = new ET.CareerView({ model: ET.career });

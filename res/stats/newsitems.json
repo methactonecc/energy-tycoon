@@ -1,0 +1,15 @@
+[
+	{
+		"name":			"welcome",
+		"description":	"<%=career.get('name')%> founded; big oil companies take note",
+		"DURATION":		36
+	},
+	{
+		"name":			"distrustStudies",
+		"description":	"New study shows new studies should be distrusted",
+		"DURATION":		36
+	}
+
+]
+
+
