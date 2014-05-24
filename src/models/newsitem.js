@@ -7,6 +7,7 @@ ET.NewsItem = Backbone.Model.extend({
 	 * Variables:
 	 * 	String name
 	 * 	String description		A template-powered string that contains the text that will be shown to the user. We'll pass {city: this.city, career: ET.career} to the template; so you can write "<%=city.get('name')%> grows quickly" and it'll become like "New York grows quickly"
+	 * 	int connotation			Whether the item is good, bad, or neutral. +2 = good, +1 = it depends, 0 = neutral (i.e. this is a funny, random news story), -1 = bad
 	 * 	const int DURATION		the maximum amount of time this item can be active for, in MONTHS. (constant)
 	 * 	int monthsLeft			the amount of time this item is active for (this counts down till it gets deactivated)
 	 * 	City city				the city this news item is affecting.
@@ -20,7 +21,8 @@ ET.NewsItem = Backbone.Model.extend({
 		name : "",
 		description : "",
 		DURATION: 0,
-		
+		connotation: 0,
+		city: null,
 		
 		monthsLeft: 0
 	},
@@ -28,7 +30,8 @@ ET.NewsItem = Backbone.Model.extend({
 	/**
 	 * Turns on this news item.
 	 */
-	activate: function(){
+	activate: function(city){
+		this.set('city', city);
 		this.set('monthsLeft', this.get('DURATION'));
 		
 		//pop onto the news reel

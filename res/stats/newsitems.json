@@ -2,13 +2,21 @@
 	{
 		"name":			"welcome",
 		"description":	"<%=career.get('name')%> founded; big oil companies take note",
-		"DURATION":		36
+		"DURATION":		36,
+		"connotation":	2
 	},
 	{
 		"name":			"distrustStudies",
 		"description":	"New study shows new studies should be distrusted",
-		"DURATION":		36
-	}
+		"DURATION":		36,
+		"connotation":	0		
+	},
+	{
+		"name":			"rainCatsDogs",
+		"description":	"Cats and dogs fall from sky in <%=city.get('name')%>; local news anchors make witty jokes",
+		"DURATION":		36,
+		"connotation":	1		
+	}	
 
 ]
 

@@ -31,6 +31,13 @@ function constrain(value, min, max){
 	return value;
 }
 
+/**
+ * pushLuck(.2) has a 20% chance of returning true, 80% of false
+ */
+function pushLuck(chance){
+	return Math.random() < chance;
+}
+
 
 /**
  * Finds the max height of the elements in this collection and sets all elements to have that same height.
@@ -44,27 +51,4 @@ $.fn.equalizeHeights = function(){
 	heights = heights.toArray(); //JS array
 	var maxHeight = _.max(heights);
 	$(this).height(maxHeight);
-};
-
-$.fn.ticker = function(options){
-	var $this = $(this);
-	var Ticker = {
-		options: {},
-		defaults: {
-			itemsToShow: 3,
-			autoPlay: false,
-			$upBtn: null,
-			$downBtn: null
-		},
-		
-		init: function(elem){
-			this.elem = $(elem);
-			this.options = $.extend(this.defaults, options);
-			alert(5);
-		}
-	};
-	
-	var t = new Ticker();
-	t.init(this);
-	
 };

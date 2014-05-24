@@ -89,6 +89,15 @@ ET.Career = Backbone.Model.extend({
 		} else {
 			this.set('month', month + 1);
 		}
+		
+		//take time off of each news reel item
+		ET.newsReel.each(function(item){
+			item.passMonth();
+		});
+		//add a random one
+		if(pushLuck(.5)){
+			_.randomFrom(ET.NewsItems).activate(_.randomFrom(this.get('cities')));
+		}
 	},
 
 	/**

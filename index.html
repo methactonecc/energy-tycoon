@@ -72,6 +72,7 @@
 			<div class="clearfix"></div>
 			<div class="panel panel-info">
 				<div class="panel-heading">
+					<i class="fa fa-envelope"></i>
 					News
 				</div>
 				<div id="sidebar-news"></div>
@@ -285,8 +286,15 @@
 			<ul id="demo3" class="list-group">
 				<%
 					news.forEach(function(item){
+						var cssClass;
+						switch(item.get('connotation')){
+							case 2:  cssClass = "success"; break;
+							case 1:  cssClass = "info"; break;
+							case 0:  cssClass = "normal"; break;
+							case -1: cssClass = "danger"; break;
+						}
 						%>
-							<li class="list-group-item"><%=item.getText()%></li>
+							<li class="list-group-item list-group-item-<%=cssClass%>"><%=item.getText()%></li>
 						<%
 					});
 				%>

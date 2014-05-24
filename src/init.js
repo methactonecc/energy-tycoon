@@ -16,5 +16,12 @@
 		 */
 		  format: function(string, object) {
 		    return (_.template(string))(object);
+		  },
+		  
+		  /**
+		   * Randomly chooses an item from a collection.
+		   */
+		  randomFrom: function(collection){
+		  	return collection.at(_.random(0, collection.length-1));
 		  }
 	});	
