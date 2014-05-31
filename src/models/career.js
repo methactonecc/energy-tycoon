@@ -96,7 +96,7 @@ ET.Career = Backbone.Model.extend({
 		});
 		//add a random one
 		if(pushLuck(.5)){
-			_.randomFrom(ET.NewsItems).activate(_.randomFrom(this.get('cities')));
+			_.randomFrom(ET.NewsItems).activate(_.sample(this.get('cities').where({"owned": true})));
 		}
 	},
 
