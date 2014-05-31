@@ -7,14 +7,14 @@
 		"regionalCoords": [0.55, 0.63],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 1,
+			"solar": 2,
 			"wind": 5,
 			"fuelcell": 5,
 			"geothermal": 1,
-			"biofuel": 2,
+			"biofuel": 4,
 			"biomass": 2,
 			"hydroelectric": 4, 
-			"tidal": 4
+			"tidal": 5
 		}
 	},
 	{
@@ -25,14 +25,14 @@
 		"regionalCoords": [0.51, 0.71],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
+			"solar": 3,
+			"wind": 4,
 			"fuelcell": 5,
 			"geothermal": 1,
-			"biofuel": 2,
-			"biomass": 2,
+			"biofuel": 4,
+			"biomass": 3,
 			"hydroelectric": 4, 
-			"tidal": 4
+			"tidal": 1
 		}
 	},
 	
@@ -44,13 +44,13 @@
 		"regionalCoords": [0.64, 0.44],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
+			"solar": 1,
 			"wind": 5,
 			"fuelcell": 5,
 			"geothermal": 1,
-			"biofuel": 2,
+			"biofuel": 3,
 			"biomass": 2,
-			"hydroelectric": 4, 
+			"hydroelectric": 2, 
 			"tidal": 4
 		}
 	},
@@ -63,14 +63,14 @@
 		"regionalCoords": [0.45, 0.82],
 		"expansionCost": 20000,		
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
+			"solar": 3,
+			"wind": 4,
+			"fuelcell": 4,
 			"geothermal": 1,
-			"biofuel": 2,
+			"biofuel": 3,
 			"biomass": 2,
-			"hydroelectric": 4, 
-			"tidal": 4
+			"hydroelectric": 1, 
+			"tidal": 2
 		}
 	},
 	
@@ -82,14 +82,14 @@
 		"regionalCoords": [0.73, 0.40],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
-			"geothermal": 1,
-			"biofuel": 2,
-			"biomass": 2,
-			"hydroelectric": 4, 
-			"tidal": 4
+			"solar": 3,
+			"wind": 3,
+			"fuelcell": 3,
+			"geothermal": 3,
+			"biofuel": 3,
+			"biomass": 3,
+			"hydroelectric": 5, 
+			"tidal": 5
 		}
 	
 	},
@@ -101,13 +101,13 @@
 		"regionalCoords": [0.34, 0.76],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
+			"solar": 4,
+			"wind": 1,
+			"fuelcell": 3,
 			"geothermal": 1,
-			"biofuel": 2,
-			"biomass": 2,
-			"hydroelectric": 4, 
+			"biofuel": 3,
+			"biomass": 4,
+			"hydroelectric": 5, 
 			"tidal": 4
 		}
 	},
@@ -119,14 +119,14 @@
 		"regionalCoords": [0.89, 0.86],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
-			"geothermal": 1,
+			"solar": 3,
+			"wind": 4,
+			"fuelcell": 2,
+			"geothermal": 2,
 			"biofuel": 2,
-			"biomass": 2,
+			"biomass": 1,
 			"hydroelectric": 4, 
-			"tidal": 4
+			"tidal": 5
 		}
 	},
 	{
@@ -137,14 +137,14 @@
 		"regionalCoords": [0.55, 0.69],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
+			"solar": 2,
+			"wind": 3,
+			"fuelcell": 1,
 			"geothermal": 1,
-			"biofuel": 2,
+			"biofuel": 1,
 			"biomass": 2,
-			"hydroelectric": 4, 
-			"tidal": 4
+			"hydroelectric": 5, 
+			"tidal": 5 
 		}
 	},		
 
@@ -156,14 +156,14 @@
 		"regionalCoords": [0.65, 0.51],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
-			"geothermal": 1,
-			"biofuel": 2,
-			"biomass": 2,
+			"solar": 2,
+			"wind": 4,
+			"fuelcell": 4,
+			"geothermal": 2,
+			"biofuel": 5,
+			"biomass": 4,
 			"hydroelectric": 4, 
-			"tidal": 4
+			"tidal": 3
 		}
 	},
 	{
@@ -174,14 +174,14 @@
 		"regionalCoords": [0.56, 0.72],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
+			"solar": 3,
+			"wind": 3,
+			"fuelcell": 1,
 			"geothermal": 1,
-			"biofuel": 2,
-			"biomass": 2,
+			"biofuel": 5,
+			"biomass": 5,
 			"hydroelectric": 4, 
-			"tidal": 4
+			"tidal": 1
 		}
 	},
 	{
@@ -192,14 +192,14 @@
 		"regionalCoords": [0.82, 0.59],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
-			"geothermal": 1,
-			"biofuel": 2,
-			"biomass": 2,
-			"hydroelectric": 4, 
-			"tidal": 4
+			"solar": 4,
+			"wind": 2,
+			"fuelcell": 2,
+			"geothermal": 2,
+			"biofuel": 5,
+			"biomass": 4,
+			"hydroelectric": 3, 
+			"tidal": 1
 		}
 	},
 	{
@@ -211,13 +211,13 @@
 		"expansionCost": 20000,
 		"suitability": {
 			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
-			"geothermal": 1,
-			"biofuel": 2,
-			"biomass": 2,
-			"hydroelectric": 4, 
-			"tidal": 4
+			"wind": 3,
+			"fuelcell": 1,
+			"geothermal": 2,
+			"biofuel": 5,
+			"biomass": 5,
+			"hydroelectric": 3, 
+			"tidal": 1
 		}
 	},
 		
@@ -229,13 +229,13 @@
 		"regionalCoords": [0.35, 0.76],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
-			"geothermal": 1,
+			"solar": 4,
+			"wind": 4,
+			"fuelcell": 4,
+			"geothermal": 5,
 			"biofuel": 2,
 			"biomass": 2,
-			"hydroelectric": 4, 
+			"hydroelectric": 3, 
 			"tidal": 4
 		}
 	},
@@ -247,14 +247,14 @@
 		"regionalCoords": [0.69, 0.55],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
-			"geothermal": 1,
+			"solar": 3,
+			"wind": 3,
+			"fuelcell": 3,
+			"geothermal": 5,
 			"biofuel": 2,
 			"biomass": 2,
-			"hydroelectric": 4, 
-			"tidal": 4
+			"hydroelectric": 1, 
+			"tidal": 1
 		}
 	},
 	{
@@ -265,14 +265,14 @@
 		"regionalCoords": [0.35, 0.07],
 		"expansionCost": 20000,
 		"suitability": {
-			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
-			"geothermal": 1,
-			"biofuel": 2,
+			"solar": 2,
+			"wind": 1,
+			"fuelcell": 4,
+			"geothermal": 4,
+			"biofuel": 3,
 			"biomass": 2,
 			"hydroelectric": 4, 
-			"tidal": 4
+			"tidal": 5
 		}
 	},
 	{
@@ -284,13 +284,13 @@
 		"expansionCost": 20000,
 		"suitability": {
 			"solar": 5,
-			"wind": 5,
-			"fuelcell": 5,
-			"geothermal": 1,
+			"wind": 4,
+			"fuelcell": 3,
+			"geothermal": 5,
 			"biofuel": 2,
 			"biomass": 2,
-			"hydroelectric": 4, 
-			"tidal": 4
+			"hydroelectric": 1, 
+			"tidal": 1
 		}
 	}
 ]

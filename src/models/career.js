@@ -16,7 +16,7 @@ ET.Career = Backbone.Model.extend({
 		money : 100000,
 		year : 1,
 		month : 1,
-		name : "MECC",
+		name : "Energy Inc.",
 		initiatives : new Backbone.Collection([]),
 		plants : new Backbone.Collection,
 		
